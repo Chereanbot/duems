@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilla University - Employee Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        :root {
+            --primary-green: #00572d;
+            --secondary-green: #1f9345;
+            --accent-gold: #f3c300;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-light: #f4f4f4;
+            --bg-white: #ffffff;
+            --footer-dark: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            opacity: 0.1;
+        }
+
+        .logo {
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            border-radius: 15px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 87, 45, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 87, 45, 0.2);
+            border-color: var(--accent-gold);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--primary-green);
+            margin-bottom: 25px;
+            background: rgba(0, 87, 45, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .login-btn {
+            background-color: var(--secondary-green);
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 87, 45, 0.3);
+        }
+
+        .stats-section {
+            background-color: var(--bg-white);
+            padding: 70px 0;
+            border-radius: 20px;
+            margin: 50px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            background-color: var(--footer-dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-white);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 87, 45, 0.1);
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            padding: 60px 0;
+            color: white;
+        }
+
+        .newsletter-input {
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            margin-right: 10px;
+        }
+
+        .newsletter-btn {
+            background-color: var(--accent-gold);
+            color: var(--text-primary);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Notification Panel -->
+    <div class="notification-panel">
+        <div class="notification-header">
+            <h5>Notifications</h5>
+            <button class="notification-close" onclick="toggleNotificationPanel()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <img src="assets/images/schedule.svg" alt="Schedule" class="notification-svg">
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">New Schedule Update</p>
+                    <p class="notification-text">Your shift for tomorrow has been updated</p>
+                    <span class="notification-time">2 minutes ago</span>
+                </div>
+            </div>
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <img src="assets/images/notifications/attendance.svg" alt="Attendance" class="notification-svg">
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Attendance Reminder</p>
+                    <p class="notification-text">Don't forget to mark your attendance</p>
+                    <span class="notification-time">15 minutes ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <img src="assets/images/notifications/team.svg" alt="Team" class="notification-svg">
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Team Update</p>
+                    <p class="notification-text">New team member joined your department</p>
+                    <span class="notification-time">1 hour ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <img src="assets/images/notifications/leave.svg" alt="Leave" class="notification-svg">
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Leave Request</p>
+                    <p class="notification-text">Your leave request has been approved</p>
+                    <span class="notification-time">2 hours ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <img src="assets/images/notifications/performance.svg" alt="Performance" class="notification-svg">
+                </div>
+                <div class="notification-content">
+                    <p class="notification-title">Performance Review</p>
+                    <p class="notification-text">New performance review available</p>
+                    <span class="notification-time">3 hours ago</span>
+                </div>
+            </div>
+        </div>
+        <div class="notification-footer">
+            <a href="#" class="view-all">View All Notifications</a>
+        </div>
+    </div>
+
+    <!-- Notification Toggle Button -->
+    <button class="notification-toggle" onclick="toggleNotificationPanel()">
+        <img src="assets/images/notifications/bell.svg" alt="Notifications" class="notification-bell">
+        <span class="notification-badge">2</span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--primary-green);">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/du-logo-white.png" alt="DU Logo" class="logo">
+                <span>Dilla University</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-slideshow">
+            <div class="slide active">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 fw-bold mb-4 animate-fadeInUp">Employee Management System</h1>
+                            <p class="lead mb-4 animate-fadeInUp" style="animation-delay: 0.2s">Streamline your university's employee management with our comprehensive solution.</p>
+                            <div class="d-flex gap-3 animate-fadeInUp" style="animation-delay: 0.4s">
+                                <a href="login.html" class="btn btn-lg login-btn">Get Started</a>
+                                <a href="#features" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assets/images/dashboard-preview.png" alt="Dashboard Preview" class="img-fluid rounded shadow-lg animate-fadeInUp" style="animation-delay: 0.6s">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 fw-bold mb-4">Mobile Attendance</h1>
+                            <p class="lead mb-4">Track attendance from anywhere with our mobile-friendly solution.</p>
+                            <div class="d-flex gap-3">
+                                <a href="login.html" class="btn btn-lg login-btn">Get Started</a>
+                                <a href="#features" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assets/images/mobile-attendance.svg" alt="Mobile Attendance" class="img-fluid rounded shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 fw-bold mb-4">Smart Scheduling</h1>
+                            <p class="lead mb-4">Efficiently manage work schedules with our intelligent system.</p>
+                            <div class="d-flex gap-3">
+                                <a href="login.html" class="btn btn-lg login-btn">Get Started</a>
+                                <a href="#features" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assets/images/scheduling.svg" alt="Scheduling" class="img-fluid rounded shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 fw-bold mb-4">Performance Analytics</h1>
+                            <p class="lead mb-4">Track and analyze employee performance with comprehensive metrics.</p>
+                            <div class="d-flex gap-3">
+                                <a href="login.html" class="btn btn-lg login-btn">Get Started</a>
+                                <a href="#features" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assets/images/analytics.svg" alt="Analytics" class="img-fluid rounded shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 fw-bold mb-4">Leave Management</h1>
+                            <p class="lead mb-4">Streamline leave requests and approvals with our automated system.</p>
+                            <div class="d-flex gap-3">
+                                <a href="login.html" class="btn btn-lg login-btn">Get Started</a>
+                                <a href="#features" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assets/images/leave-management.svg" alt="Leave Management" class="img-fluid rounded shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="display-4 fw-bold mb-4">Real-time Reports</h1>
+                            <p class="lead mb-4">Generate detailed reports and insights with our powerful analytics.</p>
+                            <div class="d-flex gap-3">
+                                <a href="login.html" class="btn btn-lg login-btn">Get Started</a>
+                                <a href="#features" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="assets/images/reports.svg" alt="Reports" class="img-fluid rounded shadow-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-controls">
+            <button class="slide-prev"><i class="bi bi-chevron-left"></i></button>
+            <div class="slide-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="slide-next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Key Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-phone feature-icon"></i>
+                        <h3>Mobile Attendance</h3>
+                        <p>Mark attendance from anywhere using our mobile-friendly interface. QR code scanning and GPS verification for accurate tracking.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-calendar-check feature-icon"></i>
+                        <h3>Smart Scheduling</h3>
+                        <p>Create and manage work schedules with ease. Automatic conflict detection and shift swapping capabilities.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-bell feature-icon"></i>
+                        <h3>Real-time Notifications</h3>
+                        <p>Instant alerts for schedule changes, attendance reminders, and important announcements.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-shield-check feature-icon"></i>
+                        <h3>Security</h3>
+                        <p>Advanced security features to protect your data and ensure privacy.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-file-earmark-text feature-icon"></i>
+                        <h3>Reports</h3>
+                        <p>Generate detailed reports and export data in various formats.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-graph-up feature-icon"></i>
+                        <h3>Performance Analytics</h3>
+                        <p>Track and analyze employee performance with comprehensive metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Features Section -->
+    <section class="section mobile-features py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Mobile Attendance Made Easy</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            QR Code Scanning
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            GPS Location Verification
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            Offline Mode Support
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            Biometric Authentication
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <img src="assets/images/mobile-attendance.svg" alt="Mobile Attendance" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scheduling Section -->
+    <section class="section scheduling-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="assets/images/scheduling.svg" alt="Scheduling" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-4">Smart Scheduling System</h2>
+                    <div class="scheduling-features">
+                        <div class="feature-item mb-4">
+                            <i class="bi bi-calendar-plus feature-icon-sm"></i>
+                            <div>
+                                <h4>Easy Shift Creation</h4>
+                                <p>Create and manage shifts with drag-and-drop interface</p>
+                            </div>
+                        </div>
+                        <div class="feature-item mb-4">
+                            <i class="bi bi-people feature-icon-sm"></i>
+                            <div>
+                                <h4>Team Management</h4>
+                                <p>Assign staff and manage team schedules efficiently</p>
+                            </div>
+                        </div>
+                        <div class="feature-item mb-4">
+                            <i class="bi bi-clock-history feature-icon-sm"></i>
+                            <div>
+                                <h4>Shift Swapping</h4>
+                                <p>Employees can request and approve shift changes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notifications Section -->
+    <section class="section notifications-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Real-time Notifications</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="notification-card">
+                        <i class="bi bi-bell-fill notification-icon"></i>
+                        <h4>Instant Alerts</h4>
+                        <p>Get notified immediately about schedule changes and important updates</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="notification-card">
+                        <i class="bi bi-envelope-fill notification-icon"></i>
+                        <h4>Email Notifications</h4>
+                        <p>Receive detailed notifications via email for important events</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="notification-card">
+                        <i class="bi bi-chat-dots-fill notification-icon"></i>
+                        <h4>Push Notifications</h4>
+                        <p>Stay updated with push notifications on your mobile device</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">What Our Users Say</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="assets/images/cherean.jpg" alt="User 1" class="testimonial-avatar">
+                            <div>
+                                <h5 class="mb-0">Cherinet Afewerk </h5>
+                                <p class="text-muted mb-0">Full Stack Developer</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"The system has transformed how we manage our department. It's efficient and user-friendly."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="assets/images/profile-default.jpg" alt="User 2" class="testimonial-avatar">
+                            <div>
+                                <h5 class="mb-0">Prof. Meseret</h5>
+                                <p class="text-muted mb-0">Faculty Member</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"Attendance tracking has never been easier. The system saves us so much time."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="assets/images/tibu.jpg" alt="User 3" class="testimonial-avatar">
+                            <div>
+                                <h5 class="mb-0">Mr. Yohannes</h5>
+                                <p class="text-muted mb-0">Administrative Staff</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"The reporting features are excellent. We can generate any report we need in seconds."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section newsletter-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2 class="mb-4">Stay Updated</h2>
+                    <p class="mb-4">Subscribe to our newsletter for the latest updates and features.</p>
+                    <div class="d-flex justify-content-center">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email">
+                        <button class="newsletter-btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Dilla University</h5>
+                    <p>Empowering education through technology</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features" class="text-white">Features</a></li>
+                        <li><a href="#testimonials" class="text-white">Testimonials</a></li>
+                        <li><a href="#about" class="text-white">About</a></li>
+                        <li><a href="login.html" class="text-white">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact</h5>
+                    <p><i class="bi bi-envelope me-2"></i>support@dillauniversity.edu.et</p>
+                    <p><i class="bi bi-telephone me-2"></i>+251 XX XXX XXXX</p>
+                    <p><i class="bi bi-geo-alt me-2"></i>Dilla, Ethiopia</p>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">&copy; 2024 Dilla University. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/index.js"></script>
+    <script>
+        function toggleNotificationPanel() {
+            const panel = document.querySelector('.notification-panel');
+            panel.classList.toggle('active');
+        }
+
+        // Hero Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Add click events for controls
+        document.querySelector('.slide-next').addEventListener('click', nextSlide);
+        document.querySelector('.slide-prev').addEventListener('click', prevSlide);
+
+        // Add click events for dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+    </script>
+</body>
+</html> 
