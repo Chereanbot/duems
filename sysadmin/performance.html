@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Performance - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .performance-card {
+            transition: transform 0.2s;
+        }
+        .performance-card:hover {
+            transform: translateY(-5px);
+        }
+        .performance-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .metric-label {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .trend-indicator {
+            font-size: 0.875rem;
+        }
+        .trend-up {
+            color: #198754;
+        }
+        .trend-down {
+            color: #dc3545;
+        }
+        .trend-neutral {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Performance Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">System Performance</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Performance</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary active">Real-time</button>
+                        <button class="btn btn-outline-primary">Hourly</button>
+                        <button class="btn btn-outline-primary">Daily</button>
+                        <button class="btn btn-outline-primary">Weekly</button>
+                    </div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+                        <i class="bi bi-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Performance Overview -->
+            <div class="row g-4 mb-4">
+                <!-- CPU Performance -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card performance-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="performance-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-cpu"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">CPU Performance</h5>
+                                    <p class="text-muted mb-0">Central Processing Unit</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <div class="metric-value">42%</div>
+                                    <div class="metric-label">Current Usage</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="trend-indicator trend-down">
+                                        <i class="bi bi-arrow-down"></i> 5%
+                                    </div>
+                                    <div class="metric-label">vs. last hour</div>
+                                </div>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 42%;" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">Cores: 8/8 Active</small>
+                                <small class="text-muted">Temp: 45°C</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory Performance -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card performance-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="performance-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-memory"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Memory Performance</h5>
+                                    <p class="text-muted mb-0">Random Access Memory</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <div class="metric-value">68%</div>
+                                    <div class="metric-label">Current Usage</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="trend-indicator trend-up">
+                                        <i class="bi bi-arrow-up"></i> 3%
+                                    </div>
+                                    <div class="metric-label">vs. last hour</div>
+                                </div>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 68%;" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">Used: 10.2/16 GB</small>
+                                <small class="text-muted">Free: 5.8 GB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disk Performance -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card performance-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="performance-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-hdd"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Disk Performance</h5>
+                                    <p class="text-muted mb-0">Storage & I/O</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <div class="metric-value">55%</div>
+                                    <div class="metric-label">Current Usage</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="trend-indicator trend-neutral">
+                                        <i class="bi bi-dash"></i> 0%
+                                    </div>
+                                    <div class="metric-label">vs. last hour</div>
+                                </div>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 55%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">I/O: 125 MB/s</small>
+                                <small class="text-muted">Free: 450 GB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Performance -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card performance-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="performance-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-diagram-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Network Performance</h5>
+                                    <p class="text-muted mb-0">Bandwidth & Latency</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <div class="metric-value">32%</div>
+                                    <div class="metric-label">Current Usage</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="trend-indicator trend-up">
+                                        <i class="bi bi-arrow-up"></i> 8%
+                                    </div>
+                                    <div class="metric-label">vs. last hour</div>
+                                </div>
+                            </div>
+                            <div class="progress mb-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 32%;" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">Bandwidth: 75 Mbps</small>
+                                <small class="text-muted">Latency: 12ms</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Performance Charts -->
+            <div class="row g-4 mb-4">
+                <!-- CPU & Memory Usage -->
+                <div class="col-md-8">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">CPU & Memory Usage</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">1h</button>
+                                <button class="btn btn-outline-secondary btn-sm">6h</button>
+                                <button class="btn btn-outline-secondary btn-sm">24h</button>
+                                <button class="btn btn-outline-secondary btn-sm">7d</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="cpuMemoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disk I/O -->
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Disk I/O</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="diskIOChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network & Application Performance -->
+            <div class="row g-4 mb-4">
+                <!-- Network Traffic -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Network Traffic</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">1h</button>
+                                <button class="btn btn-outline-secondary btn-sm">6h</button>
+                                <button class="btn btn-outline-secondary btn-sm">24h</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="networkTrafficChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Application Response Time -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Application Response Time</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">1h</button>
+                                <button class="btn btn-outline-secondary btn-sm">6h</button>
+                                <button class="btn btn-outline-secondary btn-sm">24h</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="appResponseChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Alerts -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Performance Alerts</h5>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary btn-sm">All</button>
+                        <button class="btn btn-outline-secondary btn-sm">Critical</button>
+                        <button class="btn btn-outline-secondary btn-sm">Warning</button>
+                        <button class="btn btn-outline-secondary btn-sm">Info</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Component</th>
+                                    <th>Alert</th>
+                                    <th>Severity</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10:45:23</td>
+                                    <td>CPU</td>
+                                    <td>High CPU usage detected on server-01</td>
+                                    <td><span class="badge bg-warning">Warning</span></td>
+                                    <td><span class="badge bg-success">Resolved</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10:30:15</td>
+                                    <td>Memory</td>
+                                    <td>Memory usage approaching threshold</td>
+                                    <td><span class="badge bg-warning">Warning</span></td>
+                                    <td><span class="badge bg-success">Resolved</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10:15:42</td>
+                                    <td>Disk</td>
+                                    <td>Disk I/O bottleneck detected</td>
+                                    <td><span class="badge bg-danger">Critical</span></td>
+                                    <td><span class="badge bg-warning">In Progress</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10:05:18</td>
+                                    <td>Network</td>
+                                    <td>Network latency increased</td>
+                                    <td><span class="badge bg-info">Info</span></td>
+                                    <td><span class="badge bg-success">Resolved</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>09:55:30</td>
+                                    <td>Application</td>
+                                    <td>Slow response time in user authentication service</td>
+                                    <td><span class="badge bg-warning">Warning</span></td>
+                                    <td><span class="badge bg-success">Resolved</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Export Performance Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Time Range</label>
+                            <select class="form-select">
+                                <option>Last Hour</option>
+                                <option>Last 6 Hours</option>
+                                <option selected>Last 24 Hours</option>
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Custom Range</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Components</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exportCPU" checked>
+                                <label class="form-check-label" for="exportCPU">CPU</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exportMemory" checked>
+                                <label class="form-check-label" for="exportMemory">Memory</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exportDisk" checked>
+                                <label class="form-check-label" for="exportDisk">Disk</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exportNetwork" checked>
+                                <label class="form-check-label" for="exportNetwork">Network</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exportApplication" checked>
+                                <label class="form-check-label" for="exportApplication">Application</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select">
+                                <option selected>CSV</option>
+                                <option>Excel</option>
+                                <option>JSON</option>
+                                <option>PDF</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Include Alerts</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="includeAlerts" checked>
+                                <label class="form-check-label" for="includeAlerts">Include performance alerts in export</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Export Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'performance';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize charts
+            const cpuMemoryCtx = document.getElementById('cpuMemoryChart').getContext('2d');
+            const diskIOCtx = document.getElementById('diskIOChart').getContext('2d');
+            const networkTrafficCtx = document.getElementById('networkTrafficChart').getContext('2d');
+            const appResponseCtx = document.getElementById('appResponseChart').getContext('2d');
+
+            // CPU & Memory Usage Chart
+            new Chart(cpuMemoryCtx, {
+                type: 'line',
+                data: {
+                    labels: ['10:00', '10:10', '10:20', '10:30', '10:40', '10:50', '11:00'],
+                    datasets: [
+                        {
+                            label: 'CPU Usage',
+                            data: [35, 40, 38, 45, 42, 39, 37],
+                            borderColor: '#0d6efd',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Memory Usage',
+                            data: [65, 67, 66, 68, 70, 69, 68],
+                            borderColor: '#198754',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Usage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Disk I/O Chart
+            new Chart(diskIOCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Read', 'Write', 'I/O Wait'],
+                    datasets: [{
+                        label: 'Disk I/O',
+                        data: [75, 45, 25],
+                        backgroundColor: [
+                            'rgba(13, 110, 253, 0.7)',
+                            'rgba(25, 135, 84, 0.7)',
+                            'rgba(255, 193, 7, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(13, 110, 253, 1)',
+                            'rgba(25, 135, 84, 1)',
+                            'rgba(255, 193, 7, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'MB/s'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Network Traffic Chart
+            new Chart(networkTrafficCtx, {
+                type: 'line',
+                data: {
+                    labels: ['10:00', '10:10', '10:20', '10:30', '10:40', '10:50', '11:00'],
+                    datasets: [
+                        {
+                            label: 'Inbound',
+                            data: [25, 30, 28, 35, 32, 29, 27],
+                            borderColor: '#0d6efd',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Outbound',
+                            data: [15, 18, 16, 20, 19, 17, 16],
+                            borderColor: '#198754',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'MB/s'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Application Response Time Chart
+            new Chart(appResponseCtx, {
+                type: 'line',
+                data: {
+                    labels: ['10:00', '10:10', '10:20', '10:30', '10:40', '10:50', '11:00'],
+                    datasets: [
+                        {
+                            label: 'Authentication Service',
+                            data: [120, 125, 118, 130, 122, 115, 110],
+                            borderColor: '#0d6efd',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Database Service',
+                            data: [85, 90, 82, 95, 88, 80, 75],
+                            borderColor: '#198754',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'File Service',
+                            data: [65, 70, 62, 75, 68, 60, 55],
+                            borderColor: '#ffc107',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Response Time (ms)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

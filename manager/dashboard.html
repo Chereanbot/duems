@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../css/ads.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Dashboard Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Manager Dashboard</h2>
+                            <div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createReportModal">
+                        <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-people-fill text-primary fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Total Employees</h6>
+                                <h4 class="mb-0">124</h4>
+                                <small class="text-success">+3 this month</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-check text-success fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Present Today</h6>
+                                <h4 class="mb-0">98</h4>
+                                <small class="text-muted">79% attendance rate</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-x text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">On Leave</h6>
+                                <h4 class="mb-0">12</h4>
+                                <small class="text-muted">5 pending requests</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-exclamation-triangle text-info fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Open Issues</h6>
+                                <h4 class="mb-0">7</h4>
+                                <small class="text-danger">3 require attention</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Overview -->
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card h-100">
+                        <h5 class="card-title mb-4">Department Overview</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Employees</th>
+                                        <th>Present</th>
+                                        <th>On Leave</th>
+                                        <th>Attendance Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT Department</td>
+                                        <td>25</td>
+                                        <td>22</td>
+                                        <td>2</td>
+                                        <td>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-success" style="width: 88%"></div>
+                                            </div>
+                                            <small>88%</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Café</td>
+                                        <td>35</td>
+                                        <td>30</td>
+                                        <td>3</td>
+                                        <td>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-success" style="width: 86%"></div>
+                        </div>
+                                            <small>86%</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Campus Police</td>
+                                        <td>20</td>
+                                        <td>18</td>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-success" style="width: 90%"></div>
+                                            </div>
+                                            <small>90%</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cleaning</td>
+                                        <td>44</td>
+                                        <td>38</td>
+                                        <td>4</td>
+                                        <td>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-success" style="width: 86%"></div>
+                                            </div>
+                                            <small>86%</small>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card h-100">
+                        <h5 class="card-title mb-4">Attendance Trend</h5>
+                        <div class="text-center">
+                            <canvas id="attendanceChart" height="200"></canvas>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Recent Activities & Upcoming Events -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="dashboard-card h-100">
+                        <h5 class="card-title mb-4">Recent Activities</h5>
+                        <div class="activity-timeline">
+                            <div class="activity-item">
+                                <div class="activity-icon bg-primary">
+                                    <i class="bi bi-person-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6>New Employee Added</h6>
+                                    <p>Abebe Kebede joined the IT Department</p>
+                                    <small class="text-muted">2 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6>Leave Request Approved</h6>
+                                    <p>Kebede's leave request for next week was approved</p>
+                                    <small class="text-muted">3 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6>Attendance Issue</h6>
+                                    <p>Late arrival reported for 3 employees</p>
+                                    <small class="text-muted">5 hours ago</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-info">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6>Schedule Updated</h6>
+                                    <p>Weekly schedule for Café department was updated</p>
+                                    <small class="text-muted">Yesterday</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-danger">
+                                    <i class="bi bi-tools"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h6>Issue Reported</h6>
+                                    <p>Equipment malfunction reported in IT lab</p>
+                                    <small class="text-muted">2 days ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        <div class="col-md-6">
+                    <div class="dashboard-card h-100">
+                        <h5 class="card-title mb-4">Upcoming Events</h5>
+                        <div class="upcoming-events">
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">15</span>
+                                    <span class="month">Jan</span>
+                        </div>
+                                <div class="event-content">
+                                    <h6>Department Meeting</h6>
+                                    <p>Monthly review meeting for all department heads</p>
+                                    <small class="text-muted">2:00 PM - Conference Room A</small>
+                        </div>
+                    </div>
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">18</span>
+                                    <span class="month">Jan</span>
+                </div>
+                                <div class="event-content">
+                                    <h6>Training Session</h6>
+                                    <p>New software training for IT department</p>
+                                    <small class="text-muted">10:00 AM - Training Room</small>
+                        </div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">20</span>
+                                    <span class="month">Jan</span>
+                        </div>
+                                <div class="event-content">
+                                    <h6>Performance Review</h6>
+                                    <p>Quarterly performance review for all employees</p>
+                                    <small class="text-muted">9:00 AM - Various Rooms</small>
+                        </div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">22</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="event-content">
+                                    <h6>Equipment Maintenance</h6>
+                                    <p>Scheduled maintenance for all IT equipment</p>
+                                    <small class="text-muted">All Day - IT Department</small>
+                                </div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">25</span>
+                                    <span class="month">Jan</span>
+                            </div>
+                                <div class="event-content">
+                                    <h6>Holiday</h6>
+                                    <p>University closed for National Holiday</p>
+                                    <small class="text-muted">All Day</small>
+                        </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Report Modal -->
+    <div class="modal fade" id="createReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Generate Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+                        <div class="mb-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select" required>
+                                <option value="">Select report type</option>
+                                <option value="attendance">Attendance Report</option>
+                                <option value="leave">Leave Report</option>
+                                <option value="performance">Performance Report</option>
+                                <option value="department">Department Overview</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date Range</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" required>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select">
+                                <option value="all" selected>All Departments</option>
+                                <option value="it">IT Department</option>
+                                <option value="cafe">Café</option>
+                                <option value="police">Campus Police</option>
+                                <option value="cleaning">Cleaning</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select" required>
+                                <option value="pdf" selected>PDF</option>
+                                <option value="excel">Excel</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="reportForm" class="btn btn-primary">Generate Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script src="../js/ads.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load components
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize Attendance Chart
+            const ctx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Attendance Rate (%)',
+                        data: [85, 88, 90, 87, 92, 75, 80],
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        borderColor: 'rgba(13, 110, 253, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+
+        // Handle Report Form Submission
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Report generation started. You will be notified when it\'s ready.');
+            bootstrap.Modal.getInstance(document.getElementById('createReportModal')).hide();
+        });
+    </script>
+</body>
+</html> 

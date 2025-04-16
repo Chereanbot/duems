@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Requests - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Leave Requests Content -->
+        <div class="container-fluid mt-4">
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="card-icon bg-primary-light">
+                            <i class="bi bi-calendar2-check"></i>
+                        </div>
+                        <h3 class="h5">Annual Leave</h3>
+                        <p class="mb-0">15 Days</p>
+                        <small class="text-muted">Remaining Balance</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="card-icon bg-success-light">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                        <h3 class="h5">Approved</h3>
+                        <p class="mb-0">5 Days</p>
+                        <small class="text-muted">This Year</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="card-icon bg-warning-light">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <h3 class="h5">Pending</h3>
+                        <p class="mb-0">2 Requests</p>
+                        <small class="text-muted">Awaiting Approval</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="card-icon bg-info-light">
+                            <i class="bi bi-calendar2-x"></i>
+                        </div>
+                        <h3 class="h5">Sick Leave</h3>
+                        <p class="mb-0">3 Days</p>
+                        <small class="text-muted">Used This Year</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Leave Request -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <h3 class="h5 mb-4">New Leave Request</h3>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Leave Type</label>
+                                    <select class="form-select">
+                                        <option>Annual Leave</option>
+                                        <option>Sick Leave</option>
+                                        <option>Personal Leave</option>
+                                        <option>Study Leave</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">End Date</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Reason</label>
+                                <textarea class="form-control" rows="3" placeholder="Explain the reason for your leave request..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Attachments</label>
+                                <input type="file" class="form-control">
+                                <small class="text-muted">Upload any supporting documents (optional)</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave History -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h3 class="h5 mb-0">Leave History</h3>
+                            <div class="d-flex gap-2">
+                                <select class="form-select form-select-sm" style="width: 150px;">
+                                    <option>2024</option>
+                                    <option>2023</option>
+                                </select>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Days</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Annual Leave</td>
+                                        <td>15 Mar 2024</td>
+                                        <td>22 Mar 2024</td>
+                                        <td>5</td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary me-1 view-leave-btn" data-leave-id="1">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sick Leave</td>
+                                        <td>01 Feb 2024</td>
+                                        <td>02 Feb 2024</td>
+                                        <td>2</td>
+                                        <td><span class="badge bg-success">Approved</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary view-leave-btn" data-leave-id="2">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Personal Leave</td>
+                                        <td>15 Jan 2024</td>
+                                        <td>15 Jan 2024</td>
+                                        <td>1</td>
+                                        <td><span class="badge bg-danger">Rejected</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave Calendar -->
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h3 class="h5 mb-4">Team Leave Calendar</h3>
+                        <div class="calendar-container">
+                            <div id="leaveCalendar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h3 class="h5 mb-4">Leave Summary</h3>
+                        <div class="mb-4">
+                            <h6>Annual Leave</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style="width: 25%">25%</div>
+                            </div>
+                            <small class="text-muted">5 / 20 days used</small>
+                        </div>
+                        <div class="mb-4">
+                            <h6>Sick Leave</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 30%">30%</div>
+                            </div>
+                            <small class="text-muted">3 / 10 days used</small>
+                        </div>
+                        <div>
+                            <h6>Study Leave</h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: 0%">0%</div>
+                            </div>
+                            <small class="text-muted">0 / 5 days used</small>
+                        </div>
+                    </div>
+
+                    <!-- Leave Policies -->
+                    <div class="dashboard-card mt-4">
+                        <h3 class="h5 mb-3">Leave Policies</h3>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action view-policy-btn" data-policy-type="annual">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Annual Leave Policy</h6>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <small class="text-muted">20 days per year</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action view-policy-btn" data-policy-type="sick">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Sick Leave Policy</h6>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <small class="text-muted">10 days per year</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action view-policy-btn" data-policy-type="study">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Study Leave Policy</h6>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <small class="text-muted">5 days per year</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="bi bi-sun"></i>
+    </button>
+
+    <!-- Leave Details Modal -->
+    <div class="modal fade" id="leaveDetailsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Leave Request Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <strong>Leave Type:</strong>
+                        <p id="leaveType" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Dates:</strong>
+                        <p id="leaveDates" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Total Days:</strong>
+                        <p id="leaveDays" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Status:</strong>
+                        <p id="leaveStatus" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Reason:</strong>
+                        <p id="leaveReason" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Attachments:</strong>
+                        <div id="leaveAttachments">
+                            <a href="#" class="d-block">vacation_plan.pdf</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="withdrawLeaveBtn">Withdraw Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leave Policy Modal -->
+    <div class="modal fade" id="leavePolicyModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="policyTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <strong>Entitlement:</strong>
+                        <p id="policyDays" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Description:</strong>
+                        <p id="policyDescription" class="mb-0"></p>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Rules:</strong>
+                        <ul id="policyRules" class="mb-0"></ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Download Policy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FullCalendar Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/calendar.js"></script>
+    <script>
+        // Load components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html> 

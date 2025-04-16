@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Schedule - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .fc-event {
+            cursor: pointer;
+        }
+        .fc-event:hover {
+            opacity: 0.9;
+        }
+        .schedule-legend {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .morning-shift { background-color: #4CAF50; }
+        .afternoon-shift { background-color: #2196F3; }
+        .evening-shift { background-color: #9C27B0; }
+        .leave { background-color: #FF9800; }
+        .holiday { background-color: #F44336; }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Schedule Content -->
+        <div class="container-fluid mt-4">
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-week text-primary fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">This Week</h6>
+                                <h4 class="mb-0">40h</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-check text-success fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Morning Shifts</h6>
+                                <h4 class="mb-0">3</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar2-week text-info fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Afternoon Shifts</h6>
+                                <h4 class="mb-0">2</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar2-x text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Leave Days</h6>
+                                <h4 class="mb-0">1</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Legend -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="schedule-legend">
+                            <div class="legend-item">
+                                <div class="legend-color morning-shift"></div>
+                                <span>Morning Shift</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color afternoon-shift"></div>
+                                <span>Afternoon Shift</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color evening-shift"></div>
+                                <span>Evening Shift</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color leave"></div>
+                                <span>Leave</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color holiday"></div>
+                                <span>Holiday</span>
+                            </div>
+                        </div>
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Shifts -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Upcoming Shifts</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Shift</th>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jan 16, 2024</td>
+                                        <td>Morning Shift</td>
+                                        <td>8:00 AM - 4:00 PM</td>
+                                        <td>Main Campus</td>
+                                        <td><span class="badge bg-success">Confirmed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#shiftDetailsModal">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 17, 2024</td>
+                                        <td>Afternoon Shift</td>
+                                        <td>2:00 PM - 10:00 PM</td>
+                                        <td>Library</td>
+                                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#shiftDetailsModal">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="bi bi-sun"></i>
+    </button>
+
+    <!-- Shift Details Modal -->
+    <div class="modal fade" id="shiftDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shift Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6>Shift Information</h6>
+                            <p class="mb-1"><strong>Date:</strong> January 16, 2024</p>
+                            <p class="mb-1"><strong>Shift Type:</strong> Morning Shift</p>
+                            <p class="mb-1"><strong>Time:</strong> 8:00 AM - 4:00 PM</p>
+                            <p class="mb-1"><strong>Location:</strong> Main Campus</p>
+                            <p class="mb-3"><strong>Department:</strong> IT Department</p>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                <span>Shift Confirmed</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Responsibilities</h6>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Morning Lecture (CS101)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Office Hours (10 AM - 12 PM)
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    Department Meeting (2 PM)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h6>Additional Notes</h6>
+                        <p class="mb-0">Please prepare the lecture materials for CS101 and review student assignments before the office hours.</p>
+                    </div>
+                    <div>
+                        <h6>Contact Information</h6>
+                        <p class="mb-1"><strong>Supervisor:</strong> Dr. Sarah Johnson</p>
+                        <p class="mb-1"><strong>Email:</strong> sarah.johnson@debre.edu</p>
+                        <p class="mb-0"><strong>Phone:</strong> +251 912 345 678</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Request Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load components
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize calendar
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    {
+                        title: 'Morning Shift',
+                        start: '2024-01-16',
+                        backgroundColor: '#4CAF50',
+                        borderColor: '#4CAF50'
+                    },
+                    {
+                        title: 'Afternoon Shift',
+                        start: '2024-01-17',
+                        backgroundColor: '#2196F3',
+                        borderColor: '#2196F3'
+                    },
+                    {
+                        title: 'Evening Shift',
+                        start: '2024-01-18',
+                        backgroundColor: '#9C27B0',
+                        borderColor: '#9C27B0'
+                    },
+                    {
+                        title: 'Leave',
+                        start: '2024-01-19',
+                        backgroundColor: '#FF9800',
+                        borderColor: '#FF9800'
+                    },
+                    {
+                        title: 'Holiday',
+                        start: '2024-01-20',
+                        backgroundColor: '#F44336',
+                        borderColor: '#F44336'
+                    }
+                ],
+                eventClick: function(info) {
+                    $('#shiftDetailsModal').modal('show');
+                }
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html> 

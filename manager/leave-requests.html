@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Requests Management - Debre University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Leave Requests Management</h2>
+                <div>
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#exportLeaveModal">
+                        <i class="bi bi-download"></i> Export
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLeaveModal">
+                        <i class="bi bi-plus-lg"></i> Add Leave Request
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-inbox-fill text-primary fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Pending Requests</h6>
+                                <h4 class="mb-0">5</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Approved</h6>
+                                <h4 class="mb-0">12</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-x-circle-fill text-danger fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Rejected</h6>
+                                <h4 class="mb-0">3</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-check text-info fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">On Leave Today</h6>
+                                <h4 class="mb-0">2</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="dashboard-card mb-4">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <select class="form-select" id="departmentFilter">
+                            <option value="">All Departments</option>
+                            <option value="cafe">Café</option>
+                            <option value="police">Campus Police</option>
+                            <option value="cleaning">Cleaning</option>
+                                    </select>
+                                </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                                </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="leaveTypeFilter">
+                            <option value="">All Leave Types</option>
+                            <option value="annual">Annual Leave</option>
+                            <option value="sick">Sick Leave</option>
+                            <option value="personal">Personal Leave</option>
+                            <option value="maternity">Maternity Leave</option>
+                            <option value="paternity">Paternity Leave</option>
+                        </select>
+                                </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search employee...">
+                            <button class="btn btn-secondary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave Requests Table -->
+                    <div class="dashboard-card">
+                        <div class="table-responsive">
+                    <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                <th>Request ID</th>
+                                <th>Employee</th>
+                                <th>Department</th>
+                                <th>Leave Type</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                <th>Duration</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                <td>LEAVE-001</td>
+                                <td>John Smith</td>
+                                <td>Café</td>
+                                        <td>Annual Leave</td>
+                                <td>2024-02-01</td>
+                                <td>2024-02-05</td>
+                                <td>5 days</td>
+                                <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewLeaveModal">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#approveLeaveModal">
+                                        <i class="bi bi-check-lg"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#rejectLeaveModal">
+                                        <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                <td>LEAVE-002</td>
+                                <td>Sarah Johnson</td>
+                                <td>Campus Police</td>
+                                        <td>Sick Leave</td>
+                                <td>2024-01-20</td>
+                                <td>2024-01-22</td>
+                                <td>3 days</td>
+                                        <td><span class="badge bg-success">Approved</span></td>
+                                        <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewLeaveModal">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editLeaveModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteLeaveModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                <td>LEAVE-003</td>
+                                <td>Michael Brown</td>
+                                <td>Cleaning</td>
+                                        <td>Personal Leave</td>
+                                <td>2024-01-25</td>
+                                <td>2024-01-26</td>
+                                <td>2 days</td>
+                                        <td><span class="badge bg-danger">Rejected</span></td>
+                                        <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewLeaveModal">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editLeaveModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteLeaveModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>LEAVE-004</td>
+                                <td>Emily Davis</td>
+                                <td>Café</td>
+                                <td>Maternity Leave</td>
+                                <td>2024-03-01</td>
+                                <td>2024-05-31</td>
+                                <td>92 days</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewLeaveModal">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editLeaveModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteLeaveModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+            </div>
+                        </div>
+    </main>
+
+    <!-- Add Leave Modal -->
+    <div class="modal fade" id="addLeaveModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Leave Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addLeaveForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Employee</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Employee</option>
+                                    <option value="1">John Smith</option>
+                                    <option value="2">Sarah Johnson</option>
+                                    <option value="3">Michael Brown</option>
+                                    <option value="4">Emily Davis</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Leave Type</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Leave Type</option>
+                                    <option value="annual">Annual Leave</option>
+                                    <option value="sick">Sick Leave</option>
+                                    <option value="personal">Personal Leave</option>
+                                    <option value="maternity">Maternity Leave</option>
+                                    <option value="paternity">Paternity Leave</option>
+                                </select>
+                        </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Start Date</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">End Date</label>
+                                <input type="date" class="form-control" required>
+                        </div>
+                            <div class="col-12">
+                                <label class="form-label">Reason</label>
+                                <textarea class="form-control" rows="3" required placeholder="Please provide a reason for the leave request..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Additional Notes</label>
+                                <textarea class="form-control" rows="2" placeholder="Any additional information..."></textarea>
+                                </div>
+                        </div>
+                    </form>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="addLeaveForm" class="btn btn-primary">Submit Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Leave Modal -->
+    <div class="modal fade" id="viewLeaveModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Leave Request Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Request ID</label>
+                                <p>LEAVE-001</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Employee</label>
+                                <p>John Smith (EMP-001)</p>
+                            </div>
+                    <div class="mb-3">
+                                <label class="form-label fw-bold">Department</label>
+                                <p>Café</p>
+                    </div>
+                    <div class="mb-3">
+                                <label class="form-label fw-bold">Leave Type</label>
+                                <p>Annual Leave</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Start Date</label>
+                                <p>February 1, 2024</p>
+                    </div>
+                    <div class="mb-3">
+                                <label class="form-label fw-bold">End Date</label>
+                                <p>February 5, 2024</p>
+                    </div>
+                    <div class="mb-3">
+                                <label class="form-label fw-bold">Duration</label>
+                                <p>5 days</p>
+                    </div>
+                    <div class="mb-3">
+                                <label class="form-label fw-bold">Status</label>
+                                <p><span class="badge bg-warning text-dark">Pending</span></p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Reason</label>
+                                <p>Family vacation planned for the first week of February.</p>
+                    </div>
+                    <div class="mb-3">
+                                <label class="form-label fw-bold">Additional Notes</label>
+                                <p>Will be available by phone if needed for emergencies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Leave Modal -->
+    <div class="modal fade" id="editLeaveModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Leave Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editLeaveForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Employee</label>
+                                <select class="form-select" required>
+                                    <option value="2" selected>Sarah Johnson</option>
+                                    <option value="1">John Smith</option>
+                                    <option value="3">Michael Brown</option>
+                                    <option value="4">Emily Davis</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Leave Type</label>
+                                <select class="form-select" required>
+                                    <option value="sick" selected>Sick Leave</option>
+                                    <option value="annual">Annual Leave</option>
+                                    <option value="personal">Personal Leave</option>
+                                    <option value="maternity">Maternity Leave</option>
+                                    <option value="paternity">Paternity Leave</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Start Date</label>
+                                <input type="date" class="form-control" value="2024-01-20" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">End Date</label>
+                                <input type="date" class="form-control" value="2024-01-22" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Reason</label>
+                                <textarea class="form-control" rows="3" required>Doctor's appointment and recovery from minor surgery.</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Additional Notes</label>
+                                <textarea class="form-control" rows="2">Medical certificate will be provided upon return.</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="editLeaveForm" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Approve Leave Modal -->
+    <div class="modal fade" id="approveLeaveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Approve Leave Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to approve this leave request?</p>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i>
+                        This will notify the employee that their leave request has been approved.
+                    </div>
+                    <form id="approveLeaveForm">
+                    <div class="mb-3">
+                            <label class="form-label">Approval Notes (Optional)</label>
+                            <textarea class="form-control" rows="3" placeholder="Add any notes for the employee..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="approveLeaveForm" class="btn btn-success">Approve Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Leave Modal -->
+    <div class="modal fade" id="rejectLeaveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reject Leave Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to reject this leave request?</p>
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        This will notify the employee that their leave request has been rejected.
+                    </div>
+                    <form id="rejectLeaveForm">
+                    <div class="mb-3">
+                            <label class="form-label">Rejection Reason</label>
+                            <textarea class="form-control" rows="3" required placeholder="Please provide a reason for rejecting this request..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="rejectLeaveForm" class="btn btn-danger">Reject Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Leave Modal -->
+    <div class="modal fade" id="deleteLeaveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Leave Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this leave request? This action cannot be undone.</p>
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Deleting this request will remove it from the system permanently.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Leave Modal -->
+    <div class="modal fade" id="exportLeaveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Export Leave Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="exportLeaveForm">
+                        <div class="mb-3">
+                            <label class="form-label">Date Range</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" placeholder="Start Date">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" placeholder="End Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select">
+                                <option value="">All Departments</option>
+                                <option value="cafe">Café</option>
+                                <option value="police">Campus Police</option>
+                                <option value="cleaning">Cleaning</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select">
+                                <option value="excel">Excel (.xlsx)</option>
+                                <option value="csv">CSV (.csv)</option>
+                                <option value="pdf">PDF (.pdf)</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="exportLeaveForm" class="btn btn-primary">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load Sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+        // Load Header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+        });
+    </script>
+</body>
+</html> 

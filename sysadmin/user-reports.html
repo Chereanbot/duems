@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reports - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .report-card {
+            transition: transform 0.2s;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+        .report-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .report-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .report-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        .report-date {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .report-size {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .report-actions {
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .report-item:hover .report-actions {
+            opacity: 1;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        .report-type-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .report-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-success { background-color: #198754; }
+        .status-warning { background-color: #ffc107; }
+        .status-danger { background-color: #dc3545; }
+        .status-info { background-color: #0dcaf0; }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .department-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .activity-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .activity-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e9ecef;
+        }
+        .activity-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        .activity-item:last-child {
+            padding-bottom: 0;
+        }
+        .activity-dot {
+            position: absolute;
+            left: -30px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #0d6efd;
+        }
+        .activity-time {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- User Reports Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">User Reports</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">User Reports</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleReportModal">
+                        <i class="bi bi-calendar-plus"></i> Schedule Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reports Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Active Users -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Active Users</h5>
+                                    <p class="text-muted mb-0">Currently online</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">245</h3>
+                                    <p class="text-muted mb-0">Out of 1,250 total</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+18%</span>
+                                    <p class="text-muted mb-0">vs. last week</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Activity -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-graph-up"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">User Activity</h5>
+                                    <p class="text-muted mb-0">Last 24 hours</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">1,842</h3>
+                                    <p class="text-muted mb-0">Login events</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+5%</span>
+                                    <p class="text-muted mb-0">vs. yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Growth -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-person-plus"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">User Growth</h5>
+                                    <p class="text-muted mb-0">This month</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">+32</h3>
+                                    <p class="text-muted mb-0">New users</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-warning">2.6%</span>
+                                    <p class="text-muted mb-0">growth rate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Roles -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-person-badge"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">User Roles</h5>
+                                    <p class="text-muted mb-0">Role distribution</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">8</h3>
+                                    <p class="text-muted mb-0">Active roles</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-info">+1</span>
+                                    <p class="text-muted mb-0">new this month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Activity & Recent Reports -->
+            <div class="row g-4 mb-4">
+                <!-- User Activity -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">User Activity</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">Today</button>
+                                <button class="btn btn-outline-secondary btn-sm">Week</button>
+                                <button class="btn btn-outline-secondary btn-sm">Month</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-timeline">
+                                <!-- Activity Item -->
+                                <div class="activity-item">
+                                    <div class="activity-dot"></div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar me-2">
+                                        <div>
+                                            <strong>John Doe</strong>
+                                            <span class="badge bg-primary department-badge ms-2">IT</span>
+                                        </div>
+                                        <small class="activity-time ms-auto">10:45 AM</small>
+                                    </div>
+                                    <p class="mb-0">Logged in from 192.168.1.45</p>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="activity-item">
+                                    <div class="activity-dot"></div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar me-2">
+                                        <div>
+                                            <strong>Jane Smith</strong>
+                                            <span class="badge bg-success department-badge ms-2">HR</span>
+                                        </div>
+                                        <small class="activity-time ms-auto">10:30 AM</small>
+                                    </div>
+                                    <p class="mb-0">Updated employee profile</p>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="activity-item">
+                                    <div class="activity-dot"></div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar me-2">
+                                        <div>
+                                            <strong>Robert Johnson</strong>
+                                            <span class="badge bg-info department-badge ms-2">Finance</span>
+                                        </div>
+                                        <small class="activity-time ms-auto">10:15 AM</small>
+                                    </div>
+                                    <p class="mb-0">Generated payroll report</p>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="activity-item">
+                                    <div class="activity-dot"></div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar me-2">
+                                        <div>
+                                            <strong>Emily Davis</strong>
+                                            <span class="badge bg-warning department-badge ms-2">Marketing</span>
+                                        </div>
+                                        <small class="activity-time ms-auto">10:00 AM</small>
+                                    </div>
+                                    <p class="mb-0">Logged in from 192.168.1.78</p>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="activity-item">
+                                    <div class="activity-dot"></div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar me-2">
+                                        <div>
+                                            <strong>Michael Wilson</strong>
+                                            <span class="badge bg-danger department-badge ms-2">Admin</span>
+                                        </div>
+                                        <small class="activity-time ms-auto">09:45 AM</small>
+                                    </div>
+                                    <p class="mb-0">Created new user account</p>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="activity-item">
+                                    <div class="activity-dot"></div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <img src="https://via.placeholder.com/32" alt="User" class="user-avatar me-2">
+                                        <div>
+                                            <strong>Sarah Brown</strong>
+                                            <span class="badge bg-secondary department-badge ms-2">Operations</span>
+                                        </div>
+                                        <small class="activity-time ms-auto">09:30 AM</small>
+                                    </div>
+                                    <p class="mb-0">Updated department settings</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reports -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Recent User Reports</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">Activity</button>
+                                <button class="btn btn-outline-secondary btn-sm">Access</button>
+                                <button class="btn btn-outline-secondary btn-sm">Security</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="report-list">
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>User Activity Report</strong>
+                                            <span class="badge bg-primary report-type-badge ms-2">Activity</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Today, 10:30 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 2.5 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>User Access Report</strong>
+                                            <span class="badge bg-info report-type-badge ms-2">Access</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Today, 09:15 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 1.8 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-warning"></span>
+                                            <strong>User Security Report</strong>
+                                            <span class="badge bg-danger report-type-badge ms-2">Security</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-warning">Processing</span>
+                                            <small class="report-date ms-2">Today, 08:45 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 1.2 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>User Role Report</strong>
+                                            <span class="badge bg-secondary report-type-badge ms-2">Roles</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Yesterday, 11:30 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 0.8 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>User Growth Report</strong>
+                                            <span class="badge bg-info report-type-badge ms-2">Growth</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Yesterday, 10:15 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 3.2 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Analytics & Report Types -->
+            <div class="row g-4">
+                <!-- User Analytics -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">User Analytics</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">7d</button>
+                                <button class="btn btn-outline-secondary btn-sm">30d</button>
+                                <button class="btn btn-outline-secondary btn-sm">90d</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="userAnalyticsChart"></canvas>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-primary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Active Users</h6>
+                                            <small class="text-muted">245 users</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">New Users</h6>
+                                            <small class="text-muted">32 this month</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Inactive Users</h6>
+                                            <small class="text-muted">18 users</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-info rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Avg. Session Time</h6>
+                                            <small class="text-muted">45 minutes</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-danger rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Failed Logins</h6>
+                                            <small class="text-muted">24 this week</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-secondary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">User Retention</h6>
+                                            <small class="text-muted">92% monthly</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Report Types -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">User Report Types</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addReportTypeModal">
+                                <i class="bi bi-plus-lg"></i> Add Type
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Report Type</th>
+                                            <th>Description</th>
+                                            <th>Frequency</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>User Activity</td>
+                                            <td>User login and activity logs</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Access</td>
+                                            <td>User access patterns and permissions</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Security</td>
+                                            <td>Security events and user authentication</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Roles</td>
+                                            <td>Role assignments and changes</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Growth</td>
+                                            <td>User registration and growth trends</td>
+                                            <td>Monthly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Retention</td>
+                                            <td>User retention and churn metrics</td>
+                                            <td>Monthly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Performance</td>
+                                            <td>User performance and productivity</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-warning">Inactive</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Report Modal -->
+    <div class="modal fade" id="scheduleReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Schedule User Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select">
+                                <option>User Activity Report</option>
+                                <option>User Access Report</option>
+                                <option>User Security Report</option>
+                                <option>User Role Report</option>
+                                <option>User Growth Report</option>
+                                <option>User Retention Report</option>
+                                <option>User Performance Report</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Schedule</label>
+                            <select class="form-select">
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <input type="time" class="form-control" value="06:00">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Day of Week</label>
+                            <select class="form-select">
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Day of Month</label>
+                            <select class="form-select">
+                                <option>1st</option>
+                                <option>15th</option>
+                                <option>Last Day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select">
+                                <option>PDF</option>
+                                <option>Excel</option>
+                                <option>CSV</option>
+                                <option>HTML</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Recipients</label>
+                            <input type="text" class="form-control" placeholder="Enter email addresses (comma separated)">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enableNotifications" checked>
+                                <label class="form-check-label" for="enableNotifications">Enable notifications</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Schedule Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Report Type Modal -->
+    <div class="modal fade" id="addReportTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add User Report Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Name</label>
+                            <input type="text" class="form-control" placeholder="Enter report name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter report description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>Activity</option>
+                                <option>Access</option>
+                                <option>Security</option>
+                                <option>Roles</option>
+                                <option>Growth</option>
+                                <option>Retention</option>
+                                <option>Performance</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Data Sources</label>
+                            <select class="form-select" multiple>
+                                <option>User Logins</option>
+                                <option>User Activity</option>
+                                <option>User Permissions</option>
+                                <option>Security Events</option>
+                                <option>Role Changes</option>
+                                <option>User Registrations</option>
+                                <option>User Performance</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Default Format</label>
+                            <select class="form-select">
+                                <option>PDF</option>
+                                <option>Excel</option>
+                                <option>CSV</option>
+                                <option>HTML</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enableReportType" checked>
+                                <label class="form-check-label" for="enableReportType">Enable immediately</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Report Type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'user-reports';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize user analytics chart
+            const analyticsCtx = document.getElementById('userAnalyticsChart').getContext('2d');
+            new Chart(analyticsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [
+                        {
+                            label: 'Active Users',
+                            data: [180, 195, 210, 205, 220, 190, 245],
+                            borderColor: '#0d6efd',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'New Users',
+                            data: [5, 8, 12, 7, 9, 4, 6],
+                            borderColor: '#198754',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Failed Logins',
+                            data: [3, 5, 4, 6, 3, 2, 4],
+                            borderColor: '#dc3545',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Users'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

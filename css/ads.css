@@ -1,0 +1,230 @@
+/* Ad Modal Styles */
+#adModal .modal-dialog {
+    max-width: 900px;
+}
+
+#adModal .modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#adModal .modal-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem;
+    border-bottom: none;
+}
+
+#adModal .modal-header .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+#adModal .modal-header .btn-close:hover {
+    opacity: 1;
+}
+
+#adModal .modal-body {
+    padding: 2rem;
+}
+
+#adModal .ad-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#adModal .ad-image:hover {
+    transform: scale(1.02);
+}
+
+#adModal .ad-content {
+    padding: 0 1.5rem;
+}
+
+#adModal .ad-title {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+#adModal .ad-description {
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+#adModal .features-list h6 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+#adModal .features-list ul li {
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+#adModal .features-list ul li i {
+    margin-right: 0.5rem;
+    color: var(--success-color);
+}
+
+#adModal .pricing-tiers {
+    background: rgba(0, 87, 45, 0.05);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin: 1.5rem 0;
+}
+
+#adModal .pricing-tier {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+#adModal .pricing-tier:hover {
+    background: rgba(0, 87, 45, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#adModal .pricing-tier h6 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+#adModal .pricing-tier h4 {
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 700;
+}
+
+#adModal .cta-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+#adModal .cta-buttons .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+#adModal .cta-buttons .btn-primary {
+    background: var(--primary-color);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 87, 45, 0.2);
+}
+
+#adModal .cta-buttons .btn-primary:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 87, 45, 0.3);
+}
+
+#adModal .cta-buttons .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+#adModal .cta-buttons .btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+#adModal .modal-footer {
+    border-top: none;
+    padding: 1rem 2rem;
+    background: #f8f9fa;
+}
+
+#adModal .ad-timer {
+    width: 100%;
+}
+
+#adModal .ad-timer .progress {
+    height: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#adModal .ad-timer .progress-bar {
+    background: var(--primary-color);
+    transition: width 2s linear;
+}
+
+/* Animation for ad transitions */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+#adModal .modal-content {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #adModal .modal-dialog {
+        margin: 1rem;
+    }
+    
+    #adModal .ad-image {
+        height: 250px;
+        margin-bottom: 1.5rem;
+    }
+    
+    #adModal .ad-content {
+        padding: 0;
+    }
+    
+    #adModal .pricing-tier {
+        margin-bottom: 1rem;
+    }
+    
+    #adModal .cta-buttons {
+        flex-direction: column;
+    }
+    
+    #adModal .cta-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* Custom variables */
+:root {
+    --primary-color: #00572d;
+    --secondary-color: #008a4a;
+    --success-color: #28a745;
+    --text-color: #333;
+    --light-text: #666;
+} 

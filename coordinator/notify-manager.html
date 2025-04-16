@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notify Manager - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Notify Manager Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4 class="mb-0">Notify Manager</h4>
+                    <p class="text-muted">Report issues or request assistance from your manager</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newNotificationModal">
+                        <i class="bi bi-plus-circle"></i> New Notification
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notification Form -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Send Notification to Manager</h5>
+                        <form id="notificationForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Notification Type</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Type</option>
+                                        <option value="issue">Issue Report</option>
+                                        <option value="request">Assistance Request</option>
+                                        <option value="suggestion">Suggestion</option>
+                                        <option value="update">Team Update</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Priority Level</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Priority</option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-control" placeholder="Enter a brief subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-control" rows="5" placeholder="Provide detailed information about the issue or request..." required></textarea>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Department</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Department</option>
+                                        <option value="cafe">Café</option>
+                                        <option value="campus_police">Campus Police</option>
+                                        <option value="cleaning">Cleaning</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Team</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Team</option>
+                                        <option value="morning_a">Morning Shift Team A</option>
+                                        <option value="morning_b">Morning Shift Team B</option>
+                                        <option value="afternoon_a">Afternoon Shift Team A</option>
+                                        <option value="afternoon_b">Afternoon Shift Team B</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Attachments (Optional)</label>
+                                <input type="file" class="form-control" multiple>
+                                <div class="form-text">You can attach up to 3 files (PDF, JPG, PNG)</div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="followUpCheck">
+                                    <label class="form-check-label" for="followUpCheck">
+                                        Request follow-up meeting
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3" id="followUpDateContainer" style="display: none;">
+                                <label class="form-label">Preferred Follow-up Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-outline-secondary me-md-2">Save as Draft</button>
+                                <button type="submit" class="btn btn-primary">Send Notification</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Notifications -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Recent Notifications</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Subject</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jan 15, 2024</td>
+                                        <td>Issue Report</td>
+                                        <td>Staff shortage in morning shift</td>
+                                        <td><span class="badge bg-danger">Urgent</span></td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 12, 2024</td>
+                                        <td>Assistance Request</td>
+                                        <td>Need additional training materials</td>
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                        <td><span class="badge bg-success">Resolved</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 10, 2024</td>
+                                        <td>Suggestion</td>
+                                        <td>Improve shift scheduling process</td>
+                                        <td><span class="badge bg-info">Low</span></td>
+                                        <td><span class="badge bg-success">Resolved</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 8, 2024</td>
+                                        <td>Team Update</td>
+                                        <td>Monthly performance summary</td>
+                                        <td><span class="badge bg-info">Low</span></td>
+                                        <td><span class="badge bg-success">Resolved</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jan 5, 2024</td>
+                                        <td>Issue Report</td>
+                                        <td>Equipment malfunction in break room</td>
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                        <td><span class="badge bg-success">Resolved</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Notification Modal -->
+    <div class="modal fade" id="newNotificationModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Notification Type</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Type</option>
+                                    <option value="issue">Issue Report</option>
+                                    <option value="request">Assistance Request</option>
+                                    <option value="suggestion">Suggestion</option>
+                                    <option value="update">Team Update</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority Level</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Priority</option>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input type="text" class="form-control" placeholder="Enter a brief subject" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="5" placeholder="Provide detailed information about the issue or request..." required></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Department</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Department</option>
+                                    <option value="cafe">Café</option>
+                                    <option value="campus_police">Campus Police</option>
+                                    <option value="cleaning">Cleaning</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Team</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Team</option>
+                                    <option value="morning_a">Morning Shift Team A</option>
+                                    <option value="morning_b">Morning Shift Team B</option>
+                                    <option value="afternoon_a">Afternoon Shift Team A</option>
+                                    <option value="afternoon_b">Afternoon Shift Team B</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Attachments (Optional)</label>
+                            <input type="file" class="form-control" multiple>
+                            <div class="form-text">You can attach up to 3 files (PDF, JPG, PNG)</div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="modalFollowUpCheck">
+                                <label class="form-check-label" for="modalFollowUpCheck">
+                                    Request follow-up meeting
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3" id="modalFollowUpDateContainer" style="display: none;">
+                            <label class="form-label">Preferred Follow-up Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Send Notification</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load components
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Toggle follow-up date field
+            const followUpCheck = document.getElementById('followUpCheck');
+            const followUpDateContainer = document.getElementById('followUpDateContainer');
+            
+            followUpCheck.addEventListener('change', function() {
+                followUpDateContainer.style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Toggle follow-up date field in modal
+            const modalFollowUpCheck = document.getElementById('modalFollowUpCheck');
+            const modalFollowUpDateContainer = document.getElementById('modalFollowUpDateContainer');
+            
+            modalFollowUpCheck.addEventListener('change', function() {
+                modalFollowUpDateContainer.style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Form submission
+            const notificationForm = document.getElementById('notificationForm');
+            notificationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would typically send the form data to the server
+                alert('Notification sent successfully!');
+                // Reset form
+                notificationForm.reset();
+                followUpDateContainer.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html> 

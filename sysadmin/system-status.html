@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Status - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .status-card {
+            transition: transform 0.2s;
+        }
+        .status-card:hover {
+            transform: translateY(-5px);
+        }
+        .status-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        .log-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-time {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .log-level {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .log-level.info { background-color: #cff4fc; color: #055160; }
+        .log-level.warning { background-color: #fff3cd; color: #664d03; }
+        .log-level.error { background-color: #f8d7da; color: #842029; }
+        .log-level.success { background-color: #d1e7dd; color: #0f5132; }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- System Status Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">System Status</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">System Status</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                        <i class="bi bi-gear"></i> Settings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Server Status -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card status-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="status-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-hdd-rack"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Server Status</h5>
+                                    <p class="text-muted mb-0">All systems operational</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted">Uptime</small>
+                                    <p class="mb-0">99.99%</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Response Time</small>
+                                    <p class="mb-0">45ms</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Online</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Status -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card status-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="status-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-database"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Database Status</h5>
+                                    <p class="text-muted mb-0">Performance optimal</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted">Queries/sec</small>
+                                    <p class="mb-0">1,234</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Storage</small>
+                                    <p class="mb-0">45%</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Healthy</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Status -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card status-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="status-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-diagram-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Network Status</h5>
+                                    <p class="text-muted mb-0">All connections stable</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted">Bandwidth</small>
+                                    <p class="mb-0">75%</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Latency</small>
+                                    <p class="mb-0">12ms</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Stable</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Status -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card status-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="status-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Security Status</h5>
+                                    <p class="text-muted mb-0">Protected</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted">Threats</small>
+                                    <p class="mb-0">0</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Last Scan</small>
+                                    <p class="mb-0">2h ago</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Secure</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Metrics -->
+            <div class="row g-4 mb-4">
+                <!-- CPU Usage -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">CPU Usage</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="cpuChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory Usage -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Memory Usage</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="memoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Logs -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">System Logs</h5>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary btn-sm">All</button>
+                        <button class="btn btn-outline-secondary btn-sm">Info</button>
+                        <button class="btn btn-outline-secondary btn-sm">Warning</button>
+                        <button class="btn btn-outline-secondary btn-sm">Error</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="log-container">
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level info">INFO</span>
+                                <span class="log-time">2024-02-20 10:30:15</span>
+                            </div>
+                            <p class="mb-0">System backup completed successfully</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level warning">WARNING</span>
+                                <span class="log-time">2024-02-20 10:28:45</span>
+                            </div>
+                            <p class="mb-0">High memory usage detected on server-02</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level success">SUCCESS</span>
+                                <span class="log-time">2024-02-20 10:25:30</span>
+                            </div>
+                            <p class="mb-0">Database optimization completed</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level info">INFO</span>
+                                <span class="log-time">2024-02-20 10:20:15</span>
+                            </div>
+                            <p class="mb-0">User authentication service restarted</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level error">ERROR</span>
+                                <span class="log-time">2024-02-20 10:15:45</span>
+                            </div>
+                            <p class="mb-0">Failed to connect to backup server</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level info">INFO</span>
+                                <span class="log-time">2024-02-20 10:10:30</span>
+                            </div>
+                            <p class="mb-0">System maintenance completed</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level warning">WARNING</span>
+                                <span class="log-time">2024-02-20 10:05:15</span>
+                            </div>
+                            <p class="mb-0">High CPU usage detected on server-01</p>
+                        </div>
+                        <!-- Log Entry -->
+                        <div class="log-entry">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="log-level success">SUCCESS</span>
+                                <span class="log-time">2024-02-20 10:00:00</span>
+                            </div>
+                            <p class="mb-0">System startup completed successfully</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">System Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Log Retention Period</label>
+                            <select class="form-select">
+                                <option>7 days</option>
+                                <option selected>30 days</option>
+                                <option>90 days</option>
+                                <option>180 days</option>
+                                <option>365 days</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Alert Thresholds</label>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">CPU</span>
+                                <input type="number" class="form-control" value="80">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <div class="input-group mb-2">
+                                <span class="input-group-text">Memory</span>
+                                <input type="number" class="form-control" value="85">
+                                <span class="input-group-text">%</span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">Storage</span>
+                                <input type="number" class="form-control" value="90">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Monitoring Interval</label>
+                            <select class="form-select">
+                                <option>1 minute</option>
+                                <option selected>5 minutes</option>
+                                <option>15 minutes</option>
+                                <option>30 minutes</option>
+                                <option>1 hour</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="emailAlerts" checked>
+                                <label class="form-check-label" for="emailAlerts">Email Alerts</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="smsAlerts">
+                                <label class="form-check-label" for="smsAlerts">SMS Alerts</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="autoBackup" checked>
+                                <label class="form-check-label" for="autoBackup">Automatic Backup</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'system-status';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize charts
+            const cpuCtx = document.getElementById('cpuChart').getContext('2d');
+            const memoryCtx = document.getElementById('memoryChart').getContext('2d');
+
+            // CPU Usage Chart
+            new Chart(cpuCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'CPU Usage',
+                        data: [30, 45, 35, 50, 65, 40],
+                        borderColor: '#0d6efd',
+                        tension: 0.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Usage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Memory Usage Chart
+            new Chart(memoryCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'Memory Usage',
+                        data: [40, 55, 45, 60, 75, 50],
+                        borderColor: '#198754',
+                        tension: 0.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Usage (%)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

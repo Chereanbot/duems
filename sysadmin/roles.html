@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Management - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .role-card {
+            transition: transform 0.2s;
+        }
+        .role-card:hover {
+            transform: translateY(-5px);
+        }
+        .role-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .filter-section {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .permission-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Roles Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">Role Management</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Roles</li>
+                        </ol>
+                    </nav>
+                </div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+                    <i class="bi bi-person-plus"></i> Add New Role
+                </button>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filter-section mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Search roles...">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option value="">All Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary flex-grow-1">
+                                <i class="bi bi-funnel"></i> Apply Filters
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-clockwise"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roles Grid -->
+            <div class="row g-4">
+                <!-- Administrator Role -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card role-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="role-icon bg-danger bg-opacity-10 text-danger me-3">
+                                    <i class="bi bi-shield-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Administrator</h5>
+                                    <p class="text-muted mb-0">Full system access</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editRoleModal">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <small class="text-muted">Users with this role</small>
+                                    <p class="mb-0">5</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Permissions</small>
+                                    <p class="mb-0">All</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Active</span></p>
+                                </div>
+                            </div>
+                            <div class="permission-list mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>User Management</span>
+                                    <span class="badge bg-success">Full Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Department Management</span>
+                                    <span class="badge bg-success">Full Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Role Management</span>
+                                    <span class="badge bg-success">Full Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>System Configuration</span>
+                                    <span class="badge bg-success">Full Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Reports & Analytics</span>
+                                    <span class="badge bg-success">Full Access</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manager Role -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card role-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="role-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-person-badge"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Manager</h5>
+                                    <p class="text-muted mb-0">Department management</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editRoleModal">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <small class="text-muted">Users with this role</small>
+                                    <p class="mb-0">12</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Permissions</small>
+                                    <p class="mb-0">Limited</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Active</span></p>
+                                </div>
+                            </div>
+                            <div class="permission-list mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>User Management</span>
+                                    <span class="badge bg-warning">Department Only</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Department Management</span>
+                                    <span class="badge bg-warning">View Only</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Role Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>System Configuration</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Reports & Analytics</span>
+                                    <span class="badge bg-warning">Department Only</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coordinator Role -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card role-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="role-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Coordinator</h5>
+                                    <p class="text-muted mb-0">Team coordination</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editRoleModal">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <small class="text-muted">Users with this role</small>
+                                    <p class="mb-0">18</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Permissions</small>
+                                    <p class="mb-0">Limited</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Active</span></p>
+                                </div>
+                            </div>
+                            <div class="permission-list mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>User Management</span>
+                                    <span class="badge bg-warning">Team Only</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Department Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Role Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>System Configuration</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Reports & Analytics</span>
+                                    <span class="badge bg-warning">Team Only</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Role -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card role-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="role-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Employee</h5>
+                                    <p class="text-muted mb-0">Basic access</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editRoleModal">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <small class="text-muted">Users with this role</small>
+                                    <p class="mb-0">210</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Permissions</small>
+                                    <p class="mb-0">Basic</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Active</span></p>
+                                </div>
+                            </div>
+                            <div class="permission-list mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>User Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Department Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Role Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>System Configuration</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Reports & Analytics</span>
+                                    <span class="badge bg-warning">Personal Only</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guest Role -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card role-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="role-icon bg-secondary bg-opacity-10 text-secondary me-3">
+                                    <i class="bi bi-person-x"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Guest</h5>
+                                    <p class="text-muted mb-0">Limited access</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <div class="dropdown">
+                                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editRoleModal">Edit</a></li>
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <small class="text-muted">Users with this role</small>
+                                    <p class="mb-0">3</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Permissions</small>
+                                    <p class="mb-0">Minimal</p>
+                                </div>
+                                <div>
+                                    <small class="text-muted">Status</small>
+                                    <p class="mb-0"><span class="badge bg-success">Active</span></p>
+                                </div>
+                            </div>
+                            <div class="permission-list mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>User Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Department Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Role Management</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>System Configuration</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Reports & Analytics</span>
+                                    <span class="badge bg-danger">No Access</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Role Card -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card role-card h-100 border-dashed">
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+                                <i class="bi bi-plus-circle me-2"></i> Add New Role
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Role Modal -->
+    <div class="modal fade" id="addRoleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Role Name</label>
+                            <input type="text" class="form-control" placeholder="Enter role name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-control" placeholder="Enter role description">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role Icon</label>
+                            <select class="form-select">
+                                <option value="shield-lock">Shield Lock (Admin)</option>
+                                <option value="person-badge">Person Badge (Manager)</option>
+                                <option value="people">People (Coordinator)</option>
+                                <option value="person">Person (Employee)</option>
+                                <option value="person-x">Person X (Guest)</option>
+                                <option value="gear">Gear (Custom)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role Color</label>
+                            <select class="form-select">
+                                <option value="danger">Red (Admin)</option>
+                                <option value="primary">Blue (Manager)</option>
+                                <option value="success">Green (Coordinator)</option>
+                                <option value="info">Light Blue (Employee)</option>
+                                <option value="secondary">Gray (Guest)</option>
+                                <option value="warning">Yellow (Custom)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Permissions</label>
+                            <div class="permission-list border rounded p-3">
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="userManagement">
+                                        <label class="form-check-label" for="userManagement">
+                                            User Management
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="userManagementLevel" id="userManagementFull" checked>
+                                            <label class="form-check-label" for="userManagementFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="userManagementLevel" id="userManagementDept">
+                                            <label class="form-check-label" for="userManagementDept">
+                                                Department Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="userManagementLevel" id="userManagementTeam">
+                                            <label class="form-check-label" for="userManagementTeam">
+                                                Team Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="userManagementLevel" id="userManagementNone">
+                                            <label class="form-check-label" for="userManagementNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="deptManagement">
+                                        <label class="form-check-label" for="deptManagement">
+                                            Department Management
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="deptManagementLevel" id="deptManagementFull">
+                                            <label class="form-check-label" for="deptManagementFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="deptManagementLevel" id="deptManagementView" checked>
+                                            <label class="form-check-label" for="deptManagementView">
+                                                View Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="deptManagementLevel" id="deptManagementNone">
+                                            <label class="form-check-label" for="deptManagementNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="roleManagement">
+                                        <label class="form-check-label" for="roleManagement">
+                                            Role Management
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="roleManagementLevel" id="roleManagementFull">
+                                            <label class="form-check-label" for="roleManagementFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="roleManagementLevel" id="roleManagementNone" checked>
+                                            <label class="form-check-label" for="roleManagementNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="systemConfig">
+                                        <label class="form-check-label" for="systemConfig">
+                                            System Configuration
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="systemConfigLevel" id="systemConfigFull">
+                                            <label class="form-check-label" for="systemConfigFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="systemConfigLevel" id="systemConfigNone" checked>
+                                            <label class="form-check-label" for="systemConfigNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="reportsAnalytics">
+                                        <label class="form-check-label" for="reportsAnalytics">
+                                            Reports & Analytics
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reportsAnalyticsLevel" id="reportsAnalyticsFull">
+                                            <label class="form-check-label" for="reportsAnalyticsFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reportsAnalyticsLevel" id="reportsAnalyticsDept">
+                                            <label class="form-check-label" for="reportsAnalyticsDept">
+                                                Department Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reportsAnalyticsLevel" id="reportsAnalyticsTeam">
+                                            <label class="form-check-label" for="reportsAnalyticsTeam">
+                                                Team Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reportsAnalyticsLevel" id="reportsAnalyticsPersonal">
+                                            <label class="form-check-label" for="reportsAnalyticsPersonal">
+                                                Personal Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reportsAnalyticsLevel" id="reportsAnalyticsNone">
+                                            <label class="form-check-label" for="reportsAnalyticsNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option selected>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Role</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Role Modal -->
+    <div class="modal fade" id="editRoleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Role Name</label>
+                            <input type="text" class="form-control" value="Administrator">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-control" value="Full system access">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role Icon</label>
+                            <select class="form-select">
+                                <option selected value="shield-lock">Shield Lock (Admin)</option>
+                                <option value="person-badge">Person Badge (Manager)</option>
+                                <option value="people">People (Coordinator)</option>
+                                <option value="person">Person (Employee)</option>
+                                <option value="person-x">Person X (Guest)</option>
+                                <option value="gear">Gear (Custom)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role Color</label>
+                            <select class="form-select">
+                                <option selected value="danger">Red (Admin)</option>
+                                <option value="primary">Blue (Manager)</option>
+                                <option value="success">Green (Coordinator)</option>
+                                <option value="info">Light Blue (Employee)</option>
+                                <option value="secondary">Gray (Guest)</option>
+                                <option value="warning">Yellow (Custom)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Permissions</label>
+                            <div class="permission-list border rounded p-3">
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="editUserManagement" checked>
+                                        <label class="form-check-label" for="editUserManagement">
+                                            User Management
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editUserManagementLevel" id="editUserManagementFull" checked>
+                                            <label class="form-check-label" for="editUserManagementFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editUserManagementLevel" id="editUserManagementDept">
+                                            <label class="form-check-label" for="editUserManagementDept">
+                                                Department Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editUserManagementLevel" id="editUserManagementTeam">
+                                            <label class="form-check-label" for="editUserManagementTeam">
+                                                Team Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editUserManagementLevel" id="editUserManagementNone">
+                                            <label class="form-check-label" for="editUserManagementNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="editDeptManagement" checked>
+                                        <label class="form-check-label" for="editDeptManagement">
+                                            Department Management
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editDeptManagementLevel" id="editDeptManagementFull" checked>
+                                            <label class="form-check-label" for="editDeptManagementFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editDeptManagementLevel" id="editDeptManagementView">
+                                            <label class="form-check-label" for="editDeptManagementView">
+                                                View Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editDeptManagementLevel" id="editDeptManagementNone">
+                                            <label class="form-check-label" for="editDeptManagementNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="editRoleManagement" checked>
+                                        <label class="form-check-label" for="editRoleManagement">
+                                            Role Management
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editRoleManagementLevel" id="editRoleManagementFull" checked>
+                                            <label class="form-check-label" for="editRoleManagementFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editRoleManagementLevel" id="editRoleManagementNone">
+                                            <label class="form-check-label" for="editRoleManagementNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="editSystemConfig" checked>
+                                        <label class="form-check-label" for="editSystemConfig">
+                                            System Configuration
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editSystemConfigLevel" id="editSystemConfigFull" checked>
+                                            <label class="form-check-label" for="editSystemConfigFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editSystemConfigLevel" id="editSystemConfigNone">
+                                            <label class="form-check-label" for="editSystemConfigNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="editReportsAnalytics" checked>
+                                        <label class="form-check-label" for="editReportsAnalytics">
+                                            Reports & Analytics
+                                        </label>
+                                    </div>
+                                    <div class="ms-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editReportsAnalyticsLevel" id="editReportsAnalyticsFull" checked>
+                                            <label class="form-check-label" for="editReportsAnalyticsFull">
+                                                Full Access
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editReportsAnalyticsLevel" id="editReportsAnalyticsDept">
+                                            <label class="form-check-label" for="editReportsAnalyticsDept">
+                                                Department Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editReportsAnalyticsLevel" id="editReportsAnalyticsTeam">
+                                            <label class="form-check-label" for="editReportsAnalyticsTeam">
+                                                Team Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editReportsAnalyticsLevel" id="editReportsAnalyticsPersonal">
+                                            <label class="form-check-label" for="editReportsAnalyticsPersonal">
+                                                Personal Only
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editReportsAnalyticsLevel" id="editReportsAnalyticsNone">
+                                            <label class="form-check-label" for="editReportsAnalyticsNone">
+                                                No Access
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option selected>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'roles';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html> 

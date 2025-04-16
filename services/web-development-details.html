@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Web Development Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/ads.css">
+    <style>
+        .service-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .pricing-card {
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            background: rgba(0, 87, 45, 0.05);
+            transform: translateY(-5px);
+        }
+        .pricing-card.popular {
+            border: 2px solid var(--secondary-color);
+            position: relative;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -1rem;
+            right: 1rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="service-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fw-bold">Professional Web Development</h1>
+                    <p class="lead">Transform your business with our expert web development services. Get a modern, responsive website that converts visitors into customers.</p>
+                    <a href="#pricing" class="btn btn-light btn-lg">View Pricing</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="../../assets/images/cherean.jpg" alt="Web Development" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="features mb-5">
+            <h2 class="text-center mb-4">Key Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-laptop feature-icon"></i>
+                            <h3>Responsive Design</h3>
+                            <p>Your website will look perfect on all devices, from mobile phones to desktop computers.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-search feature-icon"></i>
+                            <h3>SEO Optimization</h3>
+                            <p>Built-in SEO features to help your website rank higher in search engine results.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-speedometer2 feature-icon"></i>
+                            <h3>Fast Loading</h3>
+                            <p>Optimized for speed to ensure your visitors don't have to wait.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing mb-5">
+            <h2 class="text-center mb-4">Pricing Plans</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h3>Basic</h3>
+                        <h2 class="display-4">970 ETB</h2>
+                        <ul class="list-unstyled">
+                            <li>5 Pages</li>
+                            <li>Responsive Design</li>
+                            <li>Contact Form</li>
+                            <li>Basic SEO</li>
+                            <li>1 Month Support</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-card popular">
+                        <span class="popular-badge">Most Popular</span>
+                        <h3>Standard</h3>
+                        <h2 class="display-4">970 ETB</h2>
+                        <ul class="list-unstyled">
+                            <li>10 Pages</li>
+                            <li>Responsive Design</li>
+                            <li>Contact Form</li>
+                            <li>Advanced SEO</li>
+                            <li>3 Months Support</li>
+                            <li>Blog Integration</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h3>Premium</h3>
+                        <h2 class="display-4">1234 ETB</h2>
+                        <ul class="list-unstyled">
+                            <li>Unlimited Pages</li>
+                            <li>Responsive Design</li>
+                            <li>Contact Form</li>
+                            <li>Advanced SEO</li>
+                            <li>6 Months Support</li>
+                            <li>Blog Integration</li>
+                            <li>E-commerce Features</li>
+                        </ul>
+                        <a href="#" class="btn btn-outline-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta mb-5">
+            <div class="text-center">
+                <h2>Ready to Get Started?</h2>
+                <p class="lead">Contact us today to discuss your project requirements</p>
+                <a href="#" class="btn btn-primary btn-lg">Contact Us</a>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const service = {
+                title: 'Professional Web Development',
+                plans: [
+                    {
+                        name: 'Basic',
+                        price: '₦29,970',
+                        features: [
+                            '5 Pages',
+                            'Responsive Design',
+                            'Contact Form',
+                            'Basic SEO',
+                            '1 Month Support'
+                        ]
+                    },
+                    {
+                        name: 'Standard',
+                        price: '₦44,970',
+                        features: [
+                            '10 Pages',
+                            'Responsive Design',
+                            'Contact Form',
+                            'Advanced SEO',
+                            '3 Months Support',
+                            'Blog Integration'
+                        ]
+                    },
+                    {
+                        name: 'Premium',
+                        price: '₦74,970',
+                        features: [
+                            'Unlimited Pages',
+                            'Responsive Design',
+                            'Contact Form',
+                            'Advanced SEO',
+                            '6 Months Support',
+                            'Blog Integration',
+                            'E-commerce Features'
+                        ]
+                    }
+                ]
+            };
+
+            // Add click handlers to "Get Started" buttons
+            document.querySelectorAll('.pricing-card .btn').forEach((button, index) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.checkoutSystem.showCheckout(service, service.plans[index]);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

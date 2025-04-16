@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup Management - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .backup-card {
+            transition: transform 0.2s;
+        }
+        .backup-card:hover {
+            transform: translateY(-5px);
+        }
+        .backup-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .backup-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-success { background-color: #198754; }
+        .status-warning { background-color: #ffc107; }
+        .status-danger { background-color: #dc3545; }
+        .status-info { background-color: #0dcaf0; }
+        .backup-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .backup-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .backup-item:last-child {
+            border-bottom: none;
+        }
+        .backup-size {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .backup-time {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .progress {
+            height: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Backup Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">Backup Management</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Backups</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-clockwise"></i> Refresh
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newBackupModal">
+                        <i class="bi bi-plus-circle"></i> New Backup
+                    </button>
+                </div>
+            </div>
+
+            <!-- Backup Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Total Backups -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card backup-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="backup-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-archive"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Total Backups</h5>
+                                    <p class="text-muted mb-0">All backup types</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">124</h3>
+                                    <p class="text-muted mb-0">Last 30 days</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+12%</span>
+                                    <p class="text-muted mb-0">vs. last month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Used -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card backup-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="backup-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-hdd"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Storage Used</h5>
+                                    <p class="text-muted mb-0">Backup storage</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">1.2 TB</h3>
+                                    <p class="text-muted mb-0">Of 5 TB total</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-warning">24%</span>
+                                    <p class="text-muted mb-0">Used</p>
+                                </div>
+                            </div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 24%;" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Rate -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card backup-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="backup-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Success Rate</h5>
+                                    <p class="text-muted mb-0">Backup completion</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">98.5%</h3>
+                                    <p class="text-muted mb-0">Last 30 days</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+0.5%</span>
+                                    <p class="text-muted mb-0">vs. last month</p>
+                                </div>
+                            </div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 98.5%;" aria-valuenow="98.5" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recovery Time -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card backup-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="backup-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Recovery Time</h5>
+                                    <p class="text-muted mb-0">Average restore</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">45 min</h3>
+                                    <p class="text-muted mb-0">Last 10 restores</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-danger">+5 min</span>
+                                    <p class="text-muted mb-0">vs. last month</p>
+                                </div>
+                            </div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup Schedule & Recent Backups -->
+            <div class="row g-4 mb-4">
+                <!-- Backup Schedule -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Backup Schedule</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editScheduleModal">
+                                <i class="bi bi-pencil"></i> Edit
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Frequency</th>
+                                            <th>Time</th>
+                                            <th>Retention</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Full System</td>
+                                            <td>Weekly</td>
+                                            <td>Sunday, 02:00 AM</td>
+                                            <td>12 weeks</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Database</td>
+                                            <td>Daily</td>
+                                            <td>03:00 AM</td>
+                                            <td>30 days</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Data</td>
+                                            <td>Daily</td>
+                                            <td>04:00 AM</td>
+                                            <td>30 days</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Configuration</td>
+                                            <td>Daily</td>
+                                            <td>01:00 AM</td>
+                                            <td>90 days</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Incremental</td>
+                                            <td>Hourly</td>
+                                            <td>Every hour</td>
+                                            <td>7 days</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Backups -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Recent Backups</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">Full</button>
+                                <button class="btn btn-outline-secondary btn-sm">Incremental</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="backup-list">
+                                <!-- Backup Item -->
+                                <div class="backup-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="backup-status status-success"></span>
+                                            <strong>Full System Backup</strong>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="backup-time ms-2">Today, 02:15 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="backup-size">Size: 125 GB</small>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">Restore</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Backup Item -->
+                                <div class="backup-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="backup-status status-success"></span>
+                                            <strong>Database Backup</strong>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="backup-time ms-2">Today, 03:10 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="backup-size">Size: 15 GB</small>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">Restore</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Backup Item -->
+                                <div class="backup-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="backup-status status-success"></span>
+                                            <strong>User Data Backup</strong>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="backup-time ms-2">Today, 04:05 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="backup-size">Size: 8 GB</small>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">Restore</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Backup Item -->
+                                <div class="backup-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="backup-status status-warning"></span>
+                                            <strong>Incremental Backup</strong>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-warning">Partial</span>
+                                            <small class="backup-time ms-2">Today, 05:00 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="backup-size">Size: 2.5 GB</small>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">Restore</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Backup Item -->
+                                <div class="backup-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="backup-status status-success"></span>
+                                            <strong>Configuration Backup</strong>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="backup-time ms-2">Today, 01:05 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="backup-size">Size: 1.2 GB</small>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">Restore</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Backup Item -->
+                                <div class="backup-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="backup-status status-success"></span>
+                                            <strong>Incremental Backup</strong>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="backup-time ms-2">Yesterday, 23:00 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="backup-size">Size: 1.8 GB</small>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-outline-primary">Restore</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup Storage & Recovery History -->
+            <div class="row g-4">
+                <!-- Backup Storage -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Backup Storage</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container" style="height: 300px;">
+                                <canvas id="storageChart"></canvas>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-primary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Full Backups</h6>
+                                            <small class="text-muted">650 GB (54%)</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Incremental Backups</h6>
+                                            <small class="text-muted">350 GB (29%)</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Database Backups</h6>
+                                            <small class="text-muted">200 GB (17%)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-info rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">User Data</h6>
+                                            <small class="text-muted">100 GB (8%)</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-secondary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Configuration</h6>
+                                            <small class="text-muted">50 GB (4%)</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-danger rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Other</h6>
+                                            <small class="text-muted">50 GB (4%)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recovery History -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Recovery History</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Backup Type</th>
+                                            <th>Recovered By</th>
+                                            <th>Status</th>
+                                            <th>Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2024-02-15</td>
+                                            <td>Database</td>
+                                            <td>Admin User</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                            <td>42 min</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-02-10</td>
+                                            <td>User Data</td>
+                                            <td>System Admin</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                            <td>35 min</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-02-05</td>
+                                            <td>Configuration</td>
+                                            <td>Admin User</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                            <td>15 min</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-01-28</td>
+                                            <td>Full System</td>
+                                            <td>System Admin</td>
+                                            <td><span class="badge bg-warning">Partial</span></td>
+                                            <td>120 min</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-01-20</td>
+                                            <td>Database</td>
+                                            <td>Admin User</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                            <td>38 min</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-01-15</td>
+                                            <td>User Data</td>
+                                            <td>System Admin</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                            <td>40 min</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Backup Modal -->
+    <div class="modal fade" id="newBackupModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Backup</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Backup Type</label>
+                            <select class="form-select">
+                                <option>Full System</option>
+                                <option>Database</option>
+                                <option>User Data</option>
+                                <option>Configuration</option>
+                                <option>Incremental</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <input type="text" class="form-control" placeholder="Enter backup description">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Compression Level</label>
+                            <select class="form-select">
+                                <option>None</option>
+                                <option selected>Medium</option>
+                                <option>High</option>
+                                <option>Maximum</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Encryption</label>
+                            <select class="form-select">
+                                <option>None</option>
+                                <option selected>AES-128</option>
+                                <option>AES-256</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Storage Location</label>
+                            <select class="form-select">
+                                <option selected>Primary Storage</option>
+                                <option>Secondary Storage</option>
+                                <option>Cloud Storage</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="verifyBackup" checked>
+                                <label class="form-check-label" for="verifyBackup">Verify backup after creation</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Create Backup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Schedule Modal -->
+    <div class="modal fade" id="editScheduleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Backup Schedule</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Full System Backup</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option>Daily</option>
+                                        <option selected>Weekly</option>
+                                        <option>Monthly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" value="02:00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Database Backup</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option selected>Daily</option>
+                                        <option>Weekly</option>
+                                        <option>Monthly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" value="03:00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">User Data Backup</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option selected>Daily</option>
+                                        <option>Weekly</option>
+                                        <option>Monthly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" value="04:00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Configuration Backup</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option selected>Daily</option>
+                                        <option>Weekly</option>
+                                        <option>Monthly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" value="01:00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Incremental Backup</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option selected>Hourly</option>
+                                        <option>Daily</option>
+                                        <option>Weekly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="time" class="form-control" value="00:00" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Retention Period</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option>7 days</option>
+                                        <option selected>30 days</option>
+                                        <option>90 days</option>
+                                        <option>180 days</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" value="30" placeholder="Days">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'backups';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize storage chart
+            const storageCtx = document.getElementById('storageChart').getContext('2d');
+            new Chart(storageCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Full Backups', 'Incremental Backups', 'Database Backups', 'User Data', 'Configuration', 'Other'],
+                    datasets: [{
+                        data: [650, 350, 200, 100, 50, 50],
+                        backgroundColor: [
+                            '#0d6efd',
+                            '#198754',
+                            '#ffc107',
+                            '#0dcaf0',
+                            '#6c757d',
+                            '#dc3545'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

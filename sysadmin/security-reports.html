@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Reports - Debre University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .report-card {
+            transition: transform 0.2s;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+        .report-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .report-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .report-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        .report-date {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .report-size {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .report-actions {
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .report-item:hover .report-actions {
+            opacity: 1;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        .report-type-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .report-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-success { background-color: #198754; }
+        .status-warning { background-color: #ffc107; }
+        .status-danger { background-color: #dc3545; }
+        .status-info { background-color: #0dcaf0; }
+        .security-level {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        .level-critical { background-color: #dc3545; color: white; }
+        .level-high { background-color: #fd7e14; color: white; }
+        .level-medium { background-color: #ffc107; color: black; }
+        .level-low { background-color: #0dcaf0; color: white; }
+        .level-info { background-color: #6c757d; color: white; }
+        .alert-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+        .alert-time {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+        .alert-source {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+        .alert-actions {
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .alert-item:hover .alert-actions {
+            opacity: 1;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e9ecef;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #0d6efd;
+        }
+        .timeline-time {
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Security Reports Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">Security Reports</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Security Reports</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleReportModal">
+                        <i class="bi bi-calendar-plus"></i> Schedule Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Security Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Security Score -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Security Score</h5>
+                                    <p class="text-muted mb-0">Overall system security</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">87/100</h3>
+                                    <p class="text-muted mb-0">Good</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+5</span>
+                                    <p class="text-muted mb-0">vs. last month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Threats -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-danger bg-opacity-10 text-danger me-3">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Active Threats</h5>
+                                    <p class="text-muted mb-0">Current security issues</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">3</h3>
+                                    <p class="text-muted mb-0">2 high, 1 medium</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-danger">+2</span>
+                                    <p class="text-muted mb-0">vs. yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Failed Logins -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-key"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Failed Logins</h5>
+                                    <p class="text-muted mb-0">Last 24 hours</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">24</h3>
+                                    <p class="text-muted mb-0">Attempts</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-warning">+8%</span>
+                                    <p class="text-muted mb-0">vs. yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Patches -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-patch-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Security Patches</h5>
+                                    <p class="text-muted mb-0">System updates</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">5</h3>
+                                    <p class="text-muted mb-0">Pending updates</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-info">+2</span>
+                                    <p class="text-muted mb-0">new this week</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Alerts & Recent Reports -->
+            <div class="row g-4 mb-4">
+                <!-- Security Alerts -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Security Alerts</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">Critical</button>
+                                <button class="btn btn-outline-secondary btn-sm">High</button>
+                                <button class="btn btn-outline-secondary btn-sm">Medium</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="report-list">
+                                <!-- Alert Item -->
+                                <div class="alert-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-level level-critical me-2">Critical</span>
+                                            <strong>Multiple Failed Login Attempts</strong>
+                                        </div>
+                                        <small class="alert-time">10:45 AM</small>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="alert-source">Source: 192.168.1.45</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-outline-primary">Investigate</button>
+                                            <button class="btn btn-sm btn-outline-danger">Block IP</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Alert Item -->
+                                <div class="alert-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-level level-high me-2">High</span>
+                                            <strong>Unusual Access Pattern Detected</strong>
+                                        </div>
+                                        <small class="alert-time">09:30 AM</small>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="alert-source">User: john.doe@debre.edu</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-outline-primary">Investigate</button>
+                                            <button class="btn btn-sm btn-outline-warning">Flag Account</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Alert Item -->
+                                <div class="alert-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-level level-medium me-2">Medium</span>
+                                            <strong>Outdated Security Protocol</strong>
+                                        </div>
+                                        <small class="alert-time">08:15 AM</small>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="alert-source">System: Authentication Service</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-outline-primary">Investigate</button>
+                                            <button class="btn btn-sm btn-outline-info">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Alert Item -->
+                                <div class="alert-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-level level-low me-2">Low</span>
+                                            <strong>Unencrypted Data Transfer</strong>
+                                        </div>
+                                        <small class="alert-time">07:45 AM</small>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="alert-source">Service: File Transfer</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-outline-primary">Investigate</button>
+                                            <button class="btn btn-sm btn-outline-info">Fix</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Alert Item -->
+                                <div class="alert-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-level level-info me-2">Info</span>
+                                            <strong>Security Scan Completed</strong>
+                                        </div>
+                                        <small class="alert-time">06:30 AM</small>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="alert-source">System: Security Scanner</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View Report</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reports -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Recent Security Reports</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">Vulnerability</button>
+                                <button class="btn btn-outline-secondary btn-sm">Access</button>
+                                <button class="btn btn-outline-secondary btn-sm">Compliance</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="report-list">
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>Vulnerability Assessment</strong>
+                                            <span class="badge bg-danger report-type-badge ms-2">Vulnerability</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Today, 10:30 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 3.5 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>Access Log Analysis</strong>
+                                            <span class="badge bg-info report-type-badge ms-2">Access</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Today, 09:15 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 2.8 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-warning"></span>
+                                            <strong>Compliance Audit</strong>
+                                            <span class="badge bg-primary report-type-badge ms-2">Compliance</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-warning">Processing</span>
+                                            <small class="report-date ms-2">Today, 08:45 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 1.5 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>Security Incident Report</strong>
+                                            <span class="badge bg-danger report-type-badge ms-2">Incident</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Yesterday, 11:30 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 0.9 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>Security Patch Status</strong>
+                                            <span class="badge bg-info report-type-badge ms-2">Patches</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Yesterday, 10:15 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 1.2 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Analytics & Report Types -->
+            <div class="row g-4">
+                <!-- Security Analytics -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Security Analytics</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">7d</button>
+                                <button class="btn btn-outline-secondary btn-sm">30d</button>
+                                <button class="btn btn-outline-secondary btn-sm">90d</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="securityAnalyticsChart"></canvas>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-danger rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Critical Alerts</h6>
+                                            <small class="text-muted">3 this week</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-warning rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">High Alerts</h6>
+                                            <small class="text-muted">7 this week</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-info rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Medium Alerts</h6>
+                                            <small class="text-muted">12 this week</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-primary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Failed Logins</h6>
+                                            <small class="text-muted">24 today</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Patches Applied</h6>
+                                            <small class="text-muted">15 this month</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-secondary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Security Score</h6>
+                                            <small class="text-muted">87/100</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Report Types -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Security Report Types</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addReportTypeModal">
+                                <i class="bi bi-plus-lg"></i> Add Type
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Report Type</th>
+                                            <th>Description</th>
+                                            <th>Frequency</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Vulnerability Assessment</td>
+                                            <td>System vulnerabilities and risks</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Access Log Analysis</td>
+                                            <td>User access patterns and anomalies</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compliance Audit</td>
+                                            <td>Regulatory compliance status</td>
+                                            <td>Monthly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Security Incident</td>
+                                            <td>Security events and incidents</td>
+                                            <td>On-demand</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Patch Status</td>
+                                            <td>Security patch compliance</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Security Score</td>
+                                            <td>Overall security metrics</td>
+                                            <td>Monthly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Threat Intelligence</td>
+                                            <td>External threat monitoring</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-warning">Inactive</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Report Modal -->
+    <div class="modal fade" id="scheduleReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Schedule Security Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select">
+                                <option>Vulnerability Assessment</option>
+                                <option>Access Log Analysis</option>
+                                <option>Compliance Audit</option>
+                                <option>Security Incident Report</option>
+                                <option>Patch Status Report</option>
+                                <option>Security Score Report</option>
+                                <option>Threat Intelligence Report</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Schedule</label>
+                            <select class="form-select">
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <input type="time" class="form-control" value="06:00">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Day of Week</label>
+                            <select class="form-select">
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Day of Month</label>
+                            <select class="form-select">
+                                <option>1st</option>
+                                <option>15th</option>
+                                <option>Last Day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select">
+                                <option>PDF</option>
+                                <option>Excel</option>
+                                <option>CSV</option>
+                                <option>HTML</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Recipients</label>
+                            <input type="text" class="form-control" placeholder="Enter email addresses (comma separated)">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enableNotifications" checked>
+                                <label class="form-check-label" for="enableNotifications">Enable notifications</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Schedule Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Report Type Modal -->
+    <div class="modal fade" id="addReportTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Security Report Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Name</label>
+                            <input type="text" class="form-control" placeholder="Enter report name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter report description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>Vulnerability</option>
+                                <option>Access</option>
+                                <option>Compliance</option>
+                                <option>Incident</option>
+                                <option>Patches</option>
+                                <option>Score</option>
+                                <option>Threats</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Data Sources</label>
+                            <select class="form-select" multiple>
+                                <option>Security Logs</option>
+                                <option>Access Logs</option>
+                                <option>System Logs</option>
+                                <option>Threat Feeds</option>
+                                <option>Compliance Data</option>
+                                <option>Vulnerability Scans</option>
+                                <option>Patch Status</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Default Format</label>
+                            <select class="form-select">
+                                <option>PDF</option>
+                                <option>Excel</option>
+                                <option>CSV</option>
+                                <option>HTML</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enableReportType" checked>
+                                <label class="form-check-label" for="enableReportType">Enable immediately</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Report Type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'security-reports';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize security analytics chart
+            const analyticsCtx = document.getElementById('securityAnalyticsChart').getContext('2d');
+            new Chart(analyticsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [
+                        {
+                            label: 'Security Score',
+                            data: [82, 84, 83, 85, 86, 85, 87],
+                            borderColor: '#0d6efd',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Critical Alerts',
+                            data: [2, 1, 3, 2, 1, 2, 3],
+                            borderColor: '#dc3545',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Failed Logins',
+                            data: [18, 22, 20, 19, 21, 23, 24],
+                            borderColor: '#ffc107',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

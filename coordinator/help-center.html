@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Help Center Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4 class="mb-0">Help Center</h4>
+                    <p class="text-muted">Get assistance and find answers to common questions</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newTicketModal">
+                        <i class="bi bi-plus-circle"></i> New Support Ticket
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Section -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for help articles, FAQs, or support tickets...">
+                            <button class="btn btn-primary">
+                                <i class="bi bi-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center p-4">
+                        <i class="bi bi-question-circle display-4 text-primary mb-3"></i>
+                        <h5>FAQs</h5>
+                        <p class="text-muted">Find answers to common questions</p>
+                        <a href="#faq-section" class="btn btn-outline-primary">View FAQs</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center p-4">
+                        <i class="bi bi-book display-4 text-primary mb-3"></i>
+                        <h5>Knowledge Base</h5>
+                        <p class="text-muted">Browse helpful articles and guides</p>
+                        <a href="#knowledge-base" class="btn btn-outline-primary">Browse Articles</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center p-4">
+                        <i class="bi bi-ticket-detailed display-4 text-primary mb-3"></i>
+                        <h5>Support Tickets</h5>
+                        <p class="text-muted">View and manage your tickets</p>
+                        <a href="#tickets-section" class="btn btn-outline-primary">View Tickets</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center p-4">
+                        <i class="bi bi-headset display-4 text-primary mb-3"></i>
+                        <h5>Contact Support</h5>
+                        <p class="text-muted">Get in touch with our support team</p>
+                        <a href="#contact-section" class="btn btn-outline-primary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQs Section -->
+            <div class="row mb-4" id="faq-section">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Frequently Asked Questions</h5>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        How do I manage my team's schedule?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You can manage your team's schedule through the Schedule page. There you can view, create, and modify shifts, assign team members, and handle shift swaps.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        How do I submit a leave request?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        To submit a leave request, go to the Leave Requests page and click on "New Leave Request". Fill in the required details and submit for approval.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                        How do I report an issue to my manager?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You can report issues to your manager through the Notify Manager page. Select the appropriate notification type, priority level, and provide detailed information about the issue.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Knowledge Base Section -->
+            <div class="row mb-4" id="knowledge-base">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Knowledge Base Articles</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Getting Started Guide</h6>
+                                        <p class="card-text">Learn the basics of using the employee management system.</p>
+                                        <a href="#" class="btn btn-link p-0">Read more →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Team Management</h6>
+                                        <p class="card-text">Best practices for managing your team effectively.</p>
+                                        <a href="#" class="btn btn-link p-0">Read more →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Reporting Guide</h6>
+                                        <p class="card-text">How to generate and interpret various reports.</p>
+                                        <a href="#" class="btn btn-link p-0">Read more →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Tickets Section -->
+            <div class="row mb-4" id="tickets-section">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Recent Support Tickets</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket ID</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                        <th>Created</th>
+                                        <th>Last Updated</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#12345</td>
+                                        <td>Unable to access schedule page</td>
+                                        <td><span class="badge bg-warning">Open</span></td>
+                                        <td>Jan 15, 2024</td>
+                                        <td>Jan 15, 2024</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#12344</td>
+                                        <td>Leave request not showing in dashboard</td>
+                                        <td><span class="badge bg-success">Resolved</span></td>
+                                        <td>Jan 12, 2024</td>
+                                        <td>Jan 13, 2024</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Support Section -->
+            <div class="row" id="contact-section">
+                <div class="col-md-12">
+                    <div class="dashboard-card">
+                        <h5 class="mb-4">Contact Support</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Support Hours</h6>
+                                <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                <p>Saturday - Sunday: Closed</p>
+                                <h6 class="mt-3">Contact Information</h6>
+                                <p><i class="bi bi-envelope"></i> support@dillauniversity.edu</p>
+                                <p><i class="bi bi-telephone"></i> +251 911 123 456</p>
+                            </div>
+                            <div class="col-md-6">
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label">Subject</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Message</label>
+                                        <textarea class="form-control" rows="4" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Support Ticket Modal -->
+    <div class="modal fade" id="newTicketModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Support Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" required>
+                                <option value="">Select Category</option>
+                                <option value="technical">Technical Issue</option>
+                                <option value="account">Account Related</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Priority</label>
+                            <select class="form-select" required>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Attachments (Optional)</label>
+                            <input type="file" class="form-control" multiple>
+                            <div class="form-text">You can attach up to 3 files (PDF, JPG, PNG)</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Submit Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load components
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+        });
+    </script>
+</body>
+</html> 

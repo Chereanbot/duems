@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Dilla University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Settings</h2>
+                <div>
+                    <button class="btn btn-primary" id="saveSettingsBtn">
+                        <i class="bi bi-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Navigation -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="list-group list-group-flush">
+                            <a href="#profile" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                                <i class="bi bi-person-circle me-2"></i> Profile Settings
+                            </a>
+                            <a href="#account" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-shield-lock me-2"></i> Account Security
+                            </a>
+                            <a href="#notifications" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-bell me-2"></i> Notification Preferences
+                            </a>
+                            <a href="#appearance" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-palette me-2"></i> Appearance
+                            </a>
+                            <a href="#system" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-gear me-2"></i> System Settings
+                            </a>
+                            <a href="#integrations" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                                <i class="bi bi-puzzle me-2"></i> Integrations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <!-- Profile Settings -->
+                        <div class="tab-pane fade show active" id="profile">
+                            <div class="dashboard-card">
+                                <h5 class="card-title mb-4">Profile Settings</h5>
+                                <form id="profileSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" class="form-control" value="John">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" value="Manager">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" class="form-control" value="john.manager@dillauniversity.edu">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Phone</label>
+                                            <input type="tel" class="form-control" value="+251 912345678">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Profile Picture</label>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/100" class="rounded-circle me-3" alt="Profile Picture">
+                                                <div>
+                                                    <input type="file" class="form-control" id="profilePicture">
+                                                    <small class="text-muted">Recommended size: 200x200 pixels</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Bio</label>
+                                            <textarea class="form-control" rows="3">Department Manager at Dilla University with over 5 years of experience in employee management.</textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Department</label>
+                                            <select class="form-select">
+                                                <option value="all" selected>All Departments</option>
+                                                <option value="cafe">Café</option>
+                                                <option value="police">Campus Police</option>
+                                                <option value="cleaning">Cleaning</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Role</label>
+                                            <input type="text" class="form-control" value="Department Manager" readonly>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Account Security -->
+                        <div class="tab-pane fade" id="account">
+                            <div class="dashboard-card">
+                                <h5 class="card-title mb-4">Account Security</h5>
+                                <form id="securitySettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h6>Change Password</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Current Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">New Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Confirm New Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Two-Factor Authentication</h6>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="enable2FA">
+                                                <label class="form-check-label" for="enable2FA">Enable Two-Factor Authentication</label>
+                                            </div>
+                                            <small class="text-muted">Add an extra layer of security to your account by requiring a verification code in addition to your password.</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Login History</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date & Time</th>
+                                                            <th>IP Address</th>
+                                                            <th>Device</th>
+                                                            <th>Location</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Jan 15, 2024 09:30 AM</td>
+                                                            <td>192.168.1.100</td>
+                                                            <td>Chrome on Windows</td>
+                                                            <td>Debre, Ethiopia</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jan 14, 2024 02:15 PM</td>
+                                                            <td>192.168.1.100</td>
+                                                            <td>Chrome on Windows</td>
+                                                            <td>Debre, Ethiopia</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jan 13, 2024 10:45 AM</td>
+                                                            <td>192.168.1.100</td>
+                                                            <td>Chrome on Windows</td>
+                                                            <td>Debre, Ethiopia</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Active Sessions</h6>
+                                            <div class="list-group">
+                                                <div class="list-group-item">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <h6 class="mb-1">Chrome on Windows</h6>
+                                                            <small class="text-muted">Last active: 5 minutes ago</small>
+                                                        </div>
+                                                        <button class="btn btn-sm btn-danger">End Session</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Notification Preferences -->
+                        <div class="tab-pane fade" id="notifications">
+                            <div class="dashboard-card">
+                                <h5 class="card-title mb-4">Notification Preferences</h5>
+                                <form id="notificationSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h6>Email Notifications</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="emailAnnouncements" checked>
+                                                <label class="form-check-label" for="emailAnnouncements">Announcements</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="emailLeaveRequests" checked>
+                                                <label class="form-check-label" for="emailLeaveRequests">Leave Requests</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="emailAttendance" checked>
+                                                <label class="form-check-label" for="emailAttendance">Attendance Reports</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="emailIssues" checked>
+                                                <label class="form-check-label" for="emailIssues">Issue Reports</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Push Notifications</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="pushAnnouncements" checked>
+                                                <label class="form-check-label" for="pushAnnouncements">Announcements</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="pushLeaveRequests" checked>
+                                                <label class="form-check-label" for="pushLeaveRequests">Leave Requests</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="pushAttendance">
+                                                <label class="form-check-label" for="pushAttendance">Attendance Reports</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="pushIssues" checked>
+                                                <label class="form-check-label" for="pushIssues">Issue Reports</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Notification Frequency</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="notificationFrequency" id="frequencyImmediate" checked>
+                                                <label class="form-check-label" for="frequencyImmediate">Immediate</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="notificationFrequency" id="frequencyDaily">
+                                                <label class="form-check-label" for="frequencyDaily">Daily Digest</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="notificationFrequency" id="frequencyWeekly">
+                                                <label class="form-check-label" for="frequencyWeekly">Weekly Summary</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Appearance -->
+                        <div class="tab-pane fade" id="appearance">
+                            <div class="dashboard-card">
+                                <h5 class="card-title mb-4">Appearance Settings</h5>
+                                <form id="appearanceSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h6>Theme</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="theme" id="themeLight" checked>
+                                                <label class="form-check-label" for="themeLight">Light</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="theme" id="themeDark">
+                                                <label class="form-check-label" for="themeDark">Dark</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="theme" id="themeSystem">
+                                                <label class="form-check-label" for="themeSystem">System Default</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Color Scheme</h6>
+                                            <div class="d-flex gap-2 mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="colorScheme" id="colorBlue" checked>
+                                                    <label class="form-check-label" for="colorBlue">
+                                                        <span class="badge bg-primary">Blue</span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="colorScheme" id="colorGreen">
+                                                    <label class="form-check-label" for="colorGreen">
+                                                        <span class="badge bg-success">Green</span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="colorScheme" id="colorPurple">
+                                                    <label class="form-check-label" for="colorPurple">
+                                                        <span class="badge bg-purple">Purple</span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="colorScheme" id="colorRed">
+                                                    <label class="form-check-label" for="colorRed">
+                                                        <span class="badge bg-danger">Red</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Font Size</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="fontSize" id="fontSmall">
+                                                <label class="form-check-label" for="fontSmall">Small</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="fontSize" id="fontMedium" checked>
+                                                <label class="form-check-label" for="fontMedium">Medium</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="fontSize" id="fontLarge">
+                                                <label class="form-check-label" for="fontLarge">Large</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Layout</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="layout" id="layoutDefault" checked>
+                                                <label class="form-check-label" for="layoutDefault">Default</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="layout" id="layoutCompact">
+                                                <label class="form-check-label" for="layoutCompact">Compact</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio" name="layout" id="layoutWide">
+                                                <label class="form-check-label" for="layoutWide">Wide</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- System Settings -->
+                        <div class="tab-pane fade" id="system">
+                            <div class="dashboard-card">
+                                <h5 class="card-title mb-4">System Settings</h5>
+                                <form id="systemSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h6>Language</h6>
+                                            <select class="form-select">
+                                                <option value="en" selected>English</option>
+                                                <option value="am">Amharic</option>
+                                                <option value="fr">French</option>
+                                                <option value="es">Spanish</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Time Zone</h6>
+                                            <select class="form-select">
+                                                <option value="Africa/Addis_Ababa" selected>Africa/Addis_Ababa (GMT+3)</option>
+                                                <option value="UTC">UTC</option>
+                                                <option value="America/New_York">America/New_York (GMT-5)</option>
+                                                <option value="Europe/London">Europe/London (GMT+0)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Date Format</h6>
+                                            <select class="form-select">
+                                                <option value="MM/DD/YYYY" selected>MM/DD/YYYY</option>
+                                                <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Time Format</h6>
+                                            <select class="form-select">
+                                                <option value="12h" selected>12-hour (AM/PM)</option>
+                                                <option value="24h">24-hour</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Data Export Format</h6>
+                                            <select class="form-select">
+                                                <option value="csv" selected>CSV</option>
+                                                <option value="excel">Excel</option>
+                                                <option value="pdf">PDF</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <h6>Auto Logout</h6>
+                                            <select class="form-select">
+                                                <option value="15">15 minutes</option>
+                                                <option value="30" selected>30 minutes</option>
+                                                <option value="60">1 hour</option>
+                                                <option value="120">2 hours</option>
+                                                <option value="0">Never</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Integrations -->
+                        <div class="tab-pane fade" id="integrations">
+                            <div class="dashboard-card">
+                                <h5 class="card-title mb-4">Integrations</h5>
+                                <form id="integrationsSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-3">
+                                                <div>
+                                                    <h6 class="mb-1">Google Calendar</h6>
+                                                    <small class="text-muted">Sync your schedule with Google Calendar</small>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="googleCalendar">
+                                                    <label class="form-check-label" for="googleCalendar">Enable</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-3">
+                                                <div>
+                                                    <h6 class="mb-1">Microsoft Teams</h6>
+                                                    <small class="text-muted">Integrate with Microsoft Teams for meetings and notifications</small>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="microsoftTeams">
+                                                    <label class="form-check-label" for="microsoftTeams">Enable</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-3">
+                                                <div>
+                                                    <h6 class="mb-1">Slack</h6>
+                                                    <small class="text-muted">Send notifications to Slack channels</small>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="slack">
+                                                    <label class="form-check-label" for="slack">Enable</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-3">
+                                                <div>
+                                                    <h6 class="mb-1">Zoom</h6>
+                                                    <small class="text-muted">Schedule and join Zoom meetings directly</small>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="zoom">
+                                                    <label class="form-check-label" for="zoom">Enable</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-3">
+                                                <div>
+                                                    <h6 class="mb-1">Payroll System</h6>
+                                                    <small class="text-muted">Connect with the university payroll system</small>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="payroll" checked>
+                                                    <label class="form-check-label" for="payroll">Enable</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load Sidebar
+        fetch('components/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            });
+
+        // Load Header
+        fetch('components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+
+        // Save Settings
+        document.getElementById('saveSettingsBtn').addEventListener('click', function() {
+            // Show success message
+            alert('Settings saved successfully!');
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Dilla University EMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-green: #00572d;
+            --secondary-green: #1f9345;
+            --accent-gold: #f3c300;
+            --text-primary: #333333;
+            --background: #f4f4f4;
+            --footer-dark: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-container {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .login-illustration {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            padding: 3rem;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-illustration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            opacity: 0.1;
+        }
+
+        .login-illustration img {
+            max-width: 90%;
+            height: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-illustration h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-illustration p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-form {
+            padding: 3rem;
+        }
+
+        .logo {
+            max-width: 180px;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(0, 87, 45, 0.1);
+            border-color: var(--primary-green);
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-green);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+            background-color: transparent;
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-1px);
+        }
+
+        .google-sign-in {
+            border: 2px solid #e0e0e0;
+            background: var(--white);
+            color: var(--text-primary);
+            padding: 0.9rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            margin: 1.5rem 0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .google-sign-in:hover {
+            background-color: #f8f8f8;
+            border-color: #d0d0d0;
+            transform: translateY(-1px);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #666;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        .create-account {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .create-account:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        /* Demo accounts styling */
+        .demo-accounts .divider span {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        .demo-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .demo-btn i {
+            font-size: 1rem;
+        }
+
+        /* Google icon styling */
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991.98px) {
+            .login-container {
+                margin: 1rem;
+            }
+
+            .login-illustration {
+                padding: 2rem;
+            }
+
+            .login-form {
+                padding: 2rem;
+            }
+
+            .login-illustration h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .login-illustration {
+                padding: 1.5rem;
+            }
+
+            .login-form {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                max-width: 150px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-form {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Developer Modal Styles */
+        .developer-modal .modal-content {
+            background: linear-gradient(135deg, #000428, #004e92);
+            border: none;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .developer-modal .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+        }
+
+        .developer-modal .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f3c300;
+        }
+
+        .developer-modal .modal-body {
+            padding: 2rem;
+        }
+
+        .developer-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-images {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            border: 4px solid #f3c300;
+            box-shadow: 0 0 20px rgba(243, 195, 0, 0.3);
+        }
+
+        .profile-image.active {
+            opacity: 1;
+        }
+
+        .developer-info {
+            margin-bottom: 2rem;
+        }
+
+        .developer-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f3c300;
+        }
+
+        .developer-title {
+            font-size: 1.2rem;
+            color: #1f9345;
+            margin-bottom: 1rem;
+        }
+
+        .developer-message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .developer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f3c300;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #f3c300;
+            transform: translateY(-3px);
+        }
+
+        .close-button {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 36px;
+            height: 36px;
+            background: #f3c300;
+            border: none;
+            border-radius: 50%;
+            color: #000428;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .close-button:hover {
+            background: #fff;
+            transform: rotate(90deg);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .developer-modal .modal-content {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes imageTransition {
+            0% { opacity: 0; transform: scale(0.8); }
+            20% { opacity: 1; transform: scale(1); }
+            33.33% { opacity: 1; transform: scale(1); }
+            53.33% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        .profile-image {
+            animation: imageTransition 9s infinite;
+        }
+
+        .profile-image:nth-child(1) { animation-delay: 0s; }
+        .profile-image:nth-child(2) { animation-delay: 3s; }
+        .profile-image:nth-child(3) { animation-delay: 6s; }
+
+        /* Portfolio Showcase Styles */
+        .portfolio-showcase {
+            margin: 2rem -2rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-slider {
+            display: flex;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-slide {
+            flex: 0 0 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            transform: translateX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .showcase-slide:hover .showcase-content {
+            opacity: 1;
+        }
+
+        .showcase-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #f3c300;
+        }
+
+        .showcase-description {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .showcase-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #f3c300;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-link:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .showcase-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .showcase-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-dot.active {
+            background: #f3c300;
+            transform: scale(1.2);
+        }
+
+        .website-preview {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(243, 195, 0, 0.2);
+        }
+
+        .website-preview h3 {
+            color: #f3c300;
+            margin-bottom: 1rem;
+        }
+
+        .website-preview .btn-visit {
+            background: linear-gradient(45deg, #f3c300, #ff9900);
+            color: #000;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
+            margin-top: 1rem;
+        }
+
+        .website-preview .btn-visit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(243, 195, 0, 0.3);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #f3c300;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-item i {
+            font-size: 1rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="login-container">
+                    <div class="row g-0">
+                        <div class="col-lg-6">
+                            <div class="login-illustration">
+                                <img src="assets/images/login.svg" alt="Study Illustration">
+                                <h2 class="text-center mb-4">Dilla University Employee Management System</h2>
+                                <p class="text-light">Sign in to continue to your account</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="login-form">
+                                <form id="loginForm">
+                                    <div class="mb-4">
+                                        <label for="username" class="form-label">Username or email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-transparent border-end-0">
+                                                <i class="fas fa-user text-muted"></i>
+                                            </span>
+                                            <input type="text" class="form-control border-start-0" id="username" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-transparent border-end-0">
+                                                <i class="fas fa-lock text-muted"></i>
+                                            </span>
+                                            <input type="password" class="form-control border-start-0" id="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 text-end">
+                                        <a href="reset-password.html" class="forgot-password">Forgot password?</a>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-sign-in-alt me-2"></i>Sign in
+                                    </button>
+                                    
+                                    <div class="divider">
+                                        <span>or continue with</span>
+                                    </div>
+                                    
+                                    <a href="#" class="google-sign-in">
+                                        <img src="assets/images/google-icon.svg" alt="Google" class="google-icon">
+                                        Sign in with Google
+                                    </a>
+                                    
+                                    <div class="text-center mt-4">
+                                        <span class="text-muted">Don't have an account? </span>
+                                        <a href="#" class="create-account">Create an Account</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="login.js"></script>
+
+    <!-- Developer Modal -->
+    <div class="modal developer-modal fade" id="developerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <button type="button" class="close-button" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-body">
+                    <div class="developer-profile">
+                        <div class="profile-images">
+                            <img src="assets/images/profile-default.jpg" alt="Cherinet Afewerk" class="profile-image">
+                            <img src="assets/images/cherean.jpg" alt="Cherinet Developer" class="profile-image">
+                            <img src="assets/images/tibu.jpg" alt="Cherinet Profile" class="profile-image">
+                        </div>
+                        <h2 class="developer-name">Cherinet Afewerk</h2>
+                        <div class="developer-title">Full Stack Developer & System Administrator</div>
+                        <div class="developer-message">
+                            <p>👋 Hello! I'm the developer behind this Employee Management System. This is a private system developed exclusively for Dilla University. Unfortunately, new registrations are currently restricted as this is a controlled access system.</p>
+                            <p>If you need access or have any questions, please contact your system administrator or HR department.</p>
+                        </div>
+                        <div class="developer-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">5+</div>
+                                <div class="stat-label">Years Experience</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">50+</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">Satisfaction</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-showcase">
+                            <div class="showcase-slider">
+                                <div class="showcase-slide" style="background-image: url('assets/images/project1.jpg')">
+                                    <div class="showcase-content">
+                                        <h3 class="showcase-title">Employee Management System</h3>
+                                        <p class="showcase-description">A comprehensive system for managing university staff and resources.</p>
+                                        <a href="#" class="showcase-link">
+                                            Learn More <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Add more showcase slides as needed -->
+                            </div>
+                            <div class="showcase-nav">
+                                <div class="showcase-dot active"></div>
+                                <div class="showcase-dot"></div>
+                                <div class="showcase-dot"></div>
+                            </div>
+                        </div>
+                        <div class="website-preview floating">
+                            <h3>Visit My Portfolio</h3>
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <i class="fab fa-react"></i> React
+                                </div>
+                                <div class="tech-item">
+                                    <i class="fab fa-node-js"></i> Node.js
+                                </div>
+                                <div class="tech-item">
+                                    <i class="fab fa-js"></i> JavaScript
+                                </div>
+                                <div class="tech-item">
+                                    <i class="fab fa-python"></i> Python
+                                </div>
+                            </div>
+                            <a href="https://cherinetafewerk.vercel.app" target="_blank" class="btn-visit">
+                                <i class="fas fa-globe"></i> Visit My Website
+                            </a>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://twitter.com/yourusername" class="social-link" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://cherinetafewerk.vercel.app" class="social-link" target="_blank">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Add this to your existing JavaScript or create a new script
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the "Create Account" link
+        const createAccountLink = document.querySelector('.create-account');
+        
+        // Add click event listener
+        createAccountLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const developerModal = new bootstrap.Modal(document.getElementById('developerModal'));
+            developerModal.show();
+        });
+
+        // Showcase slider functionality
+        const dots = document.querySelectorAll('.showcase-dot');
+        let currentSlide = 0;
+
+        function updateSlider() {
+            const slider = document.querySelector('.showcase-slider');
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Add click events to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+
+        // Auto-advance slides
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        }, 5000);
+    });
+    </script>
+</body>
+</html> 

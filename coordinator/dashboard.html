@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinator Dashboard - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="../css/ads.css">
+    <style>
+        .stat-card {
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .chart-container {
+            position: relative;
+            height: 250px;
+        }
+        .activity-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .team-member {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        .team-member img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        .status-online {
+            background-color: #28a745;
+        }
+        .status-offline {
+            background-color: #dc3545;
+        }
+        .status-away {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Dashboard Content -->
+        <div class="container-fluid mt-4">
+            <!-- Welcome Section -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+            <div class="d-flex align-items-center">
+                            <img src="images/profile-default.jpg" alt="Profile" class="rounded-circle me-3" style="width: 60px; height: 60px;">
+                            <div>
+                                <h3 class="mb-1">Welcome back, Coordinator!</h3>
+                                <p class="text-muted mb-0">Here's what's happening with your team today</p>
+                            </div>
+                            <div class="ms-auto">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
+                                    <i class="bi bi-lightning-charge"></i> Quick Actions
+                    </button>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-people text-primary fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Team Members</h6>
+                                <h4 class="mb-0">12</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-check text-success fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Present Today</h6>
+                                <h4 class="mb-0">10</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-clock-history text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Pending Requests</h6>
+                                <h4 class="mb-0">5</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card stat-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar2-x text-info fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">On Leave</h6>
+                                <h4 class="mb-0">2</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="row">
+                <!-- Team Overview -->
+                <div class="col-md-8 mb-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Team Overview</h5>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#addTeamMemberModal">
+                                    <i class="bi bi-person-plus"></i> Add Member
+                                </button>
+                                <a href="team.html" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                        <th>Today's Schedule</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="images/profile-default.jpg" alt="Profile" class="rounded-circle me-2" style="width: 32px; height: 32px;">
+                                                <div>
+                                                    <div class="fw-medium">Abebe Kebede</div>
+                                                    <small class="text-muted">ID: EMP001</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>IT Department</td>
+                                        <td><span class="badge bg-success">Present</span></td>
+                                        <td>Morning Shift (8:00 AM - 4:00 PM)</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewEmployeeModal">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-chat"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="images/profile-default.jpg" alt="Profile" class="rounded-circle me-2" style="width: 32px; height: 32px;">
+                                                <div>
+                                                    <div class="fw-medium">Tigist Haile</div>
+                                                    <small class="text-muted">ID: EMP002</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>IT Department</td>
+                                        <td><span class="badge bg-success">Present</span></td>
+                                        <td>Morning Shift (8:00 AM - 4:00 PM)</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewEmployeeModal">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-chat"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="images/profile-default.jpg" alt="Profile" class="rounded-circle me-2" style="width: 32px; height: 32px;">
+                                                <div>
+                                                    <div class="fw-medium">Dawit Tesfaye</div>
+                                                    <small class="text-muted">ID: EMP003</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>IT Department</td>
+                                        <td><span class="badge bg-warning text-dark">Late</span></td>
+                                        <td>Morning Shift (8:00 AM - 4:00 PM)</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewEmployeeModal">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-chat"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="images/profile-default.jpg" alt="Profile" class="rounded-circle me-2" style="width: 32px; height: 32px;">
+                                                <div>
+                                                    <div class="fw-medium">Yohannes Alemu</div>
+                                                    <small class="text-muted">ID: EMP004</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>IT Department</td>
+                                        <td><span class="badge bg-danger">Absent</span></td>
+                                        <td>Morning Shift (8:00 AM - 4:00 PM)</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewEmployeeModal">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-chat"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Requests -->
+                <div class="col-md-4 mb-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Pending Requests</h5>
+                            <a href="requests.html" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Leave Request</h6>
+                                    <small class="text-muted">2 hours ago</small>
+                                </div>
+                                <p class="mb-1">Tigist Haile requested 3 days of annual leave</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-sm btn-success me-1">Approve</button>
+                                    <button class="btn btn-sm btn-danger">Reject</button>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Shift Swap Request</h6>
+                                    <small class="text-muted">Yesterday</small>
+                                </div>
+                                <p class="mb-1">Abebe Kebede wants to swap shifts with Dawit Tesfaye</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-sm btn-success me-1">Approve</button>
+                                    <button class="btn btn-sm btn-danger">Reject</button>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Issue Report</h6>
+                                    <small class="text-muted">3 days ago</small>
+                                </div>
+                                <p class="mb-1">Yohannes Alemu reported a technical issue</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-sm btn-primary">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Chart -->
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Attendance Overview</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary active">Week</button>
+                                <button class="btn btn-sm btn-outline-primary">Month</button>
+                                <button class="btn btn-sm btn-outline-primary">Year</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Team Performance</h5>
+                            <a href="performance-reports.html" class="btn btn-sm btn-outline-primary">View Report</a>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Recent Activity</h5>
+                            <a href="activity-log.html" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="d-flex">
+                                    <div class="activity-icon bg-primary bg-opacity-10 text-primary me-3">
+                                        <i class="bi bi-person-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Abebe Kebede clocked in at 8:00 AM</p>
+                                        <small class="text-muted">Today, 8:00 AM</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="d-flex">
+                                    <div class="activity-icon bg-success bg-opacity-10 text-success me-3">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Tigist Haile submitted a leave request</p>
+                                        <small class="text-muted">Today, 7:45 AM</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="d-flex">
+                                    <div class="activity-icon bg-warning bg-opacity-10 text-warning me-3">
+                                        <i class="bi bi-clock-history"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Dawit Tesfaye clocked in late at 8:15 AM</p>
+                                        <small class="text-muted">Today, 8:15 AM</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="d-flex">
+                                    <div class="activity-icon bg-info bg-opacity-10 text-info me-3">
+                                        <i class="bi bi-arrow-left-right"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Abebe Kebede requested a shift swap</p>
+                                        <small class="text-muted">Yesterday, 5:30 PM</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="d-flex">
+                                    <div class="activity-icon bg-danger bg-opacity-10 text-danger me-3">
+                                        <i class="bi bi-exclamation-triangle"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-0">Yohannes Alemu reported a technical issue</p>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Chat -->
+                <div class="col-md-6 mb-4">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Team Chat</h5>
+                            <a href="chat.html" class="btn btn-sm btn-outline-primary">Open Chat</a>
+                        </div>
+                        <div class="team-chat">
+                            <div class="team-member">
+                                <img src="images/profile-default.jpg" alt="Profile">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-0">Abebe Kebede</h6>
+                                        <small class="text-muted">2 min ago</small>
+                                    </div>
+                                    <p class="mb-0 text-muted">Good morning team! Don't forget about the meeting at 10 AM.</p>
+                                </div>
+                                <span class="status-indicator status-online"></span>
+                            </div>
+                            <div class="team-member">
+                                <img src="images/profile-default.jpg" alt="Profile">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-0">Tigist Haile</h6>
+                                        <small class="text-muted">5 min ago</small>
+                                    </div>
+                                    <p class="mb-0 text-muted">Thanks for the reminder! I'll be there.</p>
+                                </div>
+                                <span class="status-indicator status-online"></span>
+                            </div>
+                            <div class="team-member">
+                                <img src="images/profile-default.jpg" alt="Profile">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-0">Dawit Tesfaye</h6>
+                                        <small class="text-muted">10 min ago</small>
+                                    </div>
+                                    <p class="mb-0 text-muted">I'll join remotely as I'm working from home today.</p>
+                                </div>
+                                <span class="status-indicator status-away"></span>
+                            </div>
+                            <div class="team-member">
+                                <img src="images/profile-default.jpg" alt="Profile">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-0">Yohannes Alemu</h6>
+                                        <small class="text-muted">Offline</small>
+                                    </div>
+                                    <p class="mb-0 text-muted">On leave until next Monday.</p>
+                                </div>
+                                <span class="status-indicator status-offline"></span>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Type a message...">
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Modal -->
+    <div class="modal fade" id="quickActionsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Actions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <a href="team.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-people me-2"></i>Manage Team
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="attendance.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-calendar-check me-2"></i>Attendance
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="schedule.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-calendar-week me-2"></i>Work Schedule
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="leave-requests.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-calendar-plus me-2"></i>Leave Requests
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="performance-reports.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-graph-up me-2"></i>Performance Reports
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="notify-manager.html" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-bell me-2"></i>Notify Manager
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Employee Modal -->
+    <div class="modal fade" id="viewEmployeeModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Employee Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img src="images/profile-default.jpg" alt="Profile" class="rounded-circle mb-3" style="width: 120px; height: 120px;">
+                            <h5>Abebe Kebede</h5>
+                            <p class="text-muted">IT Department</p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary">View Profile</button>
+                                <button class="btn btn-outline-primary">Send Message</button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h6 class="mb-3">Basic Information</h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Employee ID:</strong></p>
+                                    <p>EMP001</p>
+                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Email:</strong></p>
+                                    <p>abebe.kebede@debreuniversity.edu</p>
+                        </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Phone:</strong></p>
+                                    <p>+251 911 234 567</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Status:</strong></p>
+                                    <p><span class="badge bg-success">Present</span></p>
+                            </div>
+                            </div>
+                            <h6 class="mb-3 mt-4">Today's Schedule</h6>
+                            <p><strong>Shift:</strong> Morning Shift (8:00 AM - 4:00 PM)</p>
+                            <p><strong>Location:</strong> Main Campus, IT Office</p>
+                            <p><strong>Clock In:</strong> 8:00 AM</p>
+                            <p><strong>Clock Out:</strong> Not yet</p>
+                        </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">View Full Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Team Member Modal -->
+    <div class="modal fade" id="addTeamMemberModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Team Member</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter full name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text" class="form-control" placeholder="Enter employee ID">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-select">
+                                <option>IT Department</option>
+                                <option>HR Department</option>
+                                <option>Finance Department</option>
+                                <option>Academic Department</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="Enter email address">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-control" placeholder="Enter phone number">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Default Shift</label>
+                            <select class="form-select">
+                                <option>Morning Shift (8:00 AM - 4:00 PM)</option>
+                                <option>Afternoon Shift (2:00 PM - 10:00 PM)</option>
+                                <option>Night Shift (10:00 PM - 6:00 AM)</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Member</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script src="../js/ads.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load components
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize charts
+            // Attendance Chart
+            const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(attendanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Present',
+                        data: [10, 9, 11, 10, 8, 5, 0],
+                        backgroundColor: 'rgba(40, 167, 69, 0.5)',
+                        borderColor: 'rgba(40, 167, 69, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Absent',
+                        data: [2, 3, 1, 2, 4, 7, 12],
+                        backgroundColor: 'rgba(220, 53, 69, 0.5)',
+                        borderColor: 'rgba(220, 53, 69, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 12
+                        }
+                    }
+                }
+            });
+
+            // Performance Chart
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            const performanceChart = new Chart(performanceCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Productivity', 'Teamwork', 'Initiative', 'Communication', 'Problem Solving', 'Attendance'],
+                    datasets: [{
+                        label: 'Team Average',
+                        data: [85, 90, 75, 80, 85, 88],
+                        backgroundColor: 'rgba(13, 110, 253, 0.2)',
+                        borderColor: 'rgba(13, 110, 253, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(13, 110, 253, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(13, 110, 253, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

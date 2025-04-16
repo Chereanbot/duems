@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .guide-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .guide-section:last-child {
+            border-bottom: none;
+        }
+        .guide-nav {
+            position: sticky;
+            top: 20px;
+        }
+        .guide-nav .nav-link {
+            color: #495057;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+        .guide-nav .nav-link:hover {
+            background-color: #f8f9fa;
+        }
+        .guide-nav .nav-link.active {
+            background-color: #e9ecef;
+            font-weight: 500;
+        }
+        .guide-content img {
+            max-width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            margin: 1rem 0;
+        }
+        .tip-box {
+            background-color: #e7f5ff;
+            border-left: 4px solid #0d6efd;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- User Guide Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4 class="mb-0">User Guide</h4>
+                    <p class="text-muted">Learn how to use the Employee Management System effectively</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="bi bi-printer"></i> Print Guide
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Navigation Sidebar -->
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="guide-nav">
+                            <h6 class="mb-3">Table of Contents</h6>
+                            <nav class="nav flex-column">
+                                <a class="nav-link active" href="#getting-started">Getting Started</a>
+                                <a class="nav-link" href="#dashboard">Dashboard</a>
+                                <a class="nav-link" href="#profile">My Profile</a>
+                                <a class="nav-link" href="#schedule">Work Schedule</a>
+                                <a class="nav-link" href="#attendance">Attendance</a>
+                                <a class="nav-link" href="#leave">Leave Requests</a>
+                                <a class="nav-link" href="#team">Team Management</a>
+                                <a class="nav-link" href="#reports">Reports</a>
+                                <a class="nav-link" href="#notifications">Notifications</a>
+                                <a class="nav-link" href="#help">Help & Support</a>
+                                <a class="nav-link" href="#faq">FAQ</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-md-9">
+                    <div class="dashboard-card">
+                        <!-- Getting Started Section -->
+                        <div id="getting-started" class="guide-section">
+                            <h5>Getting Started</h5>
+                            <p>Welcome to the Dilla University Employee Management System. This guide will help you navigate and use the system effectively.</p>
+                            
+                            <h6 class="mt-4">System Requirements</h6>
+                            <ul>
+                                <li>Modern web browser (Chrome, Firefox, Safari, or Edge)</li>
+                                <li>Internet connection</li>
+                                <li>Valid login credentials</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Logging In</h6>
+                            <p>To access the system:</p>
+                            <ol>
+                                <li>Navigate to the login page</li>
+                                <li>Enter your username and password</li>
+                                <li>Click the "Login" button</li>
+                            </ol>
+                            
+                            <div class="tip-box">
+                                <strong>Tip:</strong> If you forget your password, click the "Forgot Password" link on the login page to reset it.
+                            </div>
+                            
+                            <h6 class="mt-4">Navigation</h6>
+                            <p>The system has a consistent layout across all pages:</p>
+                            <ul>
+                                <li><strong>Sidebar:</strong> Contains main navigation links and quick actions</li>
+                                <li><strong>Header:</strong> Shows notifications, user profile, and mobile menu toggle</li>
+                                <li><strong>Main Content:</strong> Displays the content of the selected page</li>
+                            </ul>
+                        </div>
+
+                        <!-- Dashboard Section -->
+                        <div id="dashboard" class="guide-section">
+                            <h5>Dashboard</h5>
+                            <p>The dashboard provides an overview of your work status and quick access to important features.</p>
+                            
+                            <h6 class="mt-4">Dashboard Components</h6>
+                            <ul>
+                                <li><strong>Welcome Section:</strong> Displays your name and profile picture</li>
+                                <li><strong>Quick Stats:</strong> Shows your current status, weekly hours, next shift, and leave balance</li>
+                                <li><strong>Upcoming Schedule:</strong> Lists your upcoming shifts</li>
+                                <li><strong>Recent Attendance:</strong> Shows your recent clock-in and clock-out records</li>
+                                <li><strong>Quick Actions:</strong> Provides buttons for common tasks like clocking in/out and requesting leave</li>
+                                <li><strong>Recent Notifications:</strong> Displays important updates and alerts</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Using Quick Actions</h6>
+                            <p>The Quick Actions section allows you to perform common tasks directly from the dashboard:</p>
+                            <ol>
+                                <li>Click the "Quick Actions" button in the welcome section</li>
+                                <li>Select the desired action from the modal</li>
+                                <li>Fill in the required information</li>
+                                <li>Click the appropriate button to complete the action</li>
+                            </ol>
+                            
+                            <div class="tip-box">
+                                <strong>Tip:</strong> You can also access these actions from the sidebar or through the respective pages.
+                            </div>
+                        </div>
+
+                        <!-- Profile Section -->
+                        <div id="profile" class="guide-section">
+                            <h5>My Profile</h5>
+                            <p>The profile page displays your personal and professional information.</p>
+                            
+                            <h6 class="mt-4">Profile Sections</h6>
+                            <ul>
+                                <li><strong>Basic Information:</strong> Contains your personal details like name, ID, gender, contact information</li>
+                                <li><strong>Role Information:</strong> Shows your department, assigned team, shift type, and manager</li>
+                                <li><strong>Permissions:</strong> Lists the actions you're authorized to perform in the system</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Updating Your Profile</h6>
+                            <p>To update your profile information:</p>
+                            <ol>
+                                <li>Navigate to the Profile page</li>
+                                <li>Click the "Edit Profile" button</li>
+                                <li>Update the desired information in the modal</li>
+                                <li>Click "Save Changes" to update your profile</li>
+                            </ol>
+                            
+                            <div class="warning-box">
+                                <strong>Note:</strong> Some fields may be read-only and cannot be edited. Contact your administrator if you need to change these fields.
+                            </div>
+                        </div>
+
+                        <!-- Schedule Section -->
+                        <div id="schedule" class="guide-section">
+                            <h5>Work Schedule</h5>
+                            <p>The schedule page allows you to view and manage your work schedule.</p>
+                            
+                            <h6 class="mt-4">Viewing Your Schedule</h6>
+                            <p>The schedule is displayed in two formats:</p>
+                            <ul>
+                                <li><strong>Calendar View:</strong> Shows your shifts in a monthly calendar format</li>
+                                <li><strong>List View:</strong> Displays your upcoming shifts in a table format</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Managing Your Schedule</h6>
+                            <p>As a coordinator, you can:</p>
+                            <ul>
+                                <li>View your personal schedule</li>
+                                <li>View and manage your team's schedule</li>
+                                <li>Request shift swaps</li>
+                                <li>Add notes to shifts</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Requesting a Shift Swap</h6>
+                            <p>To request a shift swap:</p>
+                            <ol>
+                                <li>Navigate to the Schedule page</li>
+                                <li>Find the shift you want to swap</li>
+                                <li>Click the "Request Swap" button</li>
+                                <li>Select a colleague to swap with</li>
+                                <li>Add a reason for the swap request</li>
+                                <li>Click "Submit Request"</li>
+                            </ol>
+                            
+                            <div class="tip-box">
+                                <strong>Tip:</strong> Shift swap requests must be approved by your manager before they take effect.
+                            </div>
+                        </div>
+
+                        <!-- Attendance Section -->
+                        <div id="attendance" class="guide-section">
+                            <h5>Attendance</h5>
+                            <p>The attendance page allows you to manage your clock-in and clock-out records.</p>
+                            
+                            <h6 class="mt-4">Recording Attendance</h6>
+                            <p>To clock in or out:</p>
+                            <ol>
+                                <li>Click the "Clock In" or "Clock Out" button in the Quick Actions section</li>
+                                <li>Verify the current time and date</li>
+                                <li>Add any optional notes</li>
+                                <li>Click "Confirm Clock In" or "Confirm Clock Out"</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Viewing Attendance Records</h6>
+                            <p>The attendance page displays:</p>
+                            <ul>
+                                <li>Your clock-in and clock-out times</li>
+                                <li>Total hours worked</li>
+                                <li>Attendance status (Present, Late, Absent)</li>
+                                <li>Any notes or comments</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Managing Team Attendance</h6>
+                            <p>As a coordinator, you can:</p>
+                            <ul>
+                                <li>View your team's attendance records</li>
+                                <li>Update attendance records if needed</li>
+                                <li>Generate attendance reports</li>
+                            </ul>
+                            
+                            <div class="warning-box">
+                                <strong>Note:</strong> Attendance records are used for payroll and compliance purposes. Ensure accurate clock-in and clock-out times.
+                            </div>
+                        </div>
+
+                        <!-- Leave Section -->
+                        <div id="leave" class="guide-section">
+                            <h5>Leave Requests</h5>
+                            <p>The leave requests page allows you to request time off and manage your leave balance.</p>
+                            
+                            <h6 class="mt-4">Requesting Leave</h6>
+                            <p>To submit a leave request:</p>
+                            <ol>
+                                <li>Navigate to the Leave Requests page or use the Quick Actions button</li>
+                                <li>Click "New Leave Request"</li>
+                                <li>Select the leave type (Annual, Sick, Personal, Emergency)</li>
+                                <li>Choose the start and end dates</li>
+                                <li>Provide a reason for the leave</li>
+                                <li>Add contact information during leave (optional)</li>
+                                <li>Click "Submit Request"</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Managing Leave Requests</h6>
+                            <p>The leave requests page displays:</p>
+                            <ul>
+                                <li>Your current leave balance</li>
+                                <li>Pending leave requests</li>
+                                <li>Approved and rejected leave requests</li>
+                                <li>Leave history</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Approving Team Leave Requests</h6>
+                            <p>As a coordinator, you can:</p>
+                            <ul>
+                                <li>View leave requests from your team members</li>
+                                <li>Approve or reject leave requests</li>
+                                <li>Add comments to leave requests</li>
+                            </ul>
+                            
+                            <div class="tip-box">
+                                <strong>Tip:</strong> Submit leave requests as early as possible to ensure proper coverage and approval.
+                            </div>
+                        </div>
+
+                        <!-- Team Management Section -->
+                        <div id="team" class="guide-section">
+                            <h5>Team Management</h5>
+                            <p>The team management section allows you to manage your assigned team members.</p>
+                            
+                            <h6 class="mt-4">Viewing Your Team</h6>
+                            <p>To view your team members:</p>
+                            <ol>
+                                <li>Navigate to the My Team page</li>
+                                <li>View the list of assigned team members</li>
+                                <li>Click on a team member to view their details</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Managing Shift Swaps</h6>
+                            <p>To approve or reject shift swap requests:</p>
+                            <ol>
+                                <li>Navigate to the Shift Swaps page</li>
+                                <li>View pending swap requests</li>
+                                <li>Review the request details</li>
+                                <li>Click "Approve" or "Reject"</li>
+                                <li>Add comments if needed</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Adding Performance Notes</h6>
+                            <p>To add performance notes for team members:</p>
+                            <ol>
+                                <li>Navigate to the Performance Notes page</li>
+                                <li>Select a team member</li>
+                                <li>Click "Add Note"</li>
+                                <li>Enter the performance details</li>
+                                <li>Select the note type (Positive, Improvement, Issue)</li>
+                                <li>Click "Save Note"</li>
+                            </ol>
+                            
+                            <div class="warning-box">
+                                <strong>Note:</strong> Performance notes are visible to managers and may be used for evaluations.
+                            </div>
+                        </div>
+
+                        <!-- Reports Section -->
+                        <div id="reports" class="guide-section">
+                            <h5>Reports</h5>
+                            <p>The reports section allows you to generate and view various reports.</p>
+                            
+                            <h6 class="mt-4">Available Reports</h6>
+                            <ul>
+                                <li><strong>Attendance Reports:</strong> Shows attendance records and statistics</li>
+                                <li><strong>Performance Reports:</strong> Displays team performance metrics</li>
+                                <li><strong>Leave Reports:</strong> Shows leave usage and balances</li>
+                                <li><strong>Shift Reports:</strong> Displays shift coverage and distribution</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Generating Reports</h6>
+                            <p>To generate a report:</p>
+                            <ol>
+                                <li>Navigate to the desired report page</li>
+                                <li>Set the report parameters (date range, department, team, etc.)</li>
+                                <li>Click "Generate Report"</li>
+                                <li>View the report results</li>
+                                <li>Optionally, export the report in various formats</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Exporting Reports</h6>
+                            <p>To export a report:</p>
+                            <ol>
+                                <li>Generate the report</li>
+                                <li>Click the "Export" button</li>
+                                <li>Select the export format (Excel, PDF, CSV)</li>
+                                <li>Choose what to include in the export</li>
+                                <li>Click "Export" to download the file</li>
+                            </ol>
+                            
+                            <div class="tip-box">
+                                <strong>Tip:</strong> Reports can be scheduled to be generated and emailed automatically on a regular basis.
+                            </div>
+                        </div>
+
+                        <!-- Notifications Section -->
+                        <div id="notifications" class="guide-section">
+                            <h5>Notifications</h5>
+                            <p>The notifications system keeps you informed about important updates and events.</p>
+                            
+                            <h6 class="mt-4">Types of Notifications</h6>
+                            <ul>
+                                <li><strong>System Notifications:</strong> Updates about the system</li>
+                                <li><strong>Schedule Notifications:</strong> Changes to your schedule</li>
+                                <li><strong>Leave Notifications:</strong> Updates about leave requests</li>
+                                <li><strong>Team Notifications:</strong> Updates about your team</li>
+                            </ul>
+                            
+                            <h6 class="mt-4">Viewing Notifications</h6>
+                            <p>To view your notifications:</p>
+                            <ol>
+                                <li>Click the bell icon in the header</li>
+                                <li>View the notifications dropdown</li>
+                                <li>Click on a notification to view details</li>
+                                <li>Click "View All" to see all notifications</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Notification Settings</h6>
+                            <p>To manage your notification settings:</p>
+                            <ol>
+                                <li>Go to your profile settings</li>
+                                <li>Select the "Notifications" tab</li>
+                                <li>Choose which types of notifications you want to receive</li>
+                                <li>Select your preferred notification method (email, in-app, both)</li>
+                                <li>Click "Save Settings"</li>
+                            </ol>
+                        </div>
+
+                        <!-- Help & Support Section -->
+                        <div id="help" class="guide-section">
+                            <h5>Help & Support</h5>
+                            <p>The help and support section provides assistance when you need it.</p>
+                            
+                            <h6 class="mt-4">Accessing Help</h6>
+                            <p>To get help:</p>
+                            <ol>
+                                <li>Navigate to the Help Center page</li>
+                                <li>Browse the FAQs or knowledge base articles</li>
+                                <li>Search for specific topics</li>
+                                <li>Contact support if needed</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Submitting Support Tickets</h6>
+                            <p>To submit a support ticket:</p>
+                            <ol>
+                                <li>Go to the Help Center page</li>
+                                <li>Click "New Support Ticket"</li>
+                                <li>Select the issue category</li>
+                                <li>Provide a detailed description of the problem</li>
+                                <li>Attach any relevant files</li>
+                                <li>Click "Submit Ticket"</li>
+                            </ol>
+                            
+                            <h6 class="mt-4">Contacting Support</h6>
+                            <p>You can contact support through:</p>
+                            <ul>
+                                <li>Email: support@dillauniversity.edu</li>
+                                <li>Phone: +251 911 123 456</li>
+                                <li>Support hours: Monday - Friday, 8:00 AM - 5:00 PM</li>
+                            </ul>
+                            
+                            <div class="tip-box">
+                                <strong>Tip:</strong> For urgent issues, use the "Notify Manager" feature to directly inform your manager.
+                            </div>
+                        </div>
+
+                        <!-- FAQ Section -->
+                        <div id="faq" class="guide-section">
+                            <h5>Frequently Asked Questions</h5>
+                            
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                            How do I reset my password?
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            To reset your password, click the "Forgot Password" link on the login page. Enter your email address and follow the instructions sent to your email.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                            What should I do if I forget to clock in or out?
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            If you forget to clock in or out, notify your manager immediately. They can update your attendance record manually.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                            How do I request a shift swap?
+                                        </button>
+                                    </h2>
+                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            To request a shift swap, go to the Schedule page, find the shift you want to swap, click "Request Swap," select a colleague, and submit the request.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                            How do I check my leave balance?
+                                        </button>
+                                    </h2>
+                                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Your leave balance is displayed on the dashboard and in the Leave Requests page. You can also view detailed leave history in the Leave Reports section.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                            How do I report an issue to my manager?
+                                        </button>
+                                    </h2>
+                                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            To report an issue to your manager, go to the Notify Manager page, select the notification type, priority level, provide details, and submit the notification.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load components
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                });
+
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.guide-nav .nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Scroll to the target
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Update active nav link on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.guide-section');
+                const navLinks = document.querySelectorAll('.guide-nav .nav-link');
+                
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 100) {
+                        currentSection = '#' + section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

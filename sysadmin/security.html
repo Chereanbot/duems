@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Management - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .security-card {
+            transition: transform 0.2s;
+        }
+        .security-card:hover {
+            transform: translateY(-5px);
+        }
+        .security-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .security-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-success { background-color: #198754; }
+        .status-warning { background-color: #ffc107; }
+        .status-danger { background-color: #dc3545; }
+        .status-info { background-color: #0dcaf0; }
+        .security-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .security-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .security-item:last-child {
+            border-bottom: none;
+        }
+        .security-date {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .security-details {
+            font-size: 0.875rem;
+        }
+        .progress {
+            height: 6px;
+        }
+        .security-score {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .security-score-label {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .security-chart {
+            height: 200px;
+        }
+        .security-alert {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .security-alert:last-child {
+            margin-bottom: 0;
+        }
+        .security-alert-critical {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid #dc3545;
+        }
+        .security-alert-warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+        }
+        .security-alert-info {
+            background-color: rgba(13, 202, 240, 0.1);
+            border-left: 4px solid #0dcaf0;
+        }
+        .security-alert-success {
+            background-color: rgba(25, 135, 84, 0.1);
+            border-left: 4px solid #198754;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- Security Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">Security Management</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Security</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-shield-check"></i> Run Security Scan
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#securityReportModal">
+                        <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Security Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Security Score -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card security-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="security-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-shield-lock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Security Score</h5>
+                                    <p class="text-muted mb-0">Overall rating</p>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="security-score text-primary mb-1">85</div>
+                                <div class="security-score-label mb-3">Good</div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Threats -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card security-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="security-icon bg-danger bg-opacity-10 text-danger me-3">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Active Threats</h5>
+                                    <p class="text-muted mb-0">Current issues</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">3</h3>
+                                    <p class="text-muted mb-0">Last 24 hours</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-danger">+1</span>
+                                    <p class="text-muted mb-0">vs. yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Failed Logins -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card security-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="security-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-key"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Failed Logins</h5>
+                                    <p class="text-muted mb-0">Authentication attempts</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">24</h3>
+                                    <p class="text-muted mb-0">Last 24 hours</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">-5</span>
+                                    <p class="text-muted mb-0">vs. yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Patches -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card security-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="security-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-patch-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Security Patches</h5>
+                                    <p class="text-muted mb-0">System updates</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">5</h3>
+                                    <p class="text-muted mb-0">Pending updates</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-warning">+2</span>
+                                    <p class="text-muted mb-0">vs. last week</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Alerts & Recent Activity -->
+            <div class="row g-4 mb-4">
+                <!-- Security Alerts -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Security Alerts</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">Critical</button>
+                                <button class="btn btn-outline-secondary btn-sm">Warning</button>
+                                <button class="btn btn-outline-secondary btn-sm">Info</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Critical Alert -->
+                            <div class="security-alert security-alert-critical">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <span class="badge bg-danger">Critical</span>
+                                        <strong class="ms-2">Multiple Failed Login Attempts</strong>
+                                    </div>
+                                    <small class="security-date">Today, 10:45 AM</small>
+                                </div>
+                                <div class="security-details mb-2">
+                                    Detected 15 failed login attempts from IP address 192.168.1.45 in the last 30 minutes. Possible brute force attack.
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-danger">Block IP</button>
+                                    <button class="btn btn-sm btn-outline-primary">Investigate</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Warning Alert -->
+                            <div class="security-alert security-alert-warning">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <span class="badge bg-warning">Warning</span>
+                                        <strong class="ms-2">Outdated Security Patches</strong>
+                                    </div>
+                                    <small class="security-date">Today, 09:30 AM</small>
+                                </div>
+                                <div class="security-details mb-2">
+                                    5 critical security patches are pending installation. Recommended to install within 24 hours.
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Install Now</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Schedule</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Info Alert -->
+                            <div class="security-alert security-alert-info">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <span class="badge bg-info">Info</span>
+                                        <strong class="ms-2">New User Registration</strong>
+                                    </div>
+                                    <small class="security-date">Today, 08:15 AM</small>
+                                </div>
+                                <div class="security-details mb-2">
+                                    New user account created: john.doe@debreuniversity.edu. Account requires email verification.
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Success Alert -->
+                            <div class="security-alert security-alert-success">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <span class="badge bg-success">Resolved</span>
+                                        <strong class="ms-2">Suspicious Activity Resolved</strong>
+                                    </div>
+                                    <small class="security-date">Yesterday, 11:20 PM</small>
+                                </div>
+                                <div class="security-details mb-2">
+                                    Previously detected suspicious activity from IP 203.0.113.42 has been resolved. No further action needed.
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">View Report</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Warning Alert -->
+                            <div class="security-alert security-alert-warning">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <span class="badge bg-warning">Warning</span>
+                                        <strong class="ms-2">Unusual Database Access</strong>
+                                    </div>
+                                    <small class="security-date">Yesterday, 05:45 PM</small>
+                                </div>
+                                <div class="security-details mb-2">
+                                    Detected unusual database access pattern from user account 'admin'. Multiple rapid queries outside normal hours.
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary">Investigate</button>
+                                    <button class="btn btn-sm btn-outline-warning">Temporarily Disable</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Recent Security Activity</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">Login</button>
+                                <button class="btn btn-outline-secondary btn-sm">Access</button>
+                                <button class="btn btn-outline-secondary btn-sm">Changes</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="security-list">
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-danger"></span>
+                                            <strong>Failed Login</strong>
+                                            <span class="badge bg-danger ms-2">Blocked</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Today, 10:42 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        IP: 192.168.1.45 | User: admin | Location: Unknown
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-success"></span>
+                                            <strong>Successful Login</strong>
+                                            <span class="badge bg-success ms-2">Verified</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Today, 10:30 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        IP: 192.168.1.100 | User: jane.smith | Location: Campus Network
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-warning"></span>
+                                            <strong>Permission Change</strong>
+                                            <span class="badge bg-warning ms-2">Modified</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Today, 09:15 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        User: admin | Changed permissions for role: Faculty | Added: manage_grades
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-info"></span>
+                                            <strong>File Access</strong>
+                                            <span class="badge bg-info ms-2">Accessed</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Today, 08:45 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        User: jane.smith | Accessed: /students/records/2024 | Action: View
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-success"></span>
+                                            <strong>Password Changed</strong>
+                                            <span class="badge bg-success ms-2">Updated</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Today, 08:30 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        User: john.doe | Changed password successfully | IP: 192.168.1.120
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-warning"></span>
+                                            <strong>Database Query</strong>
+                                            <span class="badge bg-warning ms-2">Unusual</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Yesterday, 11:20 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        User: admin | Multiple rapid SELECT queries on student_records table | IP: 192.168.1.10
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-success"></span>
+                                            <strong>Security Scan</strong>
+                                            <span class="badge bg-success ms-2">Completed</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Yesterday, 10:00 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        System: Automated | Found: 3 vulnerabilities | Status: Fixed
+                                    </div>
+                                </div>
+                                <!-- Activity Item -->
+                                <div class="security-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="security-status status-info"></span>
+                                            <strong>New User</strong>
+                                            <span class="badge bg-info ms-2">Created</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <small class="security-date">Yesterday, 09:15 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="security-details">
+                                        User: sarah.johnson | Role: Faculty | Created by: admin
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Metrics & Firewall Status -->
+            <div class="row g-4">
+                <!-- Security Metrics -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Security Metrics</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">24h</button>
+                                <button class="btn btn-outline-secondary btn-sm">7d</button>
+                                <button class="btn btn-outline-secondary btn-sm">30d</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container security-chart">
+                                <canvas id="securityMetricsChart"></canvas>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-danger rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Failed Logins</h6>
+                                            <small class="text-muted">24 attempts</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-warning rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Suspicious Activities</h6>
+                                            <small class="text-muted">3 detected</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-info rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Security Scans</h6>
+                                            <small class="text-muted">2 completed</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Successful Logins</h6>
+                                            <small class="text-muted">156 attempts</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-primary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Security Patches</h6>
+                                            <small class="text-muted">5 pending</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-secondary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Blocked IPs</h6>
+                                            <small class="text-muted">1 blocked</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Firewall Status -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Firewall Status</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#firewallSettingsModal">
+                                <i class="bi bi-gear"></i> Configure
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container security-chart">
+                                <canvas id="firewallChart"></canvas>
+                            </div>
+                            <div class="table-responsive mt-4">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Rule</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Block Suspicious IPs</td>
+                                            <td>Automatic</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Allow Campus Network</td>
+                                            <td>Static</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Block Known Malware Domains</td>
+                                            <td>Automatic</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rate Limit Login Attempts</td>
+                                            <td>Automatic</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Allow Remote Admin Access</td>
+                                            <td>Static</td>
+                                            <td><span class="badge bg-warning">Limited</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Report Modal -->
+    <div class="modal fade" id="securityReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Generate Security Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select">
+                                <option>Comprehensive Security Report</option>
+                                <option selected>Security Incident Report</option>
+                                <option>Vulnerability Assessment</option>
+                                <option>Access Log Analysis</option>
+                                <option>Custom Report</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time Range</label>
+                            <select class="form-select">
+                                <option>Last 24 Hours</option>
+                                <option selected>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 90 Days</option>
+                                <option>Custom Range</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Include Sections</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="includeThreats" checked>
+                                <label class="form-check-label" for="includeThreats">Security Threats</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="includeIncidents" checked>
+                                <label class="form-check-label" for="includeIncidents">Security Incidents</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="includeMetrics" checked>
+                                <label class="form-check-label" for="includeMetrics">Security Metrics</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="includeRecommendations" checked>
+                                <label class="form-check-label" for="includeRecommendations">Recommendations</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select">
+                                <option selected>PDF</option>
+                                <option>Excel</option>
+                                <option>HTML</option>
+                                <option>CSV</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Recipients</label>
+                            <input type="text" class="form-control" placeholder="Enter email addresses (comma separated)">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="scheduleReport" checked>
+                                <label class="form-check-label" for="scheduleReport">Schedule recurring report</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Generate Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firewall Settings Modal -->
+    <div class="modal fade" id="firewallSettingsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Firewall Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Firewall Mode</label>
+                            <select class="form-select">
+                                <option selected>Strict</option>
+                                <option>Balanced</option>
+                                <option>Permissive</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Default Action</label>
+                            <select class="form-select">
+                                <option selected>Block</option>
+                                <option>Allow</option>
+                                <option>Ask</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Log Level</label>
+                            <select class="form-select">
+                                <option>Minimal</option>
+                                <option selected>Standard</option>
+                                <option>Detailed</option>
+                                <option>Debug</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Automatic Updates</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="autoUpdateRules" checked>
+                                <label class="form-check-label" for="autoUpdateRules">Update firewall rules automatically</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Update Frequency</label>
+                            <select class="form-select">
+                                <option>Daily</option>
+                                <option selected>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Manual Only</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notification Settings</label>
+                            <select class="form-select">
+                                <option selected>Notify for all blocked connections</option>
+                                <option>Notify for critical blocks only</option>
+                                <option>No notifications</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Allowed IP Ranges</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter IP ranges (one per line)">192.168.1.0/24&#10;10.0.0.0/8</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Blocked IP Ranges</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter IP ranges (one per line)">203.0.113.0/24</textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'security';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize security metrics chart
+            const metricsCtx = document.getElementById('securityMetricsChart').getContext('2d');
+            new Chart(metricsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
+                    datasets: [
+                        {
+                            label: 'Failed Logins',
+                            data: [5, 3, 8, 12, 6, 4, 2],
+                            borderColor: '#dc3545',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Suspicious Activities',
+                            data: [1, 0, 2, 3, 1, 0, 1],
+                            borderColor: '#ffc107',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Security Scans',
+                            data: [0, 1, 0, 0, 0, 1, 0],
+                            borderColor: '#0dcaf0',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Initialize firewall chart
+            const firewallCtx = document.getElementById('firewallChart').getContext('2d');
+            new Chart(firewallCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Allowed', 'Blocked', 'Quarantined'],
+                    datasets: [{
+                        data: [85, 12, 3],
+                        backgroundColor: [
+                            '#198754',
+                            '#dc3545',
+                            '#ffc107'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

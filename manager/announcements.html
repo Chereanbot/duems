@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements Management - Debre University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Include Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Announcements Management</h2>
+                <div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAnnouncementModal">
+                        <i class="bi bi-plus-circle"></i> Create Announcement
+                    </button>
+                </div>
+            </div>
+
+            <!-- Announcement Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-megaphone-fill text-primary fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Active Announcements</h6>
+                                <h4 class="mb-0">12</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-eye-fill text-success fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Total Views</h6>
+                                <h4 class="mb-0">1,245</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-calendar-event text-warning fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Scheduled</h6>
+                                <h4 class="mb-0">5</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card">
+                        <div class="d-flex align-items-center">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-archive-fill text-info fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Archived</h6>
+                                <h4 class="mb-0">8</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="dashboard-card mb-4">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <select class="form-select" id="statusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="scheduled">Scheduled</option>
+                            <option value="archived">Archived</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="departmentFilter">
+                            <option value="">All Departments</option>
+                            <option value="cafe">Café</option>
+                            <option value="police">Campus Police</option>
+                            <option value="cleaning">Cleaning</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="date" class="form-control" id="dateFilter">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search announcements...">
+                            <button class="btn btn-secondary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Table -->
+            <div class="dashboard-card">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Department</th>
+                                <th>Created By</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Views</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Holiday Schedule Update</td>
+                                <td>All Departments</td>
+                                <td>John Manager</td>
+                                <td>2024-01-15</td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td>245</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#archiveAnnouncementModal">
+                                        <i class="bi bi-archive"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAnnouncementModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>New Equipment Training</td>
+                                <td>Café</td>
+                                <td>John Manager</td>
+                                <td>2024-01-14</td>
+                                <td><span class="badge bg-success">Active</span></td>
+                                <td>180</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#archiveAnnouncementModal">
+                                        <i class="bi bi-archive"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAnnouncementModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Safety Protocol Update</td>
+                                <td>Campus Police</td>
+                                <td>John Manager</td>
+                                <td>2024-01-13</td>
+                                <td><span class="badge bg-warning text-dark">Scheduled</span></td>
+                                <td>0</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#archiveAnnouncementModal">
+                                        <i class="bi bi-archive"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAnnouncementModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Monthly Performance Review</td>
+                                <td>All Departments</td>
+                                <td>John Manager</td>
+                                <td>2024-01-10</td>
+                                <td><span class="badge bg-secondary">Archived</span></td>
+                                <td>820</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#viewAnnouncementModal">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#archiveAnnouncementModal">
+                                        <i class="bi bi-archive"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAnnouncementModal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Announcement Modal -->
+    <div class="modal fade" id="createAnnouncementModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Announcement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createAnnouncementForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" required placeholder="Enter announcement title">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Department</label>
+                                <select class="form-select">
+                                    <option value="">All Departments</option>
+                                    <option value="cafe">Café</option>
+                                    <option value="police">Campus Police</option>
+                                    <option value="cleaning">Cleaning</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Status</label>
+                                <select class="form-select">
+                                    <option value="active">Active</option>
+                                    <option value="scheduled">Scheduled</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Publish Date</label>
+                                <input type="datetime-local" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Expiry Date</label>
+                                <input type="datetime-local" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Content</label>
+                                <textarea class="form-control" rows="5" required placeholder="Enter announcement content..."></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Attachments</label>
+                                <input type="file" class="form-control" multiple>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sendNotification">
+                                    <label class="form-check-label" for="sendNotification">Send notification to all employees</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="requireAcknowledgment">
+                                    <label class="form-check-label" for="requireAcknowledgment">Require acknowledgment from employees</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="createAnnouncementForm" class="btn btn-primary">Create Announcement</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Announcement Modal -->
+    <div class="modal fade" id="viewAnnouncementModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Announcement Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Title</label>
+                                <p>Holiday Schedule Update</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Department</label>
+                                <p>All Departments</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Priority</label>
+                                <p><span class="badge bg-warning text-dark">Medium</span></p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Status</label>
+                                <p><span class="badge bg-success">Active</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Created By</label>
+                                <p>John Manager</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Publish Date</label>
+                                <p>January 15, 2024 09:00 AM</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Expiry Date</label>
+                                <p>January 31, 2024 05:00 PM</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Views</label>
+                                <p>245</p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Content</label>
+                                <div class="p-3 bg-light rounded">
+                                    <p>Dear Employees,</p>
+                                    <p>Please be informed about the upcoming holiday schedule for the month of February 2024. The university will be closed on the following dates:</p>
+                                    <ul>
+                                        <li>February 15, 2024 - University Day</li>
+                                        <li>February 20, 2024 - National Holiday</li>
+                                    </ul>
+                                    <p>All departments should ensure proper coverage during these holidays. Please coordinate with your supervisors for shift arrangements.</p>
+                                    <p>Best regards,<br>Management Team</p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Attachments</label>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-file-pdf text-danger"></i> Holiday_Schedule_2024.pdf
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Acknowledgments</label>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" role="progressbar" style="width: 75%">75%</div>
+                                </div>
+                                <small class="text-muted">180 out of 240 employees have acknowledged</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAnnouncementModal">
+                        <i class="bi bi-pencil"></i> Edit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Announcement Modal -->
+    <div class="modal fade" id="editAnnouncementModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Announcement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editAnnouncementForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" value="Holiday Schedule Update" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Department</label>
+                                <select class="form-select">
+                                    <option value="" selected>All Departments</option>
+                                    <option value="cafe">Café</option>
+                                    <option value="police">Campus Police</option>
+                                    <option value="cleaning">Cleaning</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Status</label>
+                                <select class="form-select">
+                                    <option value="active" selected>Active</option>
+                                    <option value="scheduled">Scheduled</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Publish Date</label>
+                                <input type="datetime-local" class="form-control" value="2024-01-15T09:00">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Expiry Date</label>
+                                <input type="datetime-local" class="form-control" value="2024-01-31T17:00">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Content</label>
+                                <textarea class="form-control" rows="5" required>Dear Employees,
+
+Please be informed about the upcoming holiday schedule for the month of February 2024. The university will be closed on the following dates:
+
+- February 15, 2024 - University Day
+- February 20, 2024 - National Holiday
+
+All departments should ensure proper coverage during these holidays. Please coordinate with your supervisors for shift arrangements.
+
+Best regards,
+Management Team</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Attachments</label>
+                                <input type="file" class="form-control" multiple>
+                                <div class="mt-2">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <i class="bi bi-file-pdf text-danger"></i> Holiday_Schedule_2024.pdf
+                                            <button type="button" class="btn btn-sm btn-danger float-end">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="editSendNotification" checked>
+                                    <label class="form-check-label" for="editSendNotification">Send notification to all employees</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="editRequireAcknowledgment" checked>
+                                    <label class="form-check-label" for="editRequireAcknowledgment">Require acknowledgment from employees</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="editAnnouncementForm" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Archive Announcement Modal -->
+    <div class="modal fade" id="archiveAnnouncementModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Archive Announcement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to archive this announcement? It will no longer be visible to employees.</p>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i>
+                        Archived announcements can be restored later if needed.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning">Archive Announcement</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Announcement Modal -->
+    <div class="modal fade" id="deleteAnnouncementModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Announcement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this announcement? This action cannot be undone.</p>
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Deleting this announcement will remove it from the system permanently.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete Announcement</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load Sidebar
+        fetch('components/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            });
+
+        // Load Header
+        fetch('components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html> 

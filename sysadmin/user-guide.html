@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .guide-sidebar {
+            position: sticky;
+            top: 0;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            border-right: 1px solid #dee2e6;
+        }
+        .guide-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .guide-section {
+            margin-bottom: 3rem;
+        }
+        .guide-section:last-child {
+            margin-bottom: 0;
+        }
+        .guide-nav-link {
+            color: #495057;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.25rem;
+            display: block;
+            text-decoration: none;
+        }
+        .guide-nav-link:hover,
+        .guide-nav-link.active {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+        .guide-nav-link i {
+            margin-right: 0.5rem;
+        }
+        .guide-step {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+        }
+        .guide-step:last-child {
+            margin-bottom: 0;
+        }
+        .guide-step-number {
+            width: 30px;
+            height: 30px;
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .guide-note {
+            background-color: #e7f5ff;
+            border-left: 4px solid #0d6efd;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .guide-warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .guide-tip {
+            background-color: #d1e7dd;
+            border-left: 4px solid #198754;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .guide-image {
+            max-width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        .guide-code {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+        .guide-table {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        .guide-table th,
+        .guide-table td {
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+        }
+        .guide-table th {
+            background-color: #f8f9fa;
+        }
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+        .guide-section-content {
+            min-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- User Guide Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Guide Sidebar -->
+                <div class="col-md-3 col-lg-2 guide-sidebar">
+                    <div class="p-3">
+                        <h5 class="mb-3">Contents</h5>
+                        <nav class="guide-nav">
+                            <a href="#getting-started" class="guide-nav-link active" data-guide="getting-started">
+                                <i class="bi bi-house"></i> Getting Started
+                            </a>
+                            <a href="#user-management" class="guide-nav-link" data-guide="user-management">
+                                <i class="bi bi-people"></i> User Management
+                            </a>
+                            <a href="#roles-permissions" class="guide-nav-link" data-guide="roles-permissions">
+                                <i class="bi bi-shield-lock"></i> Roles & Permissions
+                            </a>
+                            <a href="#departments" class="guide-nav-link" data-guide="departments">
+                                <i class="bi bi-building"></i> Departments
+                            </a>
+                            <a href="#attendance" class="guide-nav-link" data-guide="attendance">
+                                <i class="bi bi-calendar-check"></i> Attendance
+                            </a>
+                            <a href="#leave-management" class="guide-nav-link" data-guide="leave-management">
+                                <i class="bi bi-calendar-minus"></i> Leave Management
+                            </a>
+                            <a href="#reports" class="guide-nav-link" data-guide="reports">
+                                <i class="bi bi-file-earmark-text"></i> Reports
+                            </a>
+                            <a href="#system-administration" class="guide-nav-link" data-guide="system-administration">
+                                <i class="bi bi-gear"></i> System Administration
+                            </a>
+                            <a href="#security" class="guide-nav-link" data-guide="security">
+                                <i class="bi bi-shield-check"></i> Security
+                            </a>
+                            <a href="#troubleshooting" class="guide-nav-link" data-guide="troubleshooting">
+                                <i class="bi bi-tools"></i> Troubleshooting
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Guide Content -->
+                <div class="col-md-9 col-lg-10">
+                    <div class="guide-content">
+                        <!-- Getting Started Section -->
+                        <section id="getting-started" class="guide-section">
+                            <h2>Getting Started</h2>
+                            <p>Welcome to the Dilla University Employee Management System. This guide will help you understand and effectively use the system's features.</p>
+                            
+                            <div class="guide-step">
+                                <div class="guide-step-number">1</div>
+                                <h4>System Requirements</h4>
+                                <p>Before using the system, ensure your device meets the following requirements:</p>
+                                <ul>
+                                    <li>Modern web browser (Chrome, Firefox, Safari, or Edge)</li>
+                                    <li>Stable internet connection</li>
+                                    <li>Minimum screen resolution: 1366 x 768</li>
+                                </ul>
+                            </div>
+
+                            <div class="guide-step">
+                                <div class="guide-step-number">2</div>
+                                <h4>Logging In</h4>
+                                <p>To access the system:</p>
+                                <ol>
+                                    <li>Open your web browser and navigate to the system URL</li>
+                                    <li>Enter your username and password</li>
+                                    <li>Click the "Login" button</li>
+                                </ol>
+                                <div class="guide-note">
+                                    <strong>Note:</strong> If you forget your password, use the "Forgot Password" link on the login page.
+                                </div>
+                            </div>
+
+                            <div class="guide-step">
+                                <div class="guide-step-number">3</div>
+                                <h4>Dashboard Overview</h4>
+                                <p>The dashboard provides quick access to key features and important information:</p>
+                                <ul>
+                                    <li>Navigation sidebar for accessing different modules</li>
+                                    <li>Quick action buttons for common tasks</li>
+                                    <li>Summary cards showing important metrics</li>
+                                    <li>Recent activity feed</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <!-- User Management Section -->
+                        <section id="user-management" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Roles & Permissions Section -->
+                        <section id="roles-permissions" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Departments Section -->
+                        <section id="departments" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Attendance Section -->
+                        <section id="attendance" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Leave Management Section -->
+                        <section id="leave-management" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Reports Section -->
+                        <section id="reports" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- System Administration Section -->
+                        <section id="system-administration" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Security Section -->
+                        <section id="security" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Troubleshooting Section -->
+                        <section id="troubleshooting" class="guide-section guide-section-content">
+                            <div class="loading-spinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'user-guide';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Guide navigation functionality
+            const guideLinks = document.querySelectorAll('.guide-nav-link');
+            guideLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    // Update active state
+                    guideLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Load guide content if it's not the getting-started section
+                    if (targetId !== 'getting-started') {
+                        loadGuideContent(targetId);
+                    }
+                });
+            });
+            
+            // Load initial content for the first section (if not getting-started)
+            const initialSection = document.querySelector('.guide-nav-link.active').getAttribute('data-guide');
+            if (initialSection && initialSection !== 'getting-started') {
+                loadGuideContent(initialSection);
+            }
+            
+            // Function to load guide content
+            function loadGuideContent(sectionId) {
+                const section = document.getElementById(sectionId);
+                const loadingSpinner = section.querySelector('.loading-spinner');
+                
+                // Show loading spinner
+                loadingSpinner.style.display = 'flex';
+                
+                // Fetch the guide content
+                fetch(`guide/${sectionId}.html`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Guide content not found');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        // Hide loading spinner
+                        loadingSpinner.style.display = 'none';
+                        
+                        // Update section content
+                        section.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error('Error loading guide content:', error);
+                        loadingSpinner.style.display = 'none';
+                        
+                        // Create a more detailed error message with a button to create the guide
+                        section.innerHTML = `
+                            <h2>${sectionId.charAt(0).toUpperCase() + sectionId.slice(1).replace('-', ' ')}</h2>
+                            <div class="alert alert-warning">
+                                <i class="bi bi-exclamation-triangle"></i> 
+                                Guide content not found. This section is under development.
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Placeholder Content</h5>
+                                    <p class="card-text">This guide section is currently being developed. Please check back later for complete documentation.</p>
+                                    <p class="card-text">In the meantime, you can explore other sections of the user guide or contact support for assistance.</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+            }
+        });
+    </script>
+</body>
+</html> 

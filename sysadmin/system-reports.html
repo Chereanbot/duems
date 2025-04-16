@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Reports - Dilla University</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .report-card {
+            transition: transform 0.2s;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+        .report-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        .report-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .report-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        .report-date {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .report-size {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        .report-actions {
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .report-item:hover .report-actions {
+            opacity: 1;
+        }
+        .chart-container {
+            height: 300px;
+        }
+        .report-type-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .report-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-success { background-color: #198754; }
+        .status-warning { background-color: #ffc107; }
+        .status-danger { background-color: #dc3545; }
+        .status-info { background-color: #0dcaf0; }
+    </style>
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Header -->
+        <div id="header-container"></div>
+
+        <!-- System Reports Content -->
+        <div class="container-fluid mt-4">
+            <!-- Page Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="mb-1">System Reports</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">System Reports</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scheduleReportModal">
+                        <i class="bi bi-calendar-plus"></i> Schedule Report
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reports Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Total Reports -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Total Reports</h5>
+                                    <p class="text-muted mb-0">All time</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">1,245</h3>
+                                    <p class="text-muted mb-0">Generated reports</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+12%</span>
+                                    <p class="text-muted mb-0">vs. last month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scheduled Reports -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-success bg-opacity-10 text-success me-3">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Scheduled Reports</h5>
+                                    <p class="text-muted mb-0">Active schedules</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">28</h3>
+                                    <p class="text-muted mb-0">Active schedules</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success">+3</span>
+                                    <p class="text-muted mb-0">vs. last month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Storage -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-warning bg-opacity-10 text-warning me-3">
+                                    <i class="bi bi-hdd"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Storage Used</h5>
+                                    <p class="text-muted mb-0">Report storage</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">2.4 GB</h3>
+                                    <p class="text-muted mb-0">Total storage</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-warning">65%</span>
+                                    <p class="text-muted mb-0">of limit</p>
+                                </div>
+                            </div>
+                            <div class="progress mt-3" style="height: 6px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Types -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="report-icon bg-info bg-opacity-10 text-info me-3">
+                                    <i class="bi bi-diagram-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="card-title mb-1">Report Types</h5>
+                                    <p class="text-muted mb-0">Available templates</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">15</h3>
+                                    <p class="text-muted mb-0">Available types</p>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-info">+2</span>
+                                    <p class="text-muted mb-0">new this month</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Reports & Report Types -->
+            <div class="row g-4 mb-4">
+                <!-- Recent Reports -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Recent Reports</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">All</button>
+                                <button class="btn btn-outline-secondary btn-sm">System</button>
+                                <button class="btn btn-outline-secondary btn-sm">Performance</button>
+                                <button class="btn btn-outline-secondary btn-sm">Security</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="report-list">
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>System Performance Report</strong>
+                                            <span class="badge bg-primary report-type-badge ms-2">Performance</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Today, 10:30 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 2.5 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>Security Audit Report</strong>
+                                            <span class="badge bg-danger report-type-badge ms-2">Security</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Today, 09:15 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 1.8 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-warning"></span>
+                                            <strong>System Health Report</strong>
+                                            <span class="badge bg-info report-type-badge ms-2">System</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-warning">Processing</span>
+                                            <small class="report-date ms-2">Today, 08:45 AM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 1.2 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>Backup Status Report</strong>
+                                            <span class="badge bg-secondary report-type-badge ms-2">Backup</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Yesterday, 11:30 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 0.8 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Report Item -->
+                                <div class="report-item">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div>
+                                            <span class="report-status status-success"></span>
+                                            <strong>User Activity Report</strong>
+                                            <span class="badge bg-info report-type-badge ms-2">Users</span>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-success">Completed</span>
+                                            <small class="report-date ms-2">Yesterday, 10:15 PM</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <small class="report-size">Size: 3.2 MB</small>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-secondary">Download</button>
+                                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Types -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Report Types</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addReportTypeModal">
+                                <i class="bi bi-plus-lg"></i> Add Type
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Report Type</th>
+                                            <th>Description</th>
+                                            <th>Frequency</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>System Performance</td>
+                                            <td>CPU, memory, and disk usage metrics</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Security Audit</td>
+                                            <td>Security events and vulnerabilities</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>System Health</td>
+                                            <td>Overall system health metrics</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Backup Status</td>
+                                            <td>Backup success and failure reports</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User Activity</td>
+                                            <td>User login and activity logs</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Error Logs</td>
+                                            <td>System error and warning logs</td>
+                                            <td>Daily</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Resource Usage</td>
+                                            <td>Detailed resource utilization</td>
+                                            <td>Weekly</td>
+                                            <td><span class="badge bg-warning">Inactive</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Analytics & Scheduled Reports -->
+            <div class="row g-4">
+                <!-- Report Analytics -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Report Analytics</h5>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm active">7d</button>
+                                <button class="btn btn-outline-secondary btn-sm">30d</button>
+                                <button class="btn btn-outline-secondary btn-sm">90d</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="reportAnalyticsChart"></canvas>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-primary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">System Reports</h6>
+                                            <small class="text-muted">45% of total</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Performance Reports</h6>
+                                            <small class="text-muted">30% of total</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Security Reports</h6>
+                                            <small class="text-muted">25% of total</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-info rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Average Size</h6>
+                                            <small class="text-muted">2.1 MB per report</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-danger rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Failed Reports</h6>
+                                            <small class="text-muted">2% failure rate</small>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-secondary rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                        <div>
+                                            <h6 class="mb-0">Storage Growth</h6>
+                                            <small class="text-muted">+5% per month</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scheduled Reports -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Scheduled Reports</h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#scheduleReportModal">
+                                <i class="bi bi-plus-lg"></i> Schedule New
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Report Name</th>
+                                            <th>Schedule</th>
+                                            <th>Last Run</th>
+                                            <th>Next Run</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Daily Performance Report</td>
+                                            <td>Daily at 6:00 AM</td>
+                                            <td>Today, 6:00 AM</td>
+                                            <td>Tomorrow, 6:00 AM</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weekly Security Audit</td>
+                                            <td>Weekly on Sunday</td>
+                                            <td>Last Sunday, 11:00 PM</td>
+                                            <td>Next Sunday, 11:00 PM</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Monthly System Health</td>
+                                            <td>Monthly on 1st</td>
+                                            <td>Mar 1, 12:00 AM</td>
+                                            <td>Apr 1, 12:00 AM</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Daily Backup Report</td>
+                                            <td>Daily at 5:00 AM</td>
+                                            <td>Today, 5:00 AM</td>
+                                            <td>Tomorrow, 5:00 AM</td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weekly User Activity</td>
+                                            <td>Weekly on Saturday</td>
+                                            <td>Last Saturday, 10:00 PM</td>
+                                            <td>Next Saturday, 10:00 PM</td>
+                                            <td><span class="badge bg-warning">Paused</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Report Modal -->
+    <div class="modal fade" id="scheduleReportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Schedule Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Type</label>
+                            <select class="form-select">
+                                <option>System Performance Report</option>
+                                <option>Security Audit Report</option>
+                                <option>System Health Report</option>
+                                <option>Backup Status Report</option>
+                                <option>User Activity Report</option>
+                                <option>Error Logs Report</option>
+                                <option>Resource Usage Report</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Schedule</label>
+                            <select class="form-select">
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <input type="time" class="form-control" value="06:00">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Day of Week</label>
+                            <select class="form-select">
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Day of Month</label>
+                            <select class="form-select">
+                                <option>1st</option>
+                                <option>15th</option>
+                                <option>Last Day</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Format</label>
+                            <select class="form-select">
+                                <option>PDF</option>
+                                <option>Excel</option>
+                                <option>CSV</option>
+                                <option>HTML</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Recipients</label>
+                            <input type="text" class="form-control" placeholder="Enter email addresses (comma separated)">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enableNotifications" checked>
+                                <label class="form-check-label" for="enableNotifications">Enable notifications</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Schedule Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Report Type Modal -->
+    <div class="modal fade" id="addReportTypeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Report Type</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Report Name</label>
+                            <input type="text" class="form-control" placeholder="Enter report name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter report description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>System</option>
+                                <option>Performance</option>
+                                <option>Security</option>
+                                <option>Users</option>
+                                <option>Custom</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Data Sources</label>
+                            <select class="form-select" multiple>
+                                <option>System Metrics</option>
+                                <option>Security Logs</option>
+                                <option>User Activity</option>
+                                <option>Error Logs</option>
+                                <option>Performance Data</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Default Format</label>
+                            <select class="form-select">
+                                <option>PDF</option>
+                                <option>Excel</option>
+                                <option>CSV</option>
+                                <option>HTML</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enableReportType" checked>
+                                <label class="form-check-label" for="enableReportType">Enable immediately</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Report Type</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Load sidebar and header components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load sidebar
+            fetch('components/sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('sidebar-container').innerHTML = data;
+                    
+                    // Set active state for current page
+                    const currentPage = 'system-reports';
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === currentPage) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            
+            // Load header
+            fetch('components/header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                });
+
+            // Initialize report analytics chart
+            const analyticsCtx = document.getElementById('reportAnalyticsChart').getContext('2d');
+            new Chart(analyticsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [
+                        {
+                            label: 'System Reports',
+                            data: [12, 15, 10, 14, 13, 8, 9],
+                            borderColor: '#0d6efd',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Performance Reports',
+                            data: [8, 10, 7, 9, 8, 5, 6],
+                            borderColor: '#198754',
+                            tension: 0.4,
+                            fill: false
+                        },
+                        {
+                            label: 'Security Reports',
+                            data: [5, 6, 4, 7, 5, 3, 4],
+                            borderColor: '#ffc107',
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Reports'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
