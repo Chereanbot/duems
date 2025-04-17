@@ -1,63 +1,71 @@
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<svg width="100" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Primary Green -->
+    <!-- Gradients -->
     <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00572d" stop-opacity="0.8" />
+      <stop offset="0%" stop-color="#00572d" stop-opacity="0.95" />
       <stop offset="100%" stop-color="#00572d" stop-opacity="0.4" />
     </linearGradient>
-    
-    <!-- Secondary Green -->
     <linearGradient id="secondaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1f9345" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#1f9345" stop-opacity="0.4" />
+      <stop offset="0%" stop-color="#1f9345" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#1f9345" stop-opacity="0.3" />
     </linearGradient>
-    
-    <!-- Accent Gold -->
     <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f3c300" stop-opacity="0.8" />
+      <stop offset="0%" stop-color="#f3c300" stop-opacity="0.9" />
       <stop offset="100%" stop-color="#f3c300" stop-opacity="0.4" />
     </linearGradient>
-    
-    <!-- Pattern Definition -->
+
+    <!-- Pattern -->
     <pattern id="geometricPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-      <!-- Leaf Shape -->
-      <path d="M25,5 C30,5 35,10 35,15 C35,20 30,25 25,25 C20,25 15,20 15,15 C15,10 20,5 25,5 Z" fill="url(#primaryGradient)" opacity="0.6" />
-      
-      <!-- Small Circle -->
-      <circle cx="10" cy="10" r="3" fill="url(#accentGradient)" opacity="0.7" />
-      
-      <!-- Small Square -->
-      <rect x="37" y="37" width="6" height="6" fill="url(#secondaryGradient)" opacity="0.7" />
-      
-      <!-- Diagonal Line -->
-      <line x1="5" y1="45" x2="45" y2="5" stroke="url(#accentGradient)" stroke-width="1" opacity="0.5" />
+      <path d="M25,5 C30,5 35,10 35,15 C35,20 30,25 25,25 C20,25 15,20 15,15 C15,10 20,5 25,5 Z"
+            fill="url(#primaryGradient)" opacity="0.5"/>
+      <circle cx="10" cy="10" r="3" fill="url(#accentGradient)" opacity="0.7"/>
+      <rect x="37" y="37" width="6" height="6" fill="url(#secondaryGradient)" opacity="0.7"/>
+      <line x1="5" y1="45" x2="45" y2="5" stroke="url(#accentGradient)" stroke-width="1.5" opacity="0.5"/>
     </pattern>
-    
-    <!-- University Pattern -->
+
+    <!-- Scene Pattern -->
     <pattern id="universityPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-      <!-- Background with Geometric Pattern -->
-      <rect x="0" y="0" width="100" height="100" fill="url(#geometricPattern)" />
-      
-      <!-- Abstract Building Shape -->
-      <path d="M20,80 L20,40 L40,30 L60,40 L60,80 Z" fill="url(#primaryGradient)" opacity="0.3" />
-      
+      <rect width="100" height="100" fill="url(#geometricPattern)" />
+      <!-- Abstract Building -->
+      <path d="M20,80 L20,42 Q40,30 60,42 L60,80 Z"
+            fill="url(#primaryGradient)" opacity="0.4" />
       <!-- Abstract Tree -->
-      <path d="M70,80 L70,60 C70,50 80,40 80,50 C80,60 90,50 90,60 L90,80 Z" fill="url(#secondaryGradient)" opacity="0.3" />
-      
-      <!-- Abstract Sun -->
-      <circle cx="15" cy="15" r="8" fill="url(#accentGradient)" opacity="0.4" />
-      
-      <!-- Abstract Book -->
-      <rect x="75" y="20" width="10" height="15" fill="url(#primaryGradient)" opacity="0.3" />
-      <rect x="77" y="22" width="6" height="2" fill="url(#accentGradient)" opacity="0.5" />
-      <rect x="77" y="26" width="6" height="2" fill="url(#accentGradient)" opacity="0.5" />
-      <rect x="77" y="30" width="6" height="2" fill="url(#accentGradient)" opacity="0.5" />
+      <path d="M70,80 Q70,60 78,52 Q85,48 90,60 Q90,80 70,80 Z"
+            fill="url(#secondaryGradient)" opacity="0.4" />
+      <!-- Sun -->
+      <circle cx="15" cy="15" r="8" fill="url(#accentGradient)" opacity="0.5" />
+      <!-- Book -->
+      <rect x="75" y="20" width="10" height="15" fill="url(#primaryGradient)" opacity="0.4" rx="1" />
+      <rect x="77" y="22" width="6" height="2" fill="url(#accentGradient)" opacity="0.6" />
+      <rect x="77" y="26" width="6" height="2" fill="url(#accentGradient)" opacity="0.6" />
+      <rect x="77" y="30" width="6" height="2" fill="url(#accentGradient)" opacity="0.6" />
     </pattern>
+
+    <!-- Shine Filter -->
+    <filter id="shine" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+      <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" specularExponent="15"
+                          lighting-color="#ffffff" result="specular">
+        <fePointLight x="50" y="50" z="100"/>
+      </feSpecularLighting>
+      <feComposite in="specular" in2="SourceAlpha" operator="in" result="specular2"/>
+      <feComposite in="SourceGraphic" in2="specular2" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
   </defs>
-  
-  <!-- Main Rectangle with University Pattern -->
-  <rect x="0" y="0" width="100" height="100" fill="url(#universityPattern)" />
-  
-  <!-- Overlay for subtle texture -->
-  <rect x="0" y="0" width="100" height="100" fill="url(#primaryGradient)" opacity="0.05" />
-</svg> 
+
+  <!-- Main Card with Shine -->
+  <rect x="0" y="0" width="100" height="100" rx="8" ry="8" fill="url(#universityPattern)" filter="url(#shine)" />
+  <rect x="0" y="0" width="100" height="100" rx="8" ry="8" fill="url(#primaryGradient)" opacity="0.04" />
+
+  <!-- Border -->
+  <rect x="0" y="0" width="100" height="100" rx="8" ry="8" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25" />
+
+  <!-- Signature Text -->
+  <text x="50" y="115" text-anchor="middle" font-size="7" font-family="Verdana, sans-serif" fill="#ffffff" font-weight="bold">
+    Designed by Cherinet
+  </text>
+  <!-- Subtle Glow -->
+  <text x="50" y="115" text-anchor="middle" font-size="7" font-family="Verdana, sans-serif" fill="#ffffff" opacity="0.2" filter="url(#shine)">
+    Designed by Cherinet
+  </text>
+</svg>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440" height="400" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sky Gradient -->
+  <defs>
+    <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#87ceeb" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+
+    <linearGradient id="mountain1" x1="0" y1="0" x2="0" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2f4f4f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#2f4f4f" stop-opacity="0.3"/>
+    </linearGradient>
+
+    <linearGradient id="mountain2" x1="0" y1="0" x2="0" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#556b2f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#556b2f" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <linearGradient id="mountain3" x1="0" y1="0" x2="0" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8fbc8f" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#8fbc8f" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1440" height="400" fill="url(#skyGradient)" />
+
+  <!-- Background Mountains -->
+  <path d="M0 300L180 250L360 290L540 200L720 280L900 240L1080 260L1260 200L1440 300V400H0V300Z" fill="url(#mountain1)" />
+
+  <!-- Middle Mountains -->
+  <path d="M0 350L200 300L400 340L600 260L800 320L1000 280L1200 300L1440 260V400H0V350Z" fill="url(#mountain2)" />
+
+  <!-- Foreground Mountains -->
+  <path d="M0 380L240 330L480 370L720 300L960 360L1200 340L1440 320V400H0V380Z" fill="url(#mountain3)" />
+</svg>

@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers at Dilla University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .career-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .career-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            background-size: 200px 200px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 87, 45, 0.1);
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 87, 45, 0.1);
+        }
+
+        .benefits-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 244, 244, 0.95));
+            padding: 80px 0;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 87, 45, 0.1);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 87, 45, 0.1);
+            border-radius: 50%;
+            color: var(--primary-green);
+            font-size: 2rem;
+        }
+
+        .culture-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(244, 244, 244, 0.95), rgba(255, 255, 255, 0.95));
+        }
+
+        .culture-card {
+            padding: 30px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 87, 45, 0.1);
+        }
+
+        .apply-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apply-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            background-size: 200px 200px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .apply-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* New Animation Styles */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Location Section */
+        .location-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(244, 244, 244, 0.95));
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 87, 45, 0.1);
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 87, 45, 0.1);
+        }
+
+        .campus-map {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .campus-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .location-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .location-card h4 {
+            color: var(--primary-green);
+            margin: 20px 0 15px;
+        }
+
+        .location-card i {
+            width: 25px;
+            text-align: center;
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* Job Details Modal */
+        .job-details {
+            padding: 20px;
+        }
+
+        .job-details h4 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .job-details ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .job-details li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .job-details li:before {
+            content: "✓";
+            color: var(--primary-green);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Enhanced Form Styles */
+        .form-control:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 0.2rem rgba(0, 87, 45, 0.25);
+        }
+
+        .form-label {
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 20px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333;
+        }
+
+        .footer-section h5 {
+            color: var(--primary-green);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h5:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-green);
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            color: #666;
+        }
+
+        .contact-info i {
+            color: var(--primary-green);
+            width: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form .form-control {
+            border-radius: 20px 0 0 20px;
+            border: 1px solid #ddd;
+        }
+
+        .newsletter-form .btn {
+            border-radius: 0 20px 20px 0;
+            padding: 0 20px;
+        }
+
+        .list-inline-item a {
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .list-inline-item a:hover {
+            color: var(--primary-green);
+        }
+
+        hr {
+            border-color: rgba(0, 87, 45, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/du-logo-white.png" alt="Dilla University Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="career.html">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                   
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="career-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate-on-scroll">
+                    <h1 class="display-4 fw-bold mb-4">Join Dilla University</h1>
+                    <p class="lead mb-4">We're looking for passionate educators and professionals to join our growing team. Help shape the future of education in Ethiopia.</p>
+                    <a href="#open-positions" class="btn btn-light btn-lg pulse">View Open Positions</a>
+                </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <img src="assets/images/career.svg" alt="Dilla University Campus" class="img-fluid floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="container">
+            <h2 class="text-center mb-5 animate-on-scroll">Our Campus</h2>
+            <div class="row">
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="location-card">
+                        <h3>Dilla University Main Campus</h3>
+                        <p class="text-muted mb-4">Located in the heart of Dilla, our main campus offers state-of-the-art facilities and a vibrant academic environment.</p>
+                        <div class="campus-map">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.123456789012!2d38.12345678901234!3d6.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDcnMjQuNCJOIDM4wrAwNycxMi4wIkU!5e0!3m2!1sen!2set!4v1234567890!5m2!1sen!2set" 
+                                width="100%" 
+                                height="300" 
+                                style="border:0; border-radius: 15px;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <div class="mt-3">
+                            <p class="mb-1"><i class="fas fa-map-marker-alt text-primary me-2"></i> Dilla University, Dilla, Ethiopia</p>
+                            <p class="mb-1"><i class="fas fa-phone text-primary me-2"></i> +251 46 331 0000</p>
+                            <p class="mb-1"><i class="fas fa-envelope text-primary me-2"></i> info@dillauniversity.edu.et</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-on-scroll">
+                    <div class="location-card">
+                        <h3>Campus Life</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-book text-primary me-2"></i> Modern Library Facilities</li>
+                            <li class="mb-3"><i class="fas fa-flask text-primary me-2"></i> Advanced Research Labs</li>
+                            <li class="mb-3"><i class="fas fa-users text-primary me-2"></i> Student Support Services</li>
+                            <li class="mb-3"><i class="fas fa-tree text-primary me-2"></i> Beautiful Green Spaces</li>
+                            <li class="mb-3"><i class="fas fa-utensils text-primary me-2"></i> Dining Facilities</li>
+                        </ul>
+                        <div class="mt-4">
+                            <h4>Getting Here</h4>
+                            <p class="text-muted">Dilla University is easily accessible by:</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-bus text-primary me-2"></i> Public transportation</li>
+                                <li class="mb-2"><i class="fas fa-car text-primary me-2"></i> Private vehicle</li>
+                                <li class="mb-2"><i class="fas fa-walking text-primary me-2"></i> Walking distance from city center</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section id="open-positions" class="py-5">
+       
+
+            <!-- Support Staff Positions -->
+            <div class="mb-5">
+                <h3 class="text-center mb-4 animate-on-scroll">Support Staff Positions</h3>
+                <div class="row">
+                    <!-- Campus Police -->
+                    <div class="col-lg-6 animate-on-scroll">
+                        <div class="job-card">
+                            <h3>Campus Police Officer</h3>
+                            <p class="text-muted mb-3">Full-time | Dilla Campus</p>
+                            <p class="mb-4">Ensure campus safety and security by patrolling university grounds and responding to incidents.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-warning">Security</span>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#jobModal3">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cafeteria Staff -->
+                    <div class="col-lg-6 animate-on-scroll">
+                        <div class="job-card">
+                            <h3>Cafeteria Staff</h3>
+                            <p class="text-muted mb-3">Full-time | Dilla Campus</p>
+                            <p class="mb-4">Prepare and serve meals to students and staff in our university cafeteria.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-info">Food Service</span>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#jobModal4">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cleaning Staff -->
+                    <div class="col-lg-6 animate-on-scroll">
+                        <div class="job-card">
+                            <h3>Cleaning Staff</h3>
+                            <p class="text-muted mb-3">Full-time | Dilla Campus</p>
+                            <p class="mb-4">Maintain cleanliness and hygiene across university facilities and dormitories.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-secondary">Maintenance</span>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#jobModal5">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Dormitory Staff -->
+                    <div class="col-lg-6 animate-on-scroll">
+                        <div class="job-card">
+                            <h3>Dormitory Supervisor</h3>
+                            <p class="text-muted mb-3">Full-time | Dilla Campus</p>
+                            <p class="mb-4">Manage student dormitories and ensure a safe, comfortable living environment.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-dark">Housing</span>
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#jobModal6">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Detail Modals -->
+    <div class="modal fade" id="jobModal1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assistant Professor - Computer Science</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details">
+                        <h4>Job Description</h4>
+                        <p>We are seeking a qualified Assistant Professor to join our Computer Science department. The successful candidate will be responsible for teaching undergraduate and graduate courses, conducting research, and contributing to the academic community.</p>
+                        
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>PhD in Computer Science or related field</li>
+                            <li>Strong research background</li>
+                            <li>Teaching experience at university level</li>
+                            <li>Excellent communication skills</li>
+                        </ul>
+
+                        <h4>Benefits</h4>
+                        <ul>
+                            <li>Competitive salary</li>
+                            <li>Research funding opportunities</li>
+                            <li>Professional development support</li>
+                            <li>Health insurance</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="scrollToApply('Assistant Professor - Computer Science')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="jobModal2" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Research Coordinator</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details">
+                        <h4>Job Description</h4>
+                        <p>We are seeking a Research Coordinator to coordinate research activities and support faculty in their research endeavors.</p>
+                        
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Strong research background</li>
+                            <li>Excellent communication skills</li>
+                        </ul>
+
+                        <h4>Benefits</h4>
+                        <ul>
+                            <li>Research funding opportunities</li>
+                            <li>Professional development support</li>
+                            <li>Health insurance</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="scrollToApply('Research Coordinator')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campus Police Modal -->
+    <div class="modal fade" id="jobModal3" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Campus Police Officer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details">
+                        <h4>Job Description</h4>
+                        <p>We are seeking dedicated Campus Police Officers to maintain safety and security across our university campus.</p>
+                        
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Patrol campus grounds and buildings</li>
+                            <li>Respond to security incidents and emergencies</li>
+                            <li>Enforce university rules and regulations</li>
+                            <li>Assist students and staff with security concerns</li>
+                            <li>Maintain security logs and reports</li>
+                        </ul>
+
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>High school diploma or equivalent</li>
+                            <li>Previous security or law enforcement experience preferred</li>
+                            <li>Good physical condition</li>
+                            <li>Strong communication skills</li>
+                            <li>Ability to work in shifts</li>
+                        </ul>
+
+                        <h4>Benefits</h4>
+                        <ul>
+                            <li>Competitive salary</li>
+                            <li>Health insurance</li>
+                            <li>Uniform provided</li>
+                            <li>Training opportunities</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="scrollToApply('Campus Police Officer')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cafeteria Staff Modal -->
+    <div class="modal fade" id="jobModal4" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cafeteria Staff</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details">
+                        <h4>Job Description</h4>
+                        <p>Join our cafeteria team to provide quality meals and service to our university community.</p>
+                        
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Prepare and serve meals</li>
+                            <li>Maintain food safety standards</li>
+                            <li>Clean and maintain kitchen equipment</li>
+                            <li>Handle food inventory</li>
+                            <li>Provide excellent customer service</li>
+                        </ul>
+
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Experience in food service preferred</li>
+                            <li>Knowledge of food safety practices</li>
+                            <li>Ability to work in a fast-paced environment</li>
+                            <li>Good communication skills</li>
+                            <li>Flexibility to work various shifts</li>
+                        </ul>
+
+                        <h4>Benefits</h4>
+                        <ul>
+                            <li>Competitive wages</li>
+                            <li>Meal benefits</li>
+                            <li>Health insurance</li>
+                            <li>Uniform provided</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="scrollToApply('Cafeteria Staff')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cleaning Staff Modal -->
+    <div class="modal fade" id="jobModal5" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cleaning Staff</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details">
+                        <h4>Job Description</h4>
+                        <p>Help maintain a clean and healthy environment across our university campus.</p>
+                        
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Clean and maintain university facilities</li>
+                            <li>Handle waste disposal</li>
+                            <li>Restock supplies</li>
+                            <li>Follow cleaning schedules</li>
+                            <li>Report maintenance issues</li>
+                        </ul>
+
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Previous cleaning experience preferred</li>
+                            <li>Ability to use cleaning equipment</li>
+                            <li>Physical stamina</li>
+                            <li>Attention to detail</li>
+                            <li>Reliability and punctuality</li>
+                        </ul>
+
+                        <h4>Benefits</h4>
+                        <ul>
+                            <li>Competitive wages</li>
+                            <li>Health insurance</li>
+                            <li>Cleaning supplies provided</li>
+                            <li>Uniform provided</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="scrollToApply('Cleaning Staff')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dormitory Supervisor Modal -->
+    <div class="modal fade" id="jobModal6" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dormitory Supervisor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="job-details">
+                        <h4>Job Description</h4>
+                        <p>Manage student dormitories and ensure a safe, comfortable living environment for our students.</p>
+                        
+                        <h4>Responsibilities</h4>
+                        <ul>
+                            <li>Supervise dormitory operations</li>
+                            <li>Enforce dormitory rules and regulations</li>
+                            <li>Handle student concerns and issues</li>
+                            <li>Coordinate maintenance requests</li>
+                            <li>Maintain dormitory records</li>
+                        </ul>
+
+                        <h4>Requirements</h4>
+                        <ul>
+                            <li>Previous supervisory experience</li>
+                            <li>Good communication skills</li>
+                            <li>Ability to handle conflicts</li>
+                            <li>Knowledge of student housing management</li>
+                            <li>Flexibility to work various shifts</li>
+                        </ul>
+
+                        <h4>Benefits</h4>
+                        <ul>
+                            <li>Competitive salary</li>
+                            <li>Health insurance</li>
+                            <li>Housing allowance</li>
+                            <li>Professional development opportunities</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="scrollToApply('Dormitory Supervisor')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Modals -->
+    <!-- Computer Science Professor Application Modal -->
+    <div class="modal fade" id="applyModal1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply for Assistant Professor - Computer Science</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm1">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Cover Letter</label>
+                            <textarea class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resume</label>
+                            <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                            <small class="text-muted">Upload your resume (PDF, DOC, DOCX)</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Research Publications</label>
+                            <input type="file" class="form-control" accept=".pdf">
+                            <small class="text-muted">Upload your research publications (Optional)</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campus Police Application Modal -->
+    <div class="modal fade" id="applyModal3" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply for Campus Police Officer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm3">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Previous Security Experience</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resume</label>
+                            <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                            <small class="text-muted">Upload your resume (PDF, DOC, DOCX)</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Certifications</label>
+                            <input type="file" class="form-control" accept=".pdf">
+                            <small class="text-muted">Upload any security certifications (Optional)</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cafeteria Staff Application Modal -->
+    <div class="modal fade" id="applyModal4" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply for Cafeteria Staff</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm4">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Food Service Experience</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resume</label>
+                            <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                            <small class="text-muted">Upload your resume (PDF, DOC, DOCX)</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Food Safety Certifications</label>
+                            <input type="file" class="form-control" accept=".pdf">
+                            <small class="text-muted">Upload any food safety certifications (Optional)</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cleaning Staff Application Modal -->
+    <div class="modal fade" id="applyModal5" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply for Cleaning Staff</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm5">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Previous Cleaning Experience</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resume</label>
+                            <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                            <small class="text-muted">Upload your resume (PDF, DOC, DOCX)</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dormitory Supervisor Application Modal -->
+    <div class="modal fade" id="applyModal6" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Apply for Dormitory Supervisor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm6">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Supervisory Experience</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Resume</label>
+                            <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                            <small class="text-muted">Upload your resume (PDF, DOC, DOCX)</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">References</label>
+                            <input type="file" class="form-control" accept=".pdf">
+                            <small class="text-muted">Upload reference letters (Optional)</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Apply Section -->
+    <section id="apply" class="apply-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 animate-on-scroll">
+                    <div class="apply-form">
+                        <h3 class="text-center mb-4">Apply Now</h3>
+                        <form id="applicationForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Position</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Position</option>
+                                    <option>Assistant Professor - Computer Science</option>
+                                    <option>Research Coordinator</option>
+                                    <option>Campus Police Officer</option>
+                                    <option>Cafeteria Staff</option>
+                                    <option>Cleaning Staff</option>
+                                    <option>Dormitory Supervisor</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Cover Letter</label>
+                                <textarea class="form-control" rows="4" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Resume</label>
+                                <input type="file" class="form-control" accept=".pdf,.doc,.docx">
+                                <small class="text-muted">Upload your resume (PDF, DOC, DOCX)</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                        </form>
+                        <div class="success-message">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Thank you for your application! We'll review it and get back to you soon.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <!-- About Section -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5 class="mb-4">About Dilla University</h5>
+                        <img src="assets/images/logo.svg" alt="Dilla University Logo" height="40" class="mb-3">
+                        <p class="text-muted">Dilla University is committed to excellence in education, research, and community service, shaping the future of Ethiopia through quality education.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="me-3"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="me-3"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5 class="mb-4">Quick Links</h5>
+                        <ul class="list-unstyled footer-links">
+                            <li class="mb-2"><a href="index.html"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                            <li class="mb-2"><a href="about.html"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                            <li class="mb-2"><a href="career.html"><i class="fas fa-chevron-right me-2"></i>Careers</a></li>
+                            <li class="mb-2"><a href="contact.html"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+                            <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i>Admissions</a></li>
+                            <li class="mb-2"><a href="#"><i class="fas fa-chevron-right me-2"></i>Academic Calendar</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5 class="mb-4">Contact Us</h5>
+                        <ul class="list-unstyled contact-info">
+                            <li class="mb-3">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>Dilla University, Dilla, Ethiopia</span>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-phone me-2"></i>
+                                <span>+251 46 331 0000</span>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-envelope me-2"></i>
+                                <span>info@dillauniversity.edu.et</span>
+                            </li>
+                            <li class="mb-3">
+                                <i class="fas fa-clock me-2"></i>
+                                <span>Mon - Fri: 8:00 AM - 5:00 PM</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5 class="mb-4">Newsletter</h5>
+                        <p class="text-muted">Subscribe to our newsletter for updates and announcements.</p>
+                        <form class="newsletter-form">
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Copyright and Bottom Links -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2024 Dilla University. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                        <li class="list-inline-item"><span class="mx-2">|</span></li>
+                        <li class="list-inline-item"><a href="#">Terms of Service</a></li>
+                        <li class="list-inline-item"><span class="mx-2">|</span></li>
+                        <li class="list-inline-item"><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => observer.observe(element));
+
+            // Form submission handlers
+            const forms = document.querySelectorAll('form[id^="applicationForm"]');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'alert alert-success mt-3';
+                    successMessage.innerHTML = '<i class="fas fa-check-circle me-2"></i>Thank you for your application! We will review it and get back to you soon.';
+                    this.appendChild(successMessage);
+                    setTimeout(() => {
+                        modal.hide();
+                        successMessage.remove();
+                    }, 3000);
+                });
+            });
+        });
+
+        // Function to show application modal
+        function showApplicationModal(jobId) {
+            const modal = new bootstrap.Modal(document.getElementById(`applyModal${jobId}`));
+            modal.show();
+        }
+
+        // Update the Apply Now buttons in job detail modals
+        document.querySelectorAll('[onclick^="scrollToApply"]').forEach(button => {
+            const jobTitle = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+            const jobId = button.closest('.modal').id.match(/\d+/)[0];
+            button.onclick = function() {
+                showApplicationModal(jobId);
+            };
+        });
+    </script>
+</body>
+</html> 

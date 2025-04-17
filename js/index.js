@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize navbar scroll effect
     initNavbarScroll();
+    
+    // Initialize mountain animations
+    initMountainEffects();
 });
 
 // Initialize animations
@@ -75,6 +78,32 @@ function initNavbarScroll() {
     });
 }
 
+// Initialize mountain effects
+function initMountainEffects() {
+    // Simple parallax effect for mountains
+    const mountainBackground = document.querySelector('.mountain-background');
+    if (mountainBackground) {
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset;
+            const speed = 0.3;
+            mountainBackground.style.transform = `translateY(${scrollPosition * speed}px)`;
+        });
+    }
+    
+    // Add subtle movement to mountain backgrounds on mouse move
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        heroSection.addEventListener('mousemove', function(e) {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            
+            if (mountainBackground) {
+                mountainBackground.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+    }
+}
+
 // Add loading animation
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
@@ -108,4 +137,84 @@ document.querySelectorAll('.btn').forEach(button => {
             ripple.remove();
         }, 600);
     });
+});
+
+// Hero Slideshow
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const totalSlides = slides.length;
+let slideInterval;
+
+function showSlide(index) {
+    // Remove active class from current slide
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    // Add active class to new slide
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+    
+    // Reset timer
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 5000);
+}
+
+function nextSlide() {
+    const nextIndex = (currentSlide + 1) % totalSlides;
+    showSlide(nextIndex);
+}
+
+function prevSlide() {
+    const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(prevIndex);
+}
+
+// Initialize slideshow
+document.addEventListener('DOMContentLoaded', () => {
+    // Start auto-sliding
+    slideInterval = setInterval(nextSlide, 5000);
+    
+    // Add click events for controls
+    document.querySelector('.slide-next').addEventListener('click', () => {
+        nextSlide();
+    });
+    
+    document.querySelector('.slide-prev').addEventListener('click', () => {
+        prevSlide();
+    });
+    
+    // Add click events for dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+    
+    // Add touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.querySelector('.hero-slideshow').addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.querySelector('.hero-slideshow').addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            nextSlide();
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+            prevSlide();
+        }
+    }
 }); 
