@@ -3,27 +3,6 @@ class AdSystem {
     constructor() {
         this.ads = [
             {
-                id: 1,
-                title: "Professional Web Development",
-                description: "Transform your business with our expert web development services. Get a modern, responsive website that converts visitors into customers.",
-                image: "../assets/images/cherean.jpg",
-                pricing: {
-                    basic: "$999",
-                    standard: "$1,499",
-                    premium: "$2,499"
-                },
-                features: [
-                    "Responsive Design",
-                    "SEO Optimization",
-                    "Contact Form",
-                    "Social Media Integration"
-                ],
-                duration: 120000,
-                cta: "Get Started",
-                link: "../services/web-development-details.html",
-                displayHere: "../services/web-development-details.html#pricing"
-            },
-            {
                 id: 2,
                 title: "UI/UX Design Services",
                 description: "Create beautiful, user-friendly interfaces that delight your users. Our design experts will help you stand out from the competition.",
@@ -42,8 +21,30 @@ class AdSystem {
                 duration: 120000,
                 cta: "View Portfolio",
                 link: "../services/ui-ux-design-details.html",
-                displayHere: "../services/ui-ux-design-details.html#pricing"
+                displayHere: "services/ui-ux-design-details.html#pricing"
             },
+            {
+                id: 1,
+                title: "Professional Web Development",
+                description: "Transform your business with our expert web development services. Get a modern, responsive website that converts visitors into customers.",
+                image: "../../assets/images/tibu.jpg",
+                pricing: {
+                    basic: "$999",
+                    standard: "$1,499",
+                    premium: "$2,499"
+                },
+                features: [
+                    "Responsive Design",
+                    "SEO Optimization",
+                    "Contact Form",
+                    "Social Media Integration"
+                ],
+                duration: 120,
+                cta: "Get Started",
+                link: "../services/web-development-details.html",
+                displayHere: "services/web-development-details.html#pricing"
+            },
+        
             {
                 id: 3,
                 title: "Full Stack Development",
@@ -62,8 +63,8 @@ class AdSystem {
                 ],
                 duration: 120000,
                 cta: "Schedule Demo",
-                link: "../services/full-stack-development-details.html",
-                displayHere: "../services/full-stack-development-details.html#pricing"
+                link: "services/full-stack-development-details.html",
+                displayHere: "services/full-stack-development-details.html#pricing"
             }
         ];
         this.currentAdIndex = 0;
@@ -72,8 +73,12 @@ class AdSystem {
     }
 
     init() {
-        this.createModal();
-        this.showAd();
+        try {
+            this.createModal();
+            this.showAd();
+        } catch (error) {
+            console.error('Error initializing ad system:', error);
+        }
     }
 
     createModal() {
@@ -144,60 +149,80 @@ class AdSystem {
         `;
 
         document.body.insertAdjacentHTML('beforeend', modalHtml);
+        
+        // Check if Bootstrap is loaded
+        if (typeof bootstrap === 'undefined') {
+            console.error('Bootstrap is not loaded. Ads will not work properly.');
+            return;
+        }
+        
         this.adModal = new bootstrap.Modal(document.getElementById('adModal'));
     }
 
     showAd() {
-        const ad = this.ads[this.currentAdIndex];
-        const modal = document.getElementById('adModal');
-        
-        // Update content
-        modal.querySelector('.ad-image').src = ad.image;
-        modal.querySelector('.ad-title').textContent = ad.title;
-        modal.querySelector('.ad-description').textContent = ad.description;
-        
-        // Update features
-        const featuresList = modal.querySelector('.features-list ul');
-        featuresList.innerHTML = '';
-        ad.features.forEach(feature => {
-            const li = document.createElement('li');
-            li.innerHTML = `<i class="bi bi-check-circle-fill text-success me-2"></i>${feature}`;
-            featuresList.appendChild(li);
-        });
+        try {
+            const ad = this.ads[this.currentAdIndex];
+            const modal = document.getElementById('adModal');
+            
+            if (!modal) {
+                console.error('Ad modal not found');
+                return;
+            }
+            
+            // Update content
+            modal.querySelector('.ad-image').src = ad.image;
+            modal.querySelector('.ad-title').textContent = ad.title;
+            modal.querySelector('.ad-description').textContent = ad.description;
+            
+            // Update features
+            const featuresList = modal.querySelector('.features-list ul');
+            featuresList.innerHTML = '';
+            ad.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="bi bi-check-circle-fill text-success me-2"></i>${feature}`;
+                featuresList.appendChild(li);
+            });
 
-        // Update pricing
-        modal.querySelector('.price-basic').textContent = ad.pricing.basic;
-        modal.querySelector('.price-standard').textContent = ad.pricing.standard;
-        modal.querySelector('.price-premium').textContent = ad.pricing.premium;
+            // Update pricing
+            modal.querySelector('.price-basic').textContent = ad.pricing.basic;
+            modal.querySelector('.price-standard').textContent = ad.pricing.standard;
+            modal.querySelector('.price-premium').textContent = ad.pricing.premium;
 
-        // Update CTA buttons
-        const mainCta = modal.querySelector('.main-cta');
-        mainCta.textContent = ad.cta;
-        mainCta.href = ad.link;
-        
-        const displayHere = modal.querySelector('.display-here');
-        displayHere.href = ad.displayHere;
+            // Update CTA buttons
+            const mainCta = modal.querySelector('.main-cta');
+            mainCta.textContent = ad.cta;
+            mainCta.href = ad.link;
+            
+            const displayHere = modal.querySelector('.display-here');
+            displayHere.href = ad.displayHere;
 
-        // Reset and start timer
-        const progressBar = modal.querySelector('.progress-bar');
-        progressBar.style.width = '100%';
-        progressBar.style.transition = 'none';
-        void progressBar.offsetWidth; // Force reflow
-        progressBar.style.transition = `width ${ad.duration/1000}s linear`;
+            // Reset and start timer
+            const progressBar = modal.querySelector('.progress-bar');
+            progressBar.style.width = '100%';
+            progressBar.style.transition = 'none';
+            void progressBar.offsetWidth; // Force reflow
+            progressBar.style.transition = `width ${ad.duration/1000}s linear`;
 
-        this.adModal.show();
+            if (this.adModal) {
+                this.adModal.show();
+            }
 
-        // Set timer for next ad
-        this.timer = setTimeout(() => {
-            this.adModal.hide();
-            this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
-            this.showAd();
-        }, ad.duration);
+            // Set timer for next ad
+            this.timer = setTimeout(() => {
+                if (this.adModal) {
+                    this.adModal.hide();
+                }
+                this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
+                this.showAd();
+            }, ad.duration);
 
-        // Start progress bar animation
-        setTimeout(() => {
-            progressBar.style.width = '0%';
-        }, 10);
+            // Start progress bar animation
+            setTimeout(() => {
+                progressBar.style.width = '0%';
+            }, 10);
+        } catch (error) {
+            console.error('Error showing ad:', error);
+        }
     }
 
     stop() {
@@ -212,6 +237,10 @@ class AdSystem {
 
 // Initialize ad system when document is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const adSystem = new AdSystem();
-    adSystem.init();
+    try {
+        const adSystem = new AdSystem();
+        adSystem.init();
+    } catch (error) {
+        console.error('Error initializing ad system:', error);
+    }
 }); 

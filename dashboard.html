@@ -47,13 +47,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Load components
-            fetch('components/sidebar.html')
+            fetch('coordinator/components/sidebar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('sidebar-container').innerHTML = data;
                 });
 
-            fetch('components/header.html')
+            fetch('coordinator/components/header.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('header-container').innerHTML = data;
@@ -61,4 +61,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

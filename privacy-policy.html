@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Dilla University EMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        :root {
+            --primary-green: #00572d;
+            --secondary-green: #1f9345;
+            --accent-gold: #f3c300;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-light: #f4f4f4;
+            --bg-white: #ffffff;
+            --footer-dark: #1a1a1a;
+        }
+
+        .navbar {
+            background-color: var(--primary-green) !important;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-gold) !important;
+        }
+
+        .policy-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            opacity: 0.1;
+        }
+
+        .policy-hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .policy-content {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+        }
+
+        .policy-section h2 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .policy-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+
+        .policy-section h3 {
+            color: var(--secondary-green);
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+
+        .policy-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .policy-section ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .policy-section ul li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .policy-highlight {
+            background-color: rgba(0, 87, 45, 0.05);
+            border-left: 4px solid var(--primary-green);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .policy-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .table-of-contents, .references, .privacy-notes, .privacy-updates {
+            background-color: var(--bg-white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Left Side - Table of Contents Styles */
+        .table-of-contents {
+            border-left: 4px solid var(--primary-green);
+            transition: all 0.3s ease;
+        }
+
+        .table-of-contents:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .table-of-contents ul li {
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .table-of-contents ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .table-of-contents ul li a:hover {
+            background-color: rgba(0, 87, 45, 0.05);
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+
+        .table-of-contents ul li a i {
+            margin-right: 10px;
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+        }
+
+        /* Right Side - References and Notes Styles */
+        .references {
+            border-left: 4px solid var(--secondary-green);
+            margin-bottom: 30px;
+        }
+
+        .references ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .references ol li {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 5px;
+        }
+
+        .references ol li::marker {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .privacy-notes {
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .note-card {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .note-card i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .note-card p {
+            margin-bottom: 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .privacy-updates {
+            border-left: 4px solid var(--secondary-green);
+        }
+
+        .update-card {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .update-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .update-card .badge {
+            margin-bottom: 8px;
+            padding: 6px 12px;
+            font-weight: 500;
+        }
+
+        .update-card p {
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .update-card small {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Section Headers */
+        .table-of-contents h3, .references h3, .privacy-notes h3, .privacy-updates h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .table-of-contents h3 i, .references h3 i, .privacy-notes h3 i, .privacy-updates h3 i {
+            color: var(--accent-gold);
+        }
+
+        /* Active State for Table of Contents */
+        .table-of-contents ul li a.active {
+            background-color: rgba(0, 87, 45, 0.1);
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .table-of-contents, .references, .privacy-notes, .privacy-updates {
+                margin-bottom: 30px;
+            }
+
+            .table-of-contents ul li a:hover {
+                transform: none;
+            }
+
+            .note-card:hover, .update-card:hover {
+                transform: none;
+            }
+        }
+
+        .sticky-top {
+            z-index: 1020;
+        }
+
+        @media (max-width: 992px) {
+            .sticky-top {
+                position: relative !important;
+                top: 0 !important;
+            }
+            
+            .col-lg-3, .col-lg-6 {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/du-logo-white.png" alt="DU Logo" class="logo">
+                <span>Dilla University</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="career.html">Career</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="policy-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Privacy Policy</h1>
+                    <p class="lead mb-4">Learn how we protect and manage your personal information in our Employee Management System.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#privacy-content" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">
+                            <i class="bi bi-shield-check me-2"></i>Read Policy
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="assets/images/privacy.svg" alt="Privacy Policy" class="img-fluid policy-hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Content -->
+    <section id="privacy-content" class="policy-content">
+        <div class="container">
+            <div class="row">
+                <!-- Left Column - Table of Contents -->
+                <div class="col-lg-3">
+                    <div class="table-of-contents sticky-top" style="top: 100px;">
+                        <h3><i class="bi bi-list-ul"></i> Table of Contents</h3>
+                        <ul>
+                            <li><a href="#introduction"><i class="bi bi-1-circle"></i> Introduction</a></li>
+                            <li><a href="#information-collection"><i class="bi bi-2-circle"></i> Information Collection</a></li>
+                            <li><a href="#information-usage"><i class="bi bi-3-circle"></i> Information Usage</a></li>
+                            <li><a href="#information-sharing"><i class="bi bi-4-circle"></i> Information Sharing</a></li>
+                            <li><a href="#data-security"><i class="bi bi-5-circle"></i> Data Security</a></li>
+                            <li><a href="#user-rights"><i class="bi bi-6-circle"></i> User Rights</a></li>
+                            <li><a href="#cookies"><i class="bi bi-7-circle"></i> Cookies</a></li>
+                            <li><a href="#children-privacy"><i class="bi bi-8-circle"></i> Children's Privacy</a></li>
+                            <li><a href="#changes-policy"><i class="bi bi-9-circle"></i> Changes to Policy</a></li>
+                            <li><a href="#contact"><i class="bi bi-10-circle"></i> Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Center Column - Main Content -->
+                <div class="col-lg-6">
+                    <div class="policy-section" id="introduction">
+                        <h2>1. Introduction</h2>
+                        <p>Welcome to the Dilla University Employee Management System ("EMS"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our EMS.</p>
+                        <div class="policy-highlight">
+                            <p>Please read this privacy policy carefully. By accessing or using the EMS, you acknowledge that you have read, understood, and agree to be bound by all the terms of this Privacy Policy.</p>
+                        </div>
+                    </div>
+
+                    <div class="policy-section" id="information-collection">
+                        <h2>2. Information Collection</h2>
+                        <h3>2.1 Personal Information</h3>
+                        <p>We collect information that you provide directly to us, including:</p>
+                        <ul>
+                            <li>Name and contact information</li>
+                            <li>Employee ID and position</li>
+                            <li>Department and supervisor information</li>
+                            <li>Attendance and leave records</li>
+                            <li>Performance evaluation data</li>
+                            <li>Training and certification records</li>
+                        </ul>
+
+                        <h3>2.2 Automatically Collected Information</h3>
+                        <p>When you use the EMS, we automatically collect:</p>
+                        <ul>
+                            <li>Device information</li>
+                            <li>Log data</li>
+                            <li>Usage information</li>
+                            <li>Location data (when enabled)</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="information-usage">
+                        <h2>3. Information Usage</h2>
+                        <p>We use the collected information for:</p>
+                        <ul>
+                            <li>Managing employee records</li>
+                            <li>Processing attendance and leave requests</li>
+                            <li>Conducting performance evaluations</li>
+                            <li>Generating reports and analytics</li>
+                            <li>Improving the EMS functionality</li>
+                            <li>Ensuring system security</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="information-sharing">
+                        <h2>4. Information Sharing</h2>
+                        <p>We may share your information with:</p>
+                        <ul>
+                            <li>University administrators</li>
+                            <li>Department supervisors</li>
+                            <li>HR personnel</li>
+                            <li>Service providers</li>
+                            <li>Legal authorities when required</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="data-security">
+                        <h2>5. Data Security</h2>
+                        <p>We implement appropriate security measures to protect your information:</p>
+                        <ul>
+                            <li>Encryption of sensitive data</li>
+                            <li>Regular security audits</li>
+                            <li>Access controls and authentication</li>
+                            <li>Secure data storage</li>
+                            <li>Regular backups</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="user-rights">
+                        <h2>6. User Rights</h2>
+                        <p>You have the right to:</p>
+                        <ul>
+                            <li>Access your personal information</li>
+                            <li>Correct inaccurate data</li>
+                            <li>Request data deletion</li>
+                            <li>Opt-out of certain data collection</li>
+                            <li>Export your data</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="cookies">
+                        <h2>7. Cookies</h2>
+                        <p>We use cookies to:</p>
+                        <ul>
+                            <li>Maintain your session</li>
+                            <li>Remember your preferences</li>
+                            <li>Analyze system usage</li>
+                            <li>Improve system performance</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="children-privacy">
+                        <h2>8. Children's Privacy</h2>
+                        <p>The EMS is not intended for use by individuals under the age of 18. We do not knowingly collect personal information from children.</p>
+                    </div>
+
+                    <div class="policy-section" id="changes-policy">
+                        <h2>9. Changes to Policy</h2>
+                        <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+                    </div>
+
+                    <div class="contact-info" id="contact">
+                        <h3>Contact Us</h3>
+                        <p><i class="bi bi-envelope-fill"></i> privacy@dillauniversity.edu.et</p>
+                        <p><i class="bi bi-telephone-fill"></i> +251 XX XXX XXXX</p>
+                        <p><i class="bi bi-geo-alt-fill"></i> Dilla University, Dilla, Ethiopia</p>
+                        <p><i class="bi bi-clock-fill"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+
+                <!-- Right Column - References and Notes -->
+                <div class="col-lg-3">
+                    <div class="references sticky-top" style="top: 100px;">
+                        <h3>References</h3>
+                        <ol>
+                            <li>Ethiopian Data Protection Proclamation No. 1185/2020</li>
+                            <li>Ethiopian Computer Crime Proclamation No. 958/2016</li>
+                            <li>Ethiopian Electronic Transaction Proclamation No. 794/2013</li>
+                            <li>Dilla University Data Management Guidelines, 2022</li>
+                            <li>Dilla University ICT Policy, 2021</li>
+                        </ol>
+                    </div>
+
+                    <div class="privacy-notes mt-4">
+                        <h3>Important Notes</h3>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-shield-lock text-primary"></i>
+                            <p>All data is encrypted using industry-standard protocols.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-person-check text-success"></i>
+                            <p>Two-factor authentication is required for sensitive operations.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-clock-history text-warning"></i>
+                            <p>Data is backed up daily and stored securely.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-file-earmark-lock text-info"></i>
+                            <p>Access logs are maintained for security purposes.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-exclamation-triangle text-danger"></i>
+                            <p>Report any privacy concerns immediately to IT security.</p>
+                        </div>
+                    </div>
+
+                    <div class="privacy-updates mt-4">
+                        <h3>Recent Updates</h3>
+                        <div class="update-card mb-3">
+                            <span class="badge bg-success">New</span>
+                            <p>Enhanced data encryption protocols</p>
+                            <small class="text-muted">1 week ago</small>
+                        </div>
+                        <div class="update-card mb-3">
+                            <span class="badge bg-info">Update</span>
+                            <p>New privacy controls for managers</p>
+                            <small class="text-muted">2 weeks ago</small>
+                        </div>
+                        <div class="update-card mb-3">
+                            <span class="badge bg-warning">Maintenance</span>
+                            <p>Security audit completed</p>
+                            <small class="text-muted">1 month ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-brand">
+                        <img src="assets/images/du-logo-white.png" alt="DU Logo" class="footer-logo mb-3">
+                        <h5 class="text-white mb-3">Dilla University</h5>
+                        <p class="text-light mb-4">Empowering education through technology and innovation. Our employee management system streamlines administrative processes for better efficiency.</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="career.html">Career</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="#features">Features</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Features</h5>
+                    <ul class="footer-links">
+                        <li><a href="#features">Mobile Attendance</a></li>
+                        <li><a href="#features">Smart Scheduling</a></li>
+                        <li><a href="#features">Performance Analytics</a></li>
+                        <li><a href="#features">Leave Management</a></li>
+                        <li><a href="#features">Real-time Reports</a></li>
+                        <li><a href="#features">Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-3">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope-fill me-2"></i>support@dillauniversity.edu.et</li>
+                        <li><i class="bi bi-telephone-fill me-2"></i>+251 XX XXX XXXX</li>
+                        <li><i class="bi bi-geo-alt-fill me-2"></i>Dilla, Ethiopia</li>
+                        <li><i class="bi bi-clock-fill me-2"></i>Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                    <div class="newsletter-form mt-4">
+                        <h6 class="text-white mb-2">Subscribe to Newsletter</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+                            <button class="btn btn-warning" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider my-4">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0 text-light">&copy; 2024 Dilla University. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="footer-legal">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/index.js"></script>
+</body>
+</html> 

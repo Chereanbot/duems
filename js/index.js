@@ -12,6 +12,118 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize mountain animations
     initMountainEffects();
+    
+    // Initialize notification preferences
+    initNotificationPreferences();
+    
+    // Testimonials Slider
+    const testimonialTrack = document.querySelector('.testimonial-track');
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const prevButton = document.querySelector('.testimonial-prev');
+    const nextButton = document.querySelector('.testimonial-next');
+    const dots = document.querySelectorAll('.testimonial-dots .dot');
+    
+    let currentIndex = 0;
+    const cardWidth = 100 / 3; // 33.333% for each card
+    const totalCards = testimonialCards.length;
+    
+    // Function to update the slider position
+    function updateSlider() {
+        testimonialTrack.style.transform = `translateX(-${currentIndex * cardWidth}%)`;
+        
+        // Update active dot
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    // Next button click
+    nextButton.addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % totalCards;
+        updateSlider();
+    });
+    
+    // Previous button click
+    prevButton.addEventListener('click', function() {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        updateSlider();
+    });
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            currentIndex = index;
+            updateSlider();
+        });
+    });
+    
+    // Auto slide every 5 seconds
+    setInterval(function() {
+        currentIndex = (currentIndex + 1) % totalCards;
+        updateSlider();
+    }, 5000);
+    
+    // Add hover pause functionality
+    testimonialTrack.addEventListener('mouseenter', function() {
+        clearInterval(autoSlideInterval);
+    });
+    
+    testimonialTrack.addEventListener('mouseleave', function() {
+        autoSlideInterval = setInterval(function() {
+            currentIndex = (currentIndex + 1) % totalCards;
+            updateSlider();
+        }, 5000);
+    });
+    
+    // Initialize the slider
+    updateSlider();
+    
+    // Add animation to testimonial cards
+    testimonialCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('animate-fadeInUp');
+    });
+    
+    // Add animation to stats
+    const statItems = document.querySelectorAll('.testimonial-stats .stat-item');
+    statItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.2}s`;
+        item.classList.add('animate-fadeInUp');
+    });
+
+    // Testimonial Filter System
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            const category = button.getAttribute('data-filter');
+
+            testimonialCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
 });
 
 // Initialize animations
@@ -215,6 +327,137 @@ document.addEventListener('DOMContentLoaded', () => {
             nextSlide();
         } else if (touchEndX > touchStartX + swipeThreshold) {
             prevSlide();
+        }
+    }
+});
+
+// Notification Preferences
+function initNotificationPreferences() {
+    const notificationCheckboxes = document.querySelectorAll('.notification-preferences input[type="checkbox"]');
+    
+    notificationCheckboxes.forEach(checkbox => {
+        // Load saved preferences from localStorage
+        const savedPreference = localStorage.getItem(checkbox.id);
+        if (savedPreference !== null) {
+            checkbox.checked = savedPreference === 'true';
+        }
+        
+        // Save preferences when changed
+        checkbox.addEventListener('change', function() {
+            localStorage.setItem(this.id, this.checked);
+            showNotificationPreferenceUpdate(this.id, this.checked);
+        });
+    });
+}
+
+function showNotificationPreferenceUpdate(preferenceId, isEnabled) {
+    const preferenceName = preferenceId.replace('Notifications', '');
+    const status = isEnabled ? 'enabled' : 'disabled';
+    
+    // Create a temporary notification
+    const notification = document.createElement('div');
+    notification.className = 'notification-toast';
+    notification.innerHTML = `
+        <div class="notification-toast-content">
+            <i class="bi bi-${isEnabled ? 'check-circle' : 'x-circle'}"></i>
+            <span>${preferenceName} notifications ${status}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Show the notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Remove the notification after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Testimonial Video Modal
+const testimonialVideoModal = document.getElementById('testimonialVideoModal');
+const testimonialVideo = document.getElementById('testimonialVideo');
+const videoPreviewButtons = document.querySelectorAll('.video-preview-btn');
+
+videoPreviewButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const videoUrl = button.getAttribute('data-video');
+        testimonialVideo.src = videoUrl;
+        testimonialVideoModal.classList.add('show');
+        testimonialVideoModal.style.display = 'block';
+    });
+});
+
+// Close modal when clicking the close button or outside the modal
+document.querySelector('.btn-close').addEventListener('click', () => {
+    closeVideoModal();
+});
+
+testimonialVideoModal.addEventListener('click', (e) => {
+    if (e.target === testimonialVideoModal) {
+        closeVideoModal();
+    }
+});
+
+function closeVideoModal() {
+    testimonialVideoModal.classList.remove('show');
+    testimonialVideoModal.style.display = 'none';
+    testimonialVideo.pause();
+    testimonialVideo.src = '';
+}
+
+// Initialize Chart.js for the comparison chart
+const ctx = document.getElementById('satisfactionChart').getContext('2d');
+const satisfactionChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Before Implementation', 'After Implementation'],
+        datasets: [{
+            label: 'User Satisfaction Rate',
+            data: [65, 92],
+            backgroundColor: [
+                'rgba(0, 87, 45, 0.2)',
+                'rgba(0, 87, 45, 0.8)'
+            ],
+            borderColor: [
+                'rgba(0, 87, 45, 1)',
+                'rgba(0, 87, 45, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                    callback: function(value) {
+                        return value + '%';
+                    }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.raw + '% Satisfaction';
+                    }
+                }
+            }
         }
     }
 }); 

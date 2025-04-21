@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Dilla University EMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        :root {
+            --primary-green: #00572d;
+            --secondary-green: #1f9345;
+            --accent-gold: #f3c300;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-light: #f4f4f4;
+            --bg-white: #ffffff;
+            --footer-dark: #1a1a1a;
+        }
+
+        .policy-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            opacity: 0.1;
+        }
+
+        .policy-hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .policy-content {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+
+        .policy-section {
+            margin-bottom: 40px;
+        }
+
+        .policy-section h2 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .policy-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+
+        .policy-section h3 {
+            color: var(--secondary-green);
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+
+        .policy-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .policy-section ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .policy-section ul li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .policy-highlight {
+            background-color: rgba(0, 87, 45, 0.05);
+            border-left: 4px solid var(--primary-green);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .policy-highlight p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        .policy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .policy-table th, .policy-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .policy-table th {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .policy-table tr:nth-child(even) {
+            background-color: rgba(0, 87, 45, 0.05);
+        }
+
+        .policy-table tr:hover {
+            background-color: rgba(0, 87, 45, 0.1);
+        }
+
+        .contact-info {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            color: var(--accent-gold);
+            margin-right: 10px;
+        }
+
+        .references {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .references h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .references ol {
+            padding-left: 20px;
+        }
+
+        .references ol li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-gold) !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .table-of-contents {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .table-of-contents h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .table-of-contents ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .table-of-contents ul li {
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .table-of-contents ul li a:hover {
+            color: var(--primary-green);
+            padding-left: 5px;
+        }
+
+        .table-of-contents ul li a i {
+            margin-right: 8px;
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 768px) {
+            .policy-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .policy-content {
+                padding: 40px 0;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .navbar-brand img {
+                height: 30px;
+            }
+        }
+
+        .note-card {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .note-card i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .note-card p {
+            margin-bottom: 0;
+            color: var(--text-secondary);
+        }
+
+        .update-card {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .update-card .badge {
+            margin-bottom: 8px;
+        }
+
+        .update-card p {
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+        }
+
+        .update-card small {
+            color: var(--text-secondary);
+        }
+
+        .sticky-top {
+            z-index: 1020;
+        }
+
+        @media (max-width: 992px) {
+            .sticky-top {
+                position: relative !important;
+                top: 0 !important;
+            }
+            
+            .col-lg-3, .col-lg-6 {
+                margin-bottom: 30px;
+            }
+        }
+
+        .table-of-contents, .references, .ems-notes, .ems-updates {
+            background-color: var(--bg-white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .ems-notes h3, .ems-updates h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--primary-green);">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/du-logo-white.png" alt="DU Logo" class="logo">
+                <span>Dilla University</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="career.html">Career</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="policy-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Terms of Service</h1>
+                    <p class="lead mb-4">Please read these terms carefully before using our Employee Management System.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#terms-content" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">
+                            <i class="bi bi-file-text me-2"></i>Read Terms
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="assets/images/terms.svg" alt="Terms of Service" class="img-fluid policy-hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms Content -->
+    <section id="terms-content" class="policy-content">
+        <div class="container">
+            <div class="row">
+                <!-- Left Column - Table of Contents -->
+                <div class="col-lg-3">
+                    <div class="table-of-contents sticky-top" style="top: 100px;">
+                        <h3><i class="bi bi-list-ul"></i> Table of Contents</h3>
+                        <ul>
+                            <li><a href="#introduction"><i class="bi bi-1-circle"></i> Introduction</a></li>
+                            <li><a href="#definitions"><i class="bi bi-2-circle"></i> Definitions</a></li>
+                            <li><a href="#access-use"><i class="bi bi-3-circle"></i> Access and Use</a></li>
+                            <li><a href="#intellectual-property"><i class="bi bi-4-circle"></i> Intellectual Property</a></li>
+                            <li><a href="#user-content"><i class="bi bi-5-circle"></i> User Content</a></li>
+                            <li><a href="#disclaimer"><i class="bi bi-6-circle"></i> Disclaimer of Warranties</a></li>
+                            <li><a href="#limitation-liability"><i class="bi bi-7-circle"></i> Limitation of Liability</a></li>
+                            <li><a href="#indemnification"><i class="bi bi-8-circle"></i> Indemnification</a></li>
+                            <li><a href="#governing-law"><i class="bi bi-9-circle"></i> Governing Law</a></li>
+                            <li><a href="#changes-terms"><i class="bi bi-10-circle"></i> Changes to Terms</a></li>
+                            <li><a href="#severability"><i class="bi bi-11-circle"></i> Severability</a></li>
+                            <li><a href="#entire-agreement"><i class="bi bi-12-circle"></i> Entire Agreement</a></li>
+                            <li><a href="#termination"><i class="bi bi-13-circle"></i> Termination</a></li>
+                            <li><a href="#dispute-resolution"><i class="bi bi-14-circle"></i> Dispute Resolution</a></li>
+                            <li><a href="#ems-specific"><i class="bi bi-15-circle"></i> EMS Specific Terms</a></li>
+                            <li><a href="#contact"><i class="bi bi-16-circle"></i> Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Center Column - Main Content -->
+                <div class="col-lg-6">
+                    <div class="policy-section" id="introduction">
+                        <h2>1. Introduction</h2>
+                        <p>Welcome to the Dilla University Employee Management System ("EMS"). These Terms of Service ("Terms") govern your access to and use of the EMS, including any content, functionality, and services offered through the EMS.</p>
+                        <p>By accessing or using the EMS, you agree to be bound by these Terms. If you do not agree to these Terms, you must not access or use the EMS.</p>
+                        <div class="policy-highlight">
+                            <p>These Terms constitute a legally binding agreement between you and Dilla University regarding your use of the EMS.</p>
+                        </div>
+                    </div>
+
+                    <div class="policy-section" id="definitions">
+                        <h2>2. Definitions</h2>
+                        <p>For the purposes of these Terms, the following terms shall have the meanings set forth below:</p>
+                        <ul>
+                            <li><strong>"EMS"</strong> refers to the Dilla University Employee Management System, including all its features, content, and services.</li>
+                            <li><strong>"User"</strong> refers to any individual who accesses or uses the EMS, including employees, administrators, and other authorized personnel.</li>
+                            <li><strong>"Content"</strong> refers to all information, data, text, software, graphics, messages, and other materials that are displayed, available, or otherwise accessible through the EMS.</li>
+                            <li><strong>"Services"</strong> refers to the features and functionality provided through the EMS, including but not limited to attendance tracking, leave management, performance evaluation, and reporting.</li>
+                            <li><strong>"Account"</strong> refers to the personalized access credentials and profile associated with a User.</li>
+                            <li><strong>"Confidential Information"</strong> refers to any non-public information that is proprietary to Dilla University or its users.</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="access-use">
+                        <h2>3. Access and Use</h2>
+                        <h3>3.1 Eligibility</h3>
+                        <p>To access and use the EMS, you must be an authorized employee, administrator, or other authorized personnel of Dilla University. You must have valid login credentials provided by Dilla University.</p>
+                        
+                        <h3>3.2 Account Security</h3>
+                        <p>You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. You agree to notify Dilla University immediately of any unauthorized use of your account or any other breach of security.</p>
+                        
+                        <h3>3.3 Acceptable Use</h3>
+                        <p>You agree to use the EMS only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+                        <ul>
+                            <li>Use the EMS in any way that violates any applicable law or regulation.</li>
+                            <li>Use the EMS for any purpose other than those for which it is intended.</li>
+                            <li>Attempt to gain unauthorized access to, interfere with, damage, or disrupt any parts of the EMS.</li>
+                            <li>Use the EMS to transmit any material that is defamatory, obscene, or otherwise objectionable.</li>
+                            <li>Use the EMS to impersonate or attempt to impersonate Dilla University, a Dilla University employee, or another user.</li>
+                            <li>Engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the EMS.</li>
+                            <li>Use automated scripts, bots, or other automated methods to access or interact with the EMS.</li>
+                            <li>Attempt to reverse engineer, decompile, or otherwise attempt to extract the source code of the EMS.</li>
+                        </ul>
+
+                        <h3>3.4 Account Termination</h3>
+                        <p>Dilla University reserves the right to suspend or terminate your account at any time, with or without cause, and with or without notice. Upon termination, your right to use the EMS will immediately cease.</p>
+                    </div>
+
+                    <div class="policy-section" id="intellectual-property">
+                        <h2>4. Intellectual Property</h2>
+                        <p>The EMS and all of its content, features, and functionality are owned by Dilla University and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
+                        <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on the EMS, except as follows:</p>
+                        <ul>
+                            <li>Your computer may temporarily store copies of such materials in RAM incidental to your accessing and viewing those materials.</li>
+                            <li>You may store files that are automatically cached by your web browser for display enhancement purposes.</li>
+                            <li>You may print or download one copy of a reasonable number of pages of the EMS for your own personal, non-commercial use and not for further reproduction, publication, or distribution.</li>
+                        </ul>
+                        <p>If you print, copy, modify, download, or otherwise use or provide any other person with access to any part of the EMS in breach of these Terms, your right to use the EMS will stop immediately and you must, at our option, return or destroy any copies of the materials you have made.</p>
+                        
+                        <h3>4.1 Trademarks</h3>
+                        <p>The Dilla University name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of Dilla University or its affiliates or licensors. You must not use such marks without the prior written permission of Dilla University.</p>
+                    </div>
+
+                    <div class="policy-section" id="user-content">
+                        <h2>5. User Content</h2>
+                        <p>The EMS may allow you to post, submit, publish, display, or transmit content, such as comments, feedback, suggestions, and other materials ("User Content"). By providing User Content, you grant Dilla University a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such User Content in all media formats and channels now known or hereafter developed.</p>
+                        <p>You represent and warrant that:</p>
+                        <ul>
+                            <li>You own or control all rights in and to the User Content and have the right to grant the license granted above to Dilla University.</li>
+                            <li>All of your User Content does and will comply with these Terms.</li>
+                            <li>Your User Content does not infringe upon the intellectual property rights, privacy rights, publicity rights, or other legal rights of any third party.</li>
+                        </ul>
+                        <p>Dilla University has the right to remove any User Content that, in its sole discretion, violates these Terms or is otherwise objectionable.</p>
+                        
+                        <h3>5.1 Content Standards</h3>
+                        <p>User Content must not:</p>
+                        <ul>
+                            <li>Contain any material that is defamatory, obscene, indecent, abusive, offensive, harassing, violent, hateful, inflammatory, or otherwise objectionable.</li>
+                            <li>Promote sexually explicit or pornographic material, violence, or discrimination based on race, sex, religion, nationality, disability, sexual orientation, or age.</li>
+                            <li>Infringe any patent, trademark, trade secret, copyright, or other intellectual property or other rights of any other person.</li>
+                            <li>Violate the legal rights (including the rights of publicity and privacy) of others or contain any material that could give rise to any civil or criminal liability under applicable laws or regulations.</li>
+                            <li>Be likely to deceive any person.</li>
+                            <li>Promote any illegal activity, or advocate, promote, or assist any unlawful act.</li>
+                            <li>Cause annoyance, inconvenience, or needless anxiety or be likely to upset, embarrass, alarm, or annoy any other person.</li>
+                            <li>Impersonate any person, or misrepresent your identity or affiliation with any person or organization.</li>
+                            <li>Involve commercial activities or sales, such as contests, sweepstakes, and other sales promotions, barter, or advertising.</li>
+                            <li>Give the impression that they emanate from or are endorsed by Dilla University or any other person or entity.</li>
+                        </ul>
+                    </div>
+
+                    <div class="policy-section" id="disclaimer">
+                        <h2>6. Disclaimer of Warranties</h2>
+                        <p>THE EMS IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, DILLA UNIVERSITY DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+                        <p>Dilla University does not warrant that the EMS will be uninterrupted, timely, secure, or error-free, that defects will be corrected, or that the EMS or the servers that make it available are free of viruses or other harmful components.</p>
+                        <p>Dilla University makes no warranties or representations about the accuracy, reliability, timeliness, or completeness of the content provided through the EMS or the content of any sites linked to the EMS.</p>
+                    </div>
+
+                    <div class="policy-section" id="limitation-liability">
+                        <h2>7. Limitation of Liability</h2>
+                        <p>TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL DILLA UNIVERSITY, ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS, OFFICERS, OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND, UNDER ANY LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH YOUR USE, OR INABILITY TO USE, THE EMS, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO, PERSONAL INJURY, PAIN AND SUFFERING, EMOTIONAL DISTRESS, LOSS OF REVENUE, LOSS OF PROFITS, LOSS OF BUSINESS OR ANTICIPATED SAVINGS, LOSS OF USE, LOSS OF GOODWILL, LOSS OF DATA, AND WHETHER CAUSED BY TORT (INCLUDING NEGLIGENCE), BREACH OF CONTRACT OR OTHERWISE, EVEN IF FORESEEABLE.</p>
+                        <p>The foregoing does not affect any liability that cannot be excluded or limited under applicable law.</p>
+                    </div>
+
+                    <div class="policy-section" id="indemnification">
+                        <h2>8. Indemnification</h2>
+                        <p>You agree to defend, indemnify, and hold harmless Dilla University, its affiliates, licensors, and service providers, and its and their respective officers, directors, employees, contractors, agents, licensors, suppliers, and representatives from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the EMS.</p>
+                    </div>
+
+                    <div class="policy-section" id="governing-law">
+                        <h2>9. Governing Law</h2>
+                        <p>These Terms and any dispute or claim arising out of or in connection with them or their subject matter or formation shall be governed by and construed in accordance with the laws of Ethiopia, without giving effect to any choice or conflict of law provision or rule.</p>
+                        <p>Any legal suit, action, or proceeding arising out of or related to these Terms or the EMS shall be instituted exclusively in the courts of Ethiopia. You agree to waive any and all objections to the exercise of jurisdiction over you by such courts and to venue in such courts.</p>
+                    </div>
+
+                    <div class="policy-section" id="changes-terms">
+                        <h2>10. Changes to Terms</h2>
+                        <p>Dilla University may revise and update these Terms from time to time in its sole discretion. All changes are effective immediately when posted and apply to all access to and use of the EMS thereafter.</p>
+                        <p>Your continued use of the EMS following the posting of revised Terms means that you accept and agree to the changes. You are expected to check this page frequently so you are aware of any changes, as they are binding on you.</p>
+                    </div>
+
+                    <div class="policy-section" id="severability">
+                        <h2>11. Severability</h2>
+                        <p>If any provision of these Terms is held by a court or other tribunal of competent jurisdiction to be invalid, illegal, or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of the Terms will continue in full force and effect.</p>
+                    </div>
+
+                    <div class="policy-section" id="entire-agreement">
+                        <h2>12. Entire Agreement</h2>
+                        <p>The Terms and our Privacy Policy constitute the sole and entire agreement between you and Dilla University regarding the EMS and supersede all prior and contemporaneous understandings, agreements, representations, and warranties, both written and oral, regarding the EMS.</p>
+                    </div>
+
+                    <div class="policy-section" id="termination">
+                        <h2>13. Termination</h2>
+                        <p>We may terminate or suspend your access to the EMS immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms.</p>
+                        <p>Upon termination, your right to use the EMS will immediately cease. If you wish to terminate your account, you may simply discontinue using the EMS or contact us to request account deletion.</p>
+                        <p>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+                    </div>
+
+                    <div class="policy-section" id="dispute-resolution">
+                        <h2>14. Dispute Resolution</h2>
+                        <p>Any dispute arising from or relating to the subject matter of these Terms shall be finally settled in the courts of Ethiopia, but we encourage you to contact us first to try to resolve any dispute amicably.</p>
+                        <p>You agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated, or representative action.</p>
+                        <h3>14.1 Informal Dispute Resolution</h3>
+                        <p>Before filing a claim against Dilla University, you agree to try to resolve the dispute informally by contacting us at legal@dillauniversity.edu.et. We'll try to resolve the dispute informally by contacting you via email.</p>
+                        <h3>14.2 Arbitration</h3>
+                        <p>If we cannot resolve the dispute informally, you and Dilla University agree to resolve any claims related to these Terms through final and binding arbitration, except as set forth under "Exceptions to Agreement to Arbitrate" below.</p>
+                        <p>The arbitration will be conducted by the Ethiopian Arbitration and Conciliation Center (EACC) under its rules. The arbitration will be conducted in English, and the seat of arbitration will be Addis Ababa, Ethiopia.</p>
+                    </div>
+
+                    <!-- New EMS Specific Section -->
+                    <div class="policy-section" id="ems-specific">
+                        <h2>15. EMS Specific Terms</h2>
+                        
+                        <h3>15.1 Attendance Management</h3>
+                        <p>Users must comply with the following attendance-related terms:</p>
+                        <ul>
+                            <li>Clock in/out times must be accurate and reflect actual working hours</li>
+                            <li>Location-based attendance requires GPS permissions</li>
+                            <li>Biometric data will be collected and stored securely</li>
+                            <li>Attendance reports must not be falsified</li>
+                        </ul>
+
+                        <h3>15.2 Leave Management</h3>
+                        <p>Regarding leave requests and approvals:</p>
+                        <ul>
+                            <li>Leave requests must be submitted at least 48 hours in advance</li>
+                            <li>Emergency leave requires immediate notification</li>
+                            <li>Leave balance tracking is automated and final</li>
+                            <li>Documentation may be required for extended leave</li>
+                        </ul>
+
+                        <h3>15.3 Performance Evaluation</h3>
+                        <p>Performance tracking and evaluation terms:</p>
+                        <ul>
+                            <li>KPI data must be accurate and verifiable</li>
+                            <li>Peer reviews are confidential</li>
+                            <li>Performance metrics are standardized</li>
+                            <li>Appeals must be submitted within 7 days</li>
+                        </ul>
+
+                        <h3>15.4 Data Privacy</h3>
+                        <p>Specific to EMS data handling:</p>
+                        <ul>
+                            <li>Personal information is encrypted</li>
+                            <li>Access logs are maintained</li>
+                            <li>Data retention follows university policy</li>
+                            <li>Export restrictions apply to sensitive data</li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-info" id="contact">
+                        <h3>Contact Us</h3>
+                        <p><i class="bi bi-envelope-fill"></i> legal@dillauniversity.edu.et</p>
+                        <p><i class="bi bi-telephone-fill"></i> +251 XX XXX XXXX</p>
+                        <p><i class="bi bi-geo-alt-fill"></i> Dilla University, Dilla, Ethiopia</p>
+                        <p><i class="bi bi-clock-fill"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+
+                <!-- Right Column - References and Notes -->
+                <div class="col-lg-3">
+                    <div class="references sticky-top" style="top: 100px;">
+                        <h3>References</h3>
+                        <ol>
+                            <li>Ethiopian Civil Code, Proclamation No. 165/1960</li>
+                            <li>Ethiopian Commercial Code, Proclamation No. 166/1960</li>
+                            <li>Ethiopian Labor Proclamation No. 1156/2019</li>
+                            <li>Ethiopian Electronic Transaction Proclamation No. 794/2013</li>
+                            <li>Ethiopian Computer Crime Proclamation No. 958/2016</li>
+                            <li>Ethiopian Data Protection Proclamation No. 1185/2020</li>
+                            <li>Ethiopian Higher Education Proclamation No. 1152/2019</li>
+                            <li>Dilla University Senate Legislation, 2020</li>
+                            <li>Dilla University ICT Policy, 2021</li>
+                            <li>Dilla University Data Management Guidelines, 2022</li>
+                        </ol>
+                    </div>
+
+                    <div class="ems-notes mt-4">
+                        <h3>Important Notes</h3>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-info-circle-fill text-primary"></i>
+                            <p>All employees must complete EMS training before access is granted.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-shield-check text-success"></i>
+                            <p>Two-factor authentication is mandatory for all users.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-clock-history text-warning"></i>
+                            <p>System maintenance occurs every Sunday 2-4 AM.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-file-earmark-text text-info"></i>
+                            <p>Monthly reports are automatically generated on the 1st.</p>
+                        </div>
+                        <div class="note-card mb-3">
+                            <i class="bi bi-exclamation-triangle text-danger"></i>
+                            <p>Failed login attempts will trigger account lockout.</p>
+                        </div>
+                    </div>
+
+                    <div class="ems-updates mt-4">
+                        <h3>Recent Updates</h3>
+                        <div class="update-card mb-3">
+                            <span class="badge bg-success">New</span>
+                            <p>Mobile app version 2.1 released</p>
+                            <small class="text-muted">2 days ago</small>
+                        </div>
+                        <div class="update-card mb-3">
+                            <span class="badge bg-info">Update</span>
+                            <p>New leave request workflow</p>
+                            <small class="text-muted">1 week ago</small>
+                        </div>
+                        <div class="update-card mb-3">
+                            <span class="badge bg-warning">Maintenance</span>
+                            <p>Scheduled system upgrade</p>
+                            <small class="text-muted">2 weeks ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-brand">
+                        <img src="assets/images/du-logo-white.png" alt="DU Logo" class="footer-logo mb-3">
+                        <h5 class="text-white mb-3">Dilla University</h5>
+                        <p class="text-light mb-4">Empowering education through technology and innovation. Our employee management system streamlines administrative processes for better efficiency.</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="career.html">Career</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="#features">Features</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Features</h5>
+                    <ul class="footer-links">
+                        <li><a href="#features">Mobile Attendance</a></li>
+                        <li><a href="#features">Smart Scheduling</a></li>
+                        <li><a href="#features">Performance Analytics</a></li>
+                        <li><a href="#features">Leave Management</a></li>
+                        <li><a href="#features">Real-time Reports</a></li>
+                        <li><a href="#features">Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-3">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope-fill me-2"></i>support@dillauniversity.edu.et</li>
+                        <li><i class="bi bi-telephone-fill me-2"></i>+251 XX XXX XXXX</li>
+                        <li><i class="bi bi-geo-alt-fill me-2"></i>Dilla, Ethiopia</li>
+                        <li><i class="bi bi-clock-fill me-2"></i>Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                    <div class="newsletter-form mt-4">
+                        <h6 class="text-white mb-2">Subscribe to Newsletter</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+                            <button class="btn btn-warning" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider my-4">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0 text-light">&copy; 2024 Dilla University. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="footer-legal">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/index.js"></script>
+</body>
+</html> 

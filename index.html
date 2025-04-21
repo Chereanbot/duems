@@ -183,76 +183,7 @@
     </style>
 </head>
 <body>
-    <!-- Fixed Notification Panel -->
-    <div class="notification-panel">
-        <div class="notification-header">
-            <h5>Notifications</h5>
-            <button class="notification-close" onclick="toggleNotificationPanel()">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-        <div class="notification-list">
-            <div class="notification-item unread">
-                <div class="notification-icon">
-                    <img src="assets/images/schedule.svg" alt="Schedule" class="notification-svg">
-                </div>
-                <div class="notification-content">
-                    <p class="notification-title">New Schedule Update</p>
-                    <p class="notification-text">Your shift for tomorrow has been updated</p>
-                    <span class="notification-time">2 minutes ago</span>
-                </div>
-            </div>
-            <div class="notification-item unread">
-                <div class="notification-icon">
-                    <img src="assets/images/notifications/attendance.svg" alt="Attendance" class="notification-svg">
-                </div>
-                <div class="notification-content">
-                    <p class="notification-title">Attendance Reminder</p>
-                    <p class="notification-text">Don't forget to mark your attendance</p>
-                    <span class="notification-time">15 minutes ago</span>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <img src="assets/images/notifications/team.svg" alt="Team" class="notification-svg">
-                </div>
-                <div class="notification-content">
-                    <p class="notification-title">Team Update</p>
-                    <p class="notification-text">New team member joined your department</p>
-                    <span class="notification-time">1 hour ago</span>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <img src="assets/images/notifications/leave.svg" alt="Leave" class="notification-svg">
-                </div>
-                <div class="notification-content">
-                    <p class="notification-title">Leave Request</p>
-                    <p class="notification-text">Your leave request has been approved</p>
-                    <span class="notification-time">2 hours ago</span>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <img src="assets/images/notifications/performance.svg" alt="Performance" class="notification-svg">
-                </div>
-                <div class="notification-content">
-                    <p class="notification-title">Performance Review</p>
-                    <p class="notification-text">New performance review available</p>
-                    <span class="notification-time">3 hours ago</span>
-                </div>
-            </div>
-        </div>
-        <div class="notification-footer">
-            <a href="#" class="view-all">View All Notifications</a>
-        </div>
-    </div>
-
-    <!-- Notification Toggle Button -->
-    <button class="notification-toggle" onclick="toggleNotificationPanel()">
-        <img src="assets/images/notifications/bell.svg" alt="Notifications" class="notification-bell">
-        <span class="notification-badge">2</span>
-    </button>
+  
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--primary-green);">
@@ -261,7 +192,7 @@
                 <img src="assets/images/du-logo-white.png" alt="DU Logo" class="logo">
                 <span>Dilla University</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -275,12 +206,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="career.html">Career</a>
                     </li>
-                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a class="nav-link btn btn-outline-light ms-2" href="login.html">Login</a>
                     </li>
                 </ul>
             </div>
@@ -412,6 +345,102 @@
         </div>
     </section>
 
+    <!-- Notifications Section -->
+    <section class="section notifications-section py-5">
+        <div class="mountain-background"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="text-center mb-5">Real-time Notifications</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="notification-card">
+                                <div class="notification-icon">
+                                    <img src="assets/images/notifications/attendance.svg" alt="Attendance" class="notification-svg">
+                                </div>
+                                <h4>Attendance Updates</h4>
+                                <p>Get instant notifications about attendance status and reminders</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="notification-card">
+                                <div class="notification-icon">
+                                    <img src="assets/images/notifications/leave.svg" alt="Leave" class="notification-svg">
+                                </div>
+                                <h4>Leave Requests</h4>
+                                <p>Stay informed about leave request approvals and updates</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="notification-card">
+                                <div class="notification-icon">
+                                    <img src="assets/images/notifications/performance.svg" alt="Performance" class="notification-svg">
+                                </div>
+                                <h4>Performance Reviews</h4>
+                                <p>Receive notifications about performance evaluations and feedback</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="notification-card">
+                                <div class="notification-icon">
+                                    <img src="assets/images/notifications/schedule.svg" alt="Schedule" class="notification-svg">
+                                </div>
+                                <h4>Schedule Updates</h4>
+                                <p>Get notified about schedule changes and shift assignments</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification-settings mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Notification Preferences</h5>
+                                <div class="notification-preferences">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="desktopNotifications" checked>
+                                        <label class="form-check-label" for="desktopNotifications">
+                                            Desktop Notifications
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                        <label class="form-check-label" for="emailNotifications">
+                                            Email Notifications
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="mobileNotifications" checked>
+                                        <label class="form-check-label" for="mobileNotifications">
+                                            Mobile Notifications
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="notification-image-container">
+                        <img src="assets/images/notifications.svg" alt="Notifications" class="img-fluid notification-image">
+                        <div class="notification-floating-elements">
+                            <div class="floating-icon attendance-icon">
+                                <img src="assets/images/notifications/attendance.svg" alt="Attendance" class="floating-svg">
+                            </div>
+                            <div class="floating-icon leave-icon">
+                                <img src="assets/images/notifications/leave.svg" alt="Leave" class="floating-svg">
+                            </div>
+                            <div class="floating-icon performance-icon">
+                                <img src="assets/images/notifications/performance.svg" alt="Performance" class="floating-svg">
+                            </div>
+                            <div class="floating-icon schedule-icon">
+                                <img src="assets/images/notifications/schedule.svg" alt="Schedule" class="floating-svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="section py-5">
         <div class="mountain-background"></div>
@@ -535,45 +564,26 @@
         </div>
     </section>
 
-    <!-- Notifications Section -->
-    <section class="section notifications-section py-5 bg-light">
-        <div class="mountain-background"></div>
-        <div class="container">
-            <h2 class="text-center mb-5">Real-time Notifications</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="notification-card">
-                        <i class="bi bi-bell-fill notification-icon"></i>
-                        <h4>Instant Alerts</h4>
-                        <p>Get notified immediately about schedule changes and important updates</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="notification-card">
-                        <i class="bi bi-envelope-fill notification-icon"></i>
-                        <h4>Email Notifications</h4>
-                        <p>Receive detailed notifications via email for important events</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="notification-card">
-                        <i class="bi bi-chat-dots-fill notification-icon"></i>
-                        <h4>Push Notifications</h4>
-                        <p>Stay updated with push notifications on your mobile device</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Testimonials Section -->
     <section id="testimonials" class="section py-5">
         <div class="mountain-background"></div>
         <div class="container">
             <h2 class="text-center mb-5">What Our Users Say</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="testimonial-card">
+            
+            <!-- Testimonial Filter System -->
+            <div class="testimonial-filter-container text-center mb-4">
+                <div class="testimonial-filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Testimonials</button>
+                    <button class="filter-btn" data-filter="faculty">Faculty</button>
+                    <button class="filter-btn" data-filter="staff">Staff</button>
+                    <button class="filter-btn" data-filter="admin">Administration</button>
+                    <button class="filter-btn" data-filter="it">IT Department</button>
+                </div>
+            </div>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-card" data-category="it">
                         <div class="d-flex align-items-center mb-3">
                             <img src="assets/images/cherean.jpg" alt="User 1" class="testimonial-avatar">
                             <div>
@@ -581,11 +591,26 @@
                                 <p class="text-muted mb-0">Full Stack Developer</p>
                             </div>
                         </div>
+                        <div class="testimonial-rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
                         <p class="mb-0">"The system has transformed how we manage our department. It's efficient and user-friendly."</p>
+                        <div class="testimonial-features mt-3">
+                            <span class="badge bg-success me-2">Easy to Use</span>
+                            <span class="badge bg-info me-2">Responsive</span>
+                            <span class="badge bg-primary">Efficient</span>
+                        </div>
+                        <div class="testimonial-video-preview mt-3">
+                            <button class="btn btn-sm btn-outline-primary video-preview-btn" data-video="video1.mp4">
+                                <i class="bi bi-play-circle me-1"></i> Watch Video
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="testimonial-card" data-category="faculty">
                         <div class="d-flex align-items-center mb-3">
                             <img src="assets/images/profile-default.jpg" alt="User 2" class="testimonial-avatar">
                             <div>
@@ -593,76 +618,244 @@
                                 <p class="text-muted mb-0">Faculty Member</p>
                             </div>
                         </div>
+                        <div class="testimonial-rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                        </div>
                         <p class="mb-0">"Attendance tracking has never been easier. The system saves us so much time."</p>
+                        <div class="testimonial-features mt-3">
+                            <span class="badge bg-success me-2">Time-saving</span>
+                            <span class="badge bg-info me-2">Accurate</span>
+                            <span class="badge bg-primary">Reliable</span>
+                        </div>
+                        <div class="testimonial-video-preview mt-3">
+                            <button class="btn btn-sm btn-outline-primary video-preview-btn" data-video="video2.mp4">
+                                <i class="bi bi-play-circle me-1"></i> Watch Video
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
+                    <div class="testimonial-card" data-category="staff">
                         <div class="d-flex align-items-center mb-3">
                             <img src="assets/images/tibu.jpg" alt="User 3" class="testimonial-avatar">
                             <div>
-                                <h5 class="mb-0">Mr. Yohannes</h5>
+                                <h5 class="mb-0">Tibu </h5>
                                 <p class="text-muted mb-0">Administrative Staff</p>
                             </div>
                         </div>
+                        <div class="testimonial-rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
                         <p class="mb-0">"The reporting features are excellent. We can generate any report we need in seconds."</p>
+                        <div class="testimonial-features mt-3">
+                            <span class="badge bg-success me-2">Comprehensive</span>
+                            <span class="badge bg-info me-2">Fast</span>
+                            <span class="badge bg-primary">Detailed</span>
+                        </div>
+                        <div class="testimonial-video-preview mt-3">
+                            <button class="btn btn-sm btn-outline-primary video-preview-btn" data-video="video3.mp4">
+                                <i class="bi bi-play-circle me-1"></i> Watch Video
+                            </button>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-category="admin">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="assets/images/profile-default.jpg" alt="User 4" class="testimonial-avatar">
+                            <div>
+                                <h5 class="mb-0">Dr. Abebe</h5>
+                                <p class="text-muted mb-0">Department Head</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="mb-0">"The performance analytics have helped us make data-driven decisions for our department."</p>
+                        <div class="testimonial-features mt-3">
+                            <span class="badge bg-success me-2">Analytics</span>
+                            <span class="badge bg-info me-2">Insights</span>
+                            <span class="badge bg-primary">Data-driven</span>
+                        </div>
+                        <div class="testimonial-video-preview mt-3">
+                            <button class="btn btn-sm btn-outline-primary video-preview-btn" data-video="video4.mp4">
+                                <i class="bi bi-play-circle me-1"></i> Watch Video
+                            </button>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-category="admin">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="assets/images/profile-default.jpg" alt="User 5" class="testimonial-avatar">
+                            <div>
+                                <h5 class="mb-0">Ms. Tigist</h5>
+                                <p class="text-muted mb-0">HR Manager</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-half text-warning"></i>
+                        </div>
+                        <p class="mb-0">"Leave management is now streamlined. Approvals are faster and tracking is effortless."</p>
+                        <div class="testimonial-features mt-3">
+                            <span class="badge bg-success me-2">Streamlined</span>
+                            <span class="badge bg-info me-2">Fast</span>
+                            <span class="badge bg-primary">Organized</span>
+                        </div>
+                        <div class="testimonial-video-preview mt-3">
+                            <button class="btn btn-sm btn-outline-primary video-preview-btn" data-video="video5.mp4">
+                                <i class="bi bi-play-circle me-1"></i> Watch Video
+                            </button>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-category="it">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="assets/images/profile-default.jpg" alt="User 6" class="testimonial-avatar">
+                            <div>
+                                <h5 class="mb-0">Mr. Dawit</h5>
+                                <p class="text-muted mb-0">IT Support</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <p class="mb-0">"The system is robust and rarely requires maintenance. Support is excellent when needed."</p>
+                        <div class="testimonial-features mt-3">
+                            <span class="badge bg-success me-2">Robust</span>
+                            <span class="badge bg-info me-2">Reliable</span>
+                            <span class="badge bg-primary">Support</span>
+                        </div>
+                        <div class="testimonial-video-preview mt-3">
+                            <button class="btn btn-sm btn-outline-primary video-preview-btn" data-video="video6.mp4">
+                                <i class="bi bi-play-circle me-1"></i> Watch Video
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="section newsletter-section">
-        <div class="mountain-background"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <h2 class="mb-4">Stay Updated</h2>
-                    <p class="mb-4">Subscribe to our newsletter for the latest updates and features.</p>
-                    <div class="d-flex justify-content-center">
-                        <input type="email" class="newsletter-input" placeholder="Enter your email">
-                        <button class="newsletter-btn">Subscribe</button>
+        <div class="testimonial-controls text-center mt-4">
+            <button class="testimonial-prev btn btn-outline-primary me-2">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <div class="testimonial-dots d-inline-block">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="testimonial-next btn btn-outline-primary ms-2">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- Testimonial Video Modal -->
+        <div class="modal fade" id="testimonialVideoModal" tabindex="-1" aria-labelledby="testimonialVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="testimonialVideoModalLabel">User Testimonial</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div class="ratio ratio-16x9">
+                            <video id="testimonialVideo" controls>
+                                <source src="" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        
+       
+        
 
+   
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h5>Dilla University</h5>
-                    <p>Empowering education through technology</p>
-                    <div class="social-icons">
-                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-brand">
+                        <img src="assets/images/du-logo-white.png" alt="DU Logo" class="footer-logo mb-3">
+                        <h5 class="text-white mb-3">Dilla University</h5>
+                        <p class="text-light mb-4">Empowering education through technology and innovation. Our employee management system streamlines administrative processes for better efficiency.</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#features" class="text-white">Features</a></li>
-                        <li><a href="#testimonials" class="text-white">Testimonials</a></li>
-                        <li><a href="#about" class="text-white">About</a></li>
-                        <li><a href="login.html" class="text-white">Login</a></li>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="career.html">Career</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="#features">Features</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h5>Contact</h5>
-                    <p><i class="bi bi-envelope me-2"></i>support@dillauniversity.edu.et</p>
-                    <p><i class="bi bi-telephone me-2"></i>+251 XX XXX XXXX</p>
-                    <p><i class="bi bi-geo-alt me-2"></i>Dilla, Ethiopia</p>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Features</h5>
+                    <ul class="footer-links">
+                        <li><a href="#features">Mobile Attendance</a></li>
+                        <li><a href="#features">Smart Scheduling</a></li>
+                        <li><a href="#features">Performance Analytics</a></li>
+                        <li><a href="#features">Leave Management</a></li>
+                        <li><a href="#features">Real-time Reports</a></li>
+                        <li><a href="#features">Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-3">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope-fill me-2"></i>support@dillauniversity.edu.et</li>
+                        <li><i class="bi bi-telephone-fill me-2"></i>+251 XX XXX XXXX</li>
+                        <li><i class="bi bi-geo-alt-fill me-2"></i>Dilla, Ethiopia</li>
+                        <li><i class="bi bi-clock-fill me-2"></i>Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                    <div class="newsletter-form mt-4">
+                        <h6 class="text-white mb-2">Subscribe to Newsletter</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+                            <button class="btn btn-warning" type="button">Subscribe</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <hr class="footer-divider my-4">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <p class="mb-0">&copy; 2024 Dilla University. All rights reserved.</p>
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0 text-light">&copy; 2024 Dilla University. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="footer-legal">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="">Terms of Service</a></li>
+                        <li><a href="">Cookie Policy</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -670,6 +863,8 @@
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom JS -->
     <script src="js/index.js"></script>
     <script>

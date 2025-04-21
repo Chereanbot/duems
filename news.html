@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates - Dilla University EMS</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        :root {
+            --primary-green: #00572d;
+            --secondary-green: #1f9345;
+            --accent-gold: #f3c300;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-light: #f4f4f4;
+            --bg-white: #ffffff;
+            --footer-dark: #1a1a1a;
+        }
+
+        .navbar {
+            background-color: var(--primary-green) !important;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-gold) !important;
+        }
+
+        .news-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/pattern.svg') repeat;
+            opacity: 0.1;
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+
+        .news-hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-content {
+            padding: 60px 0;
+            background-color: var(--bg-white);
+        }
+
+        .news-card {
+            background: var(--bg-white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 87, 45, 0.1);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 87, 45, 0.2);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .news-card-content {
+            padding: 25px;
+        }
+
+        .news-card .badge {
+            background-color: var(--accent-gold);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover .badge {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .news-card h3 {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .news-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .news-card .date {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .news-filters {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .filter-btn {
+            background: var(--bg-light);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: var(--text-secondary);
+            margin: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 87, 45, 0.2);
+        }
+
+        .news-sidebar {
+            background: var(--bg-white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-sidebar h3 {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .popular-news {
+            margin-bottom: 30px;
+        }
+
+        .popular-news-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--bg-light);
+        }
+
+        .popular-news-item:last-child {
+            border-bottom: none;
+        }
+
+        .popular-news-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .popular-news-item h4 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .popular-news-item .date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .news-categories {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .news-categories li {
+            margin-bottom: 15px;
+        }
+
+        .news-categories a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+        }
+
+        .news-categories a:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .news-categories .badge {
+            background: var(--bg-white);
+            color: var(--text-secondary);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Featured News Section */
+        .featured-news {
+            margin-bottom: 50px;
+        }
+
+        .featured-news-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .featured-news-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-news-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        /* News Search */
+        .news-search {
+            margin-bottom: 30px;
+        }
+
+        .news-search .form-control {
+            border-radius: 25px;
+            padding: 12px 25px;
+            border: 1px solid rgba(0, 87, 45, 0.1);
+        }
+
+        .news-search .btn {
+            border-radius: 25px;
+            padding: 12px 25px;
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* News Tags */
+        .news-tags {
+            margin-top: 30px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            background: var(--bg-light);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            margin: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* News Pagination */
+        .news-pagination {
+            margin-top: 50px;
+        }
+
+        .page-link {
+            color: var(--primary-green);
+            border: none;
+            margin: 0 5px;
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .page-item.active .page-link {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .featured-news-card {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .featured-news-card {
+                height: 300px;
+            }
+            
+            .news-filters {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .filter-btn {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="assets/images/du-logo-white.png" alt="DU Logo" class="logo">
+                <span>Dilla University</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="career.html">Career</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="news-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">News & Updates</h1>
+                    <p class="lead mb-4">Stay informed about the latest developments, announcements, and achievements at Dilla University.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#news-content" class="btn btn-lg" style="background-color: var(--accent-gold); color: var(--text-primary);">
+                            <i class="bi bi-newspaper me-2"></i>Latest News
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="assets/images/news.svg" alt="News & Updates" class="img-fluid news-hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Content -->
+    <section id="news-content" class="news-content">
+        <div class="container">
+            <!-- Featured News -->
+            <div class="featured-news">
+                <div class="featured-news-card">
+                    <img src="assets/images/news.svg" alt="Featured News">
+                    <div class="featured-news-content">
+                        <span class="badge">Featured</span>
+                        <h2>EMS System Update: New Department-Specific Features</h2>
+                        <p class="lead">Enhanced features for cafeteria staff, cleaning services, campus police, and dormitory management teams.</p>
+                        <div class="d-flex align-items-center">
+                            <img src="assets/images/tibu.jpg" alt="Author" class="rounded-circle me-3" style="width: 40px; height: 40px;">
+                            <div>
+                                <h6 class="mb-0">Birktawit </h6>
+                                <small>March 15, 2025</small>
+                            </div>
+                        </div>
+                        <a href="cafeteria-news.html" class="btn btn-light mt-3">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- News Search -->
+                    <div class="news-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search news by department or keyword...">
+                            <button class="btn">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Department Filters -->
+                    <div class="news-filters">
+                        <button class="filter-btn active">All Departments</button>
+                        <button class="filter-btn">Cafeteria</button>
+                        <button class="filter-btn">Cleaning Services</button>
+                        <button class="filter-btn">Campus Police</button>
+                        <button class="filter-btn">Dormitory</button>
+                        <button class="filter-btn">Administration</button>
+                    </div>
+
+                    <!-- News Cards -->
+                    <div class="row">
+                        <!-- Cafeteria News -->
+                        <div class="col-md-6">
+                            <div class="news-card">
+                                <img src="assets/images/cafe.png" alt="Cafeteria News">
+                                <div class="news-card-content">
+                                    <span class="badge">Cafeteria</span>
+                                    <h3>New Menu Management System</h3>
+                                    <p>Cafeteria staff can now efficiently manage menus and track inventory through the updated EMS interface.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="date">
+                                            <i class="bi bi-calendar3"></i>
+                                            March 15, 2024
+                                        </div>
+                                        <a href="cafeteria-news.html" class="btn btn-sm btn-outline-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cleaning Services News -->
+                        <div class="col-md-6">
+                            <div class="news-card">
+                                <img src="assets/images/clean.png" alt="Cleaning Services News">
+                                <div class="news-card-content">
+                                    <span class="badge">Cleaning Services</span>
+                                    <h3>Schedule Optimization Update</h3>
+                                    <p>New scheduling features for cleaning staff to better manage shifts and assignments.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="date">
+                                            <i class="bi bi-calendar3"></i>
+                                            March 20, 2024
+                                        </div>
+                                        <a href="cleaning-news.html" class="btn btn-sm btn-outline-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Campus Police News -->
+                        <div class="col-md-6">
+                            <div class="news-card">
+                                <img src="assets/images/campus.png" alt="Campus Police News">
+                                <div class="news-card-content">
+                                    <span class="badge">Campus Police</span>
+                                    <h3>Emergency Response Protocol Update</h3>
+                                    <p>Enhanced communication system for campus security personnel.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="date">
+                                            <i class="bi bi-calendar3"></i>
+                                            March 10, 2024
+                                        </div>
+                                        <a href="police-news.html" class="btn btn-sm btn-outline-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dormitory News -->
+                        <div class="col-md-6">
+                            <div class="news-card">
+                                <img src="assets/images/dorm.png" alt="Dormitory News">
+                                <div class="news-card-content">
+                                    <span class="badge">Dormitory</span>
+                                    <h3>Resident Management System Upgrade</h3>
+                                    <p>New features for dormitory staff to manage student housing and maintenance requests.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="date">
+                                            <i class="bi bi-calendar3"></i>
+                                            March 25, 2024
+                                        </div>
+                                        <a href="dormitory-news.html" class="btn btn-sm btn-outline-primary">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Pagination -->
+                    <nav class="news-pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Department Quick Links -->
+                    <div class="news-sidebar mb-4">
+                        <h3><i class="bi bi-building me-2"></i>Departments</h3>
+                        <ul class="news-categories">
+                            <li>
+                                <a href="cafeteria-news.html">
+                                    Cafeteria Staff
+                                    <span class="badge">25</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="cleaning-news.html">
+                                    Cleaning Services
+                                    <span class="badge">18</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="police-news.html">
+                                    Campus Police
+                                    <span class="badge">12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="dormitory-news.html">
+                                    Dormitory Management
+                                    <span class="badge">15</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Administration
+                                    <span class="badge">20</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Popular News -->
+                    <div class="news-sidebar mb-4">
+                        <h3><i class="bi bi-star-fill me-2"></i>Popular Updates</h3>
+                        <div class="popular-news">
+                            <a href="cafeteria-news.html" class="popular-news-item text-decoration-none">
+                                <img src="assets/images/cafe.png" alt="Popular News 1">
+                                <div>
+                                    <h4>Cafeteria Staff Training</h4>
+                                    <div class="date">March 12, 2024</div>
+                                </div>
+                            </a>
+                            <a href="cleaning-news.html" class="popular-news-item text-decoration-none">
+                                <img src="assets/images/popular2.jpg" alt="Popular News 2">
+                                <div>
+                                    <h4>New Cleaning Protocols</h4>
+                                    <div class="date">March 8, 2024</div>
+                                </div>
+                            </a>
+                            <a href="police-news.html" class="popular-news-item text-decoration-none">
+                                <img src="assets/images/popular3.jpg" alt="Popular News 3">
+                                <div>
+                                    <h4>Security System Upgrade</h4>
+                                    <div class="date">March 5, 2024</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Department Tags -->
+                    <div class="news-sidebar">
+                        <h3><i class="bi bi-tags-fill me-2"></i>Department Tags</h3>
+                        <div class="news-tags">
+                            <a href="cafeteria-news.html" class="tag">Cafeteria</a>
+                            <a href="cleaning-news.html" class="tag">Cleaning</a>
+                            <a href="police-news.html" class="tag">Security</a>
+                            <a href="dormitory-news.html" class="tag">Dormitory</a>
+                            <a href="#" class="tag">Maintenance</a>
+                            <a href="#" class="tag">Staff</a>
+                            <a href="#" class="tag">Training</a>
+                            <a href="#" class="tag">Updates</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-brand">
+                        <img src="assets/images/du-logo-white.png" alt="DU Logo" class="footer-logo mb-3">
+                        <h5 class="text-white mb-3">Dilla University</h5>
+                        <p class="text-light mb-4">Empowering education through technology and innovation. Our employee management system streamlines administrative processes for better efficiency.</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="career.html">Career</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-3">Features</h5>
+                    <ul class="footer-links">
+                        <li><a href="#features">Mobile Attendance</a></li>
+                        <li><a href="#features">Smart Scheduling</a></li>
+                        <li><a href="#features">Performance Analytics</a></li>
+                        <li><a href="#features">Leave Management</a></li>
+                        <li><a href="#features">Real-time Reports</a></li>
+                        <li><a href="#features">Security</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-3">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-envelope-fill me-2"></i>support@dillauniversity.edu.et</li>
+                        <li><i class="bi bi-telephone-fill me-2"></i>+251 XX XXX XXXX</li>
+                        <li><i class="bi bi-geo-alt-fill me-2"></i>Dilla, Ethiopia</li>
+                        <li><i class="bi bi-clock-fill me-2"></i>Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                    <div class="newsletter-form mt-4">
+                        <h6 class="text-white mb-2">Subscribe to Newsletter</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+                            <button class="btn btn-warning" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider my-4">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0 text-light">&copy; 2024 Dilla University. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <ul class="footer-legal">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- News Detail Modals -->
+    <!-- Cafeteria News Modal -->
+    <div class="modal fade" id="cafeteriaNewsModal" tabindex="-1" aria-labelledby="cafeteriaNewsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cafeteriaNewsModalLabel">New Menu Management System</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="assets/images/cafeteria-news.jpg" alt="Cafeteria News" class="img-fluid rounded mb-4">
+                    <div class="news-meta mb-4">
+                        <span class="badge bg-warning text-dark">Cafeteria</span>
+                        <span class="ms-3"><i class="bi bi-calendar3"></i> March 15, 2024</span>
+                        <span class="ms-3"><i class="bi bi-person"></i> By: John Smith</span>
+                    </div>
+                    <h4>Enhanced Menu Management Features</h4>
+                    <p>Cafeteria staff now have access to an improved menu management system with the following features:</p>
+                    <ul>
+                        <li>Real-time inventory tracking</li>
+                        <li>Digital menu planning tools</li>
+                        <li>Automated cost calculation</li>
+                        <li>Staff scheduling integration</li>
+                        <li>Customer feedback system</li>
+                    </ul>
+                    <h4>Key Benefits</h4>
+                    <p>The new system provides several advantages for cafeteria operations:</p>
+                    <ul>
+                        <li>Reduced food waste through better inventory management</li>
+                        <li>Improved staff efficiency with digital tools</li>
+                        <li>Better cost control and budgeting</li>
+                        <li>Enhanced customer satisfaction tracking</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Training sessions for the new system will be conducted next week.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary">Download User Guide</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cleaning Services News Modal -->
+    <div class="modal fade" id="cleaningNewsModal" tabindex="-1" aria-labelledby="cleaningNewsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cleaningNewsModalLabel">Schedule Optimization Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="assets/images/cleaning-news.jpg" alt="Cleaning Services News" class="img-fluid rounded mb-4">
+                    <div class="news-meta mb-4">
+                        <span class="badge bg-info">Cleaning Services</span>
+                        <span class="ms-3"><i class="bi bi-calendar3"></i> March 20, 2024</span>
+                        <span class="ms-3"><i class="bi bi-person"></i> By: Maria Garcia</span>
+                    </div>
+                    <h4>New Scheduling System Features</h4>
+                    <p>The updated scheduling system includes:</p>
+                    <ul>
+                        <li>Smart shift allocation</li>
+                        <li>Real-time task tracking</li>
+                        <li>Equipment maintenance scheduling</li>
+                        <li>Area coverage optimization</li>
+                        <li>Staff availability management</li>
+                    </ul>
+                    <h4>Implementation Timeline</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h5>Phase 1: Initial Setup</h5>
+                            <p>March 20-25: System configuration and staff training</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Phase 2: Testing</h5>
+                            <p>March 26-28: Pilot testing with selected teams</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Phase 3: Full Implementation</h5>
+                            <p>March 29: System goes live for all cleaning staff</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary">View Schedule Guide</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campus Police News Modal -->
+    <div class="modal fade" id="policeNewsModal" tabindex="-1" aria-labelledby="policeNewsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="policeNewsModalLabel">Emergency Response Protocol Update</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="assets/images/police-news.jpg" alt="Campus Police News" class="img-fluid rounded mb-4">
+                    <div class="news-meta mb-4">
+                        <span class="badge bg-danger">Campus Police</span>
+                        <span class="ms-3"><i class="bi bi-calendar3"></i> March 10, 2024</span>
+                        <span class="ms-3"><i class="bi bi-person"></i> By: James Wilson</span>
+                    </div>
+                    <h4>Enhanced Security Features</h4>
+                    <p>The new emergency response system includes:</p>
+                    <ul>
+                        <li>Real-time incident reporting</li>
+                        <li>GPS-enabled patrol tracking</li>
+                        <li>Emergency alert system</li>
+                        <li>Inter-department communication channels</li>
+                        <li>Automated incident documentation</li>
+                    </ul>
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i> All security personnel must complete the new protocol training by March 25.
+                    </div>
+                    <h4>Training Schedule</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Topic</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>March 22</td>
+                                <td>9:00 AM</td>
+                                <td>Security HQ</td>
+                                <td>New Protocol Overview</td>
+                            </tr>
+                            <tr>
+                                <td>March 23</td>
+                                <td>2:00 PM</td>
+                                <td>Training Room</td>
+                                <td>System Usage</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary">Download Protocol Guide</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dormitory News Modal -->
+    <div class="modal fade" id="dormitoryNewsModal" tabindex="-1" aria-labelledby="dormitoryNewsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dormitoryNewsModalLabel">Resident Management System Upgrade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="assets/images/dormitory-news.jpg" alt="Dormitory News" class="img-fluid rounded mb-4">
+                    <div class="news-meta mb-4">
+                        <span class="badge bg-success">Dormitory</span>
+                        <span class="ms-3"><i class="bi bi-calendar3"></i> March 25, 2024</span>
+                        <span class="ms-3"><i class="bi bi-person"></i> By: Sarah Johnson</span>
+                    </div>
+                    <h4>New Management Features</h4>
+                    <p>The upgraded system includes:</p>
+                    <ul>
+                        <li>Digital room assignment system</li>
+                        <li>Maintenance request tracking</li>
+                        <li>Visitor management</li>
+                        <li>Resident communication portal</li>
+                        <li>Facility usage analytics</li>
+                    </ul>
+                    <h4>Implementation Details</h4>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5>Key Updates</h5>
+                            <ul>
+                                <li>Mobile app for maintenance requests</li>
+                                <li>Real-time occupancy tracking</li>
+                                <li>Automated incident reporting</li>
+                                <li>Integration with campus security</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="alert alert-success">
+                        <i class="bi bi-check-circle"></i> The new system will be available for all dormitory staff starting April 1st.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary">Access User Manual</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/index.js"></script>
+    <script>
+        // Add click handlers for Read More buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cafeteria News
+            document.querySelector('.news-card:nth-child(1) .btn-outline-primary').addEventListener('click', function(e) {
+                e.preventDefault();
+                var modal = new bootstrap.Modal(document.getElementById('cafeteriaNewsModal'));
+                modal.show();
+            });
+
+            // Cleaning Services News
+            document.querySelector('.news-card:nth-child(2) .btn-outline-primary').addEventListener('click', function(e) {
+                e.preventDefault();
+                var modal = new bootstrap.Modal(document.getElementById('cleaningNewsModal'));
+                modal.show();
+            });
+
+            // Campus Police News
+            document.querySelector('.news-card:nth-child(3) .btn-outline-primary').addEventListener('click', function(e) {
+                e.preventDefault();
+                var modal = new bootstrap.Modal(document.getElementById('policeNewsModal'));
+                modal.show();
+            });
+
+            // Dormitory News
+            document.querySelector('.news-card:nth-child(4) .btn-outline-primary').addEventListener('click', function(e) {
+                e.preventDefault();
+                var modal = new bootstrap.Modal(document.getElementById('dormitoryNewsModal'));
+                modal.show();
+            });
+        });
+    </script>
+</body>
+</html> 
