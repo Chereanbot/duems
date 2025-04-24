@@ -1,0 +1,94 @@
+/* Sidebar Styles */
+.sidebar {
+    background: var(--primary-color);
+    min-height: 100vh;
+    padding: 1rem;
+    position: fixed;
+    width: 280px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.nav-section {
+    margin-bottom: 2rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+/* Active/Clicked state styles */
+.nav-link.active {
+    color: #000;
+    background: #ffd700;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateX(5px);
+    position: relative;
+    z-index: 2;
+}
+
+.nav-link.active i {
+    color: #000;
+}
+
+/* Hover effect for active items */
+.nav-link.active:hover {
+    background: #ffed4a;
+    transform: translateX(5px);
+}
+
+/* Badge styles */
+.nav-link .badge {
+    margin-left: auto;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: var(--secondary-color);
+} 
