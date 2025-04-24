@@ -180,10 +180,308 @@
             background-color: #e6b800;
             transform: translateY(-2px);
         }
+
+        /* Cookie Modal Styles */
+        .cookie-modal .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .cookie-modal .modal-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+        
+        .cookie-modal .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cookie-modal .modal-header .btn-close:hover {
+            opacity: 1;
+        }
+        
+        .cookie-modal .modal-body {
+            padding: 2rem;
+        }
+        
+        .cookie-modal .cookie-icon {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            background: rgba(0, 87, 45, 0.1);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .cookie-modal .cookie-title {
+            color: var(--primary-green);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .cookie-modal .cookie-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cookie-modal .cookie-options {
+            background: rgba(0, 87, 45, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cookie-modal .cookie-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .cookie-modal .cookie-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cookie-modal .cookie-option .form-check-input {
+            margin-right: 1rem;
+        }
+        
+        .cookie-modal .cookie-option .form-check-label {
+            font-weight: 500;
+        }
+        
+        .cookie-modal .cookie-option .form-check-label small {
+            display: block;
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+        
+        .cookie-modal .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .cookie-modal .cookie-buttons .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            flex: 1;
+        }
+        
+        .cookie-modal .cookie-buttons .btn-primary {
+            background: var(--primary-green);
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 87, 45, 0.2);
+        }
+        
+        .cookie-modal .cookie-buttons .btn-primary:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 87, 45, 0.3);
+        }
+        
+        .cookie-modal .cookie-buttons .btn-outline-primary {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+        
+        .cookie-modal .cookie-buttons .btn-outline-primary:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .cookie-modal .cookie-footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .cookie-modal .cookie-footer a {
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+        
+        .cookie-modal .cookie-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Notification Option Styles */
+        .cookie-modal .notification-option {
+            border-top: 1px solid rgba(0, 87, 45, 0.1);
+            margin-top: 1rem;
+            padding-top: 1rem;
+        }
+        
+        .cookie-modal .notification-option .form-check-label {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cookie-modal .notification-option .form-check-label small {
+            margin-top: 0.25rem;
+        }
+        
+        .cookie-modal .notification-option.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .cookie-modal .cookie-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        /* Toast Notification Styles */
+        .toast-container {
+            z-index: 1050;
+        }
+        
+        .toast {
+            background-color: white;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            min-width: 300px;
+        }
+        
+        .toast-header {
+            padding: 0.75rem 1rem;
+            border-bottom: none;
+        }
+        
+        .toast-header.bg-success {
+            background-color: var(--secondary-green) !important;
+        }
+        
+        .toast-header.bg-info {
+            background-color: var(--primary-green) !important;
+        }
+        
+        .toast-header.bg-warning {
+            background-color: var(--accent-gold) !important;
+        }
+        
+        .toast-body {
+            padding: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .toast .btn-close-white {
+            filter: brightness(0) invert(1);
+        }
+        
+        /* Floating Cookie Settings Button */
+        .cookie-settings-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .cookie-settings-button .btn {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .cookie-settings-button .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-  
+    <!-- Cookie Consent Modal -->
+    <div class="modal fade cookie-modal" id="cookieConsentModal" tabindex="-1" aria-labelledby="cookieConsentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cookieConsentModalLabel">Cookie Preferences</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="cookie-icon">
+                        <i class="bi bi-cookie"></i>
+                    </div>
+                    <h4 class="cookie-title">We Value Your Privacy</h4>
+                    <p class="cookie-text">
+                        We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
+                        By clicking "Accept All", you consent to our use of cookies. Read our <a href="privacy-policy.html">Privacy Policy</a> to learn more.
+                    </p>
+                    
+                    <div class="cookie-options">
+                        <div class="cookie-option">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="essentialCookies" checked disabled>
+                                <label class="form-check-label" for="essentialCookies">
+                                    Essential Cookies
+                                    <small>Required for the website to function properly. Cannot be disabled.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="cookie-option">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="analyticsCookies">
+                                <label class="form-check-label" for="analyticsCookies">
+                                    Analytics Cookies
+                                    <small>Help us understand how visitors interact with our website.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="cookie-option">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="marketingCookies">
+                                <label class="form-check-label" for="marketingCookies">
+                                    Marketing Cookies
+                                    <small>Used to deliver personalized advertisements.</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="cookie-option notification-option">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="notificationPermission">
+                                <label class="form-check-label" for="notificationPermission">
+                                    Browser Notifications
+                                    <small>Receive important updates and alerts directly to your device.</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cookie-buttons">
+                        <button type="button" class="btn btn-outline-primary" id="rejectAllBtn">Reject All</button>
+                        <button type="button" class="btn btn-primary" id="savePreferencesBtn">Save Preferences</button>
+                        <button type="button" class="btn btn-success" id="acceptAllBtn">Accept All</button>
+                    </div>
+                    
+                    <div class="cookie-footer mt-3">
+                        <p>You can change your cookie preferences at any time by clicking <a href="#" id="cookieSettingsLink">Cookie Settings</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: var(--primary-green);">
@@ -861,54 +1159,20 @@
         </div>
     </footer>
 
+    <!-- Floating Cookie Settings Button -->
+    <div class="cookie-settings-button" id="floatingCookieSettings">
+        <button class="btn btn-sm rounded-pill" style="background-color: var(--primary-green); color: white;">
+            <i class="bi bi-cookie me-1"></i> Cookie Settings
+        </button>
+    </div>
+
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom JS -->
     <script src="js/index.js"></script>
-    <script>
-        function toggleNotificationPanel() {
-            const panel = document.querySelector('.notification-panel');
-            panel.classList.toggle('active');
-        }
-
-        // Hero Slideshow
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const totalSlides = slides.length;
-
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentSlide = index;
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
-        }
-
-        // Auto slide every 5 seconds
-        setInterval(nextSlide, 5000);
-
-        // Add click events for controls
-        document.querySelector('.slide-next').addEventListener('click', nextSlide);
-        document.querySelector('.slide-prev').addEventListener('click', prevSlide);
-
-        // Add click events for dots
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
-        });
-    </script>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/notification-permissions.js"></script>
 </body>
 </html> 
